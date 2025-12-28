@@ -1,0 +1,26 @@
+flowchart TD
+    A[Pedido Recebido] --> B{Projeto já existe?}
+
+    B -- Não --> C[Agente Orquestrador]
+    C --> D[Delegar ao Agente Criador]
+
+    B -- Sim --> E{Tipo do Pedido}
+
+    E -- Criar Feature / Página --> F[Validar Ordem]
+    F -- Ordem OK --> G[Agente Evolutor]
+    F -- Ordem Inválida --> Z[Bloquear e Solicitar Correção]
+
+    E -- Refatorar Código --> H[Agente Refatorador]
+
+    E -- Verificar Conformidade --> I[Agente Auditor]
+
+    G --> J[Feature Implementada]
+    H --> K[Refatoração Concluída]
+    I --> L[Relatório de Auditoria]
+
+    J --> M{Auditoria Necessária?}
+    K --> M
+    M -- Sim --> I
+    M -- Não --> N[Fim]
+
+    L --> N[Fim]
