@@ -194,6 +194,14 @@ Incluem-se:
 
   4.3.8. A alteração, remoção ou reescrita de Documentos de Histórico é vedada, exceto para correção factual explícita, devendo toda modificação ser registrada no `changelog.md`.
 
+  4.3.9. Substituição normativa — Conteúdo e Autores dos Documentos em `06-historico/`
+
+- `auditorias.md` → registro formal de auditorias institucionais. Somente o `AGENTE_AUDITOR` pode adicionar entradas formais neste arquivo.
+- `decisoes.md` → registro de decisões estruturais ou normativas. Apenas humanos responsáveis (Comitê de Governança ou autoridade designada) podem registrar decisões aqui.
+- `changelog.md` → registro automático e manual de alterações de release e histórico técnico. Sistema e equipes de release devem registrar entradas; alterações devem ser rastreáveis.
+
+  4.3.10. Qualquer tentativa de escrita em `06-historico/` por agente não autorizado constitui violação institucional e deve ser reportada ao AGENTE_AUDITOR.
+
 ---
 
 ## CLÁUSULA 5 — DA EXISTÊNCIA DE ARTEFATOS
@@ -475,7 +483,49 @@ o banco definitivo é a fonte oficial de verdade.
 
 ---
 
-## CLÁUSULA 11 — DISPOSIÇÃO FINAL
+## CLÁUSULA 11 — Papel institucional da pasta 07-prompts/
+
+A pasta `07-prompts/` serve exclusivamente para instanciar agentes em execução, não para definir regras novas.
+
+**Funções da pasta 07-prompts:**
+
+- Transforma MAPA, FLUXO, Dossiês e Playbooks em ordem de execução.
+- É o ponto de entrada prática do sistema.
+
+**Limitações:**
+
+- Não cria normas.
+- Não substitui agentes.
+- Não interpreta histórico.
+
+**Regra-chave:**
+
+- Prompts executam o sistema institucional.
+- Agents definem o comportamento.
+- Documentos governam o sistema.
+
+**Organização recomendada da pasta 07-prompts:**
+
+Estrutura ideal (simples e suficiente):
+
+```plaintext
+07-prompts/
+├── prompt-01-criacao-estrutura.md
+├── prompt-02-geracao-passaporte.md
+├── prompt-03-validacao-passaporte.md
+├── prompt-04-evolucao-moc.md
+├── prompt-05-auditoria.md
+├── prompt-06-refatoracao.md
+└── README.md
+```
+
+Cada prompt:
+
+- Corresponde diretamente a uma ETAPA do FLUXO.
+- Instancia um agente específico.
+- Não mistura fases.
+
+## CLÁUSULA 12 — DISPOSIÇÃO FINAL
 
 11.1. Este documento entra em vigor imediatamente.
 
