@@ -1,4 +1,5 @@
-📜 MAPA_INSTITUCIONAL
+# 📜 MAPA_INSTITUCIONAL
+
 Estatuto Normativo de Governança Arquitetural e Operacional
 
 Aplicações Next.js Fullstack
@@ -266,7 +267,7 @@ interpretação subjetiva.
 
 CLÁUSULA 10 — DO MODELO DE PERSISTÊNCIA POR FASE (MOC → PRODUÇÃO)
 
-### CLÁUSULA 10.1 — DEFINIÇÃO DE MOC (Modelo Operacional de Conteúdo)
+## CLÁUSULA 10.1 — DEFINIÇÃO DE MOC (Modelo Operacional de Conteúdo)
 
 10.1.1. Para fins deste framework, define-se MOC (Modelo Operacional de Conteúdo) como:
 
@@ -305,7 +306,7 @@ sem a existência de seu MOC inicial.
 
 **Exemplo válido:**
 
-```
+```code
 data/
  └── usuarios/
      └── usuarios.json
@@ -313,7 +314,7 @@ data/
 
 **Exemplo inválido:**
 
-```
+```code
 data/
  ├── paginaA/usuarios.json
  └── paginaB/usuarios.json
@@ -369,12 +370,12 @@ data/
 
 10.7.1. A migração para produção DEVE ocorrer em duas etapas obrigatórias e sequenciais:
 
-**Etapa 1 — Importação de Dados**
+#### Etapa 1 — Importação de Dados
 
 - Transferência integral dos dados existentes nos MOCs para o banco definitivo (Mongo Atlas),
 - Preservando contratos, IDs lógicos e relações.
 
-**Etapa 2 — Troca de Adapter**
+#### Etapa 2 — Troca de Adapter
 
 - Substituição do adapter de repositório:
 
@@ -412,7 +413,7 @@ data/
 - alterar contratos durante migração,
 - misturar persistência MOC e banco real simultaneamente como fontes primárias.
 
-**Violação implica:**
+#### Violação implica
 
 - bloqueio imediato da execução,
 - invalidação da etapa,
@@ -432,7 +433,7 @@ o banco definitivo é a fonte oficial de verdade.
 
 ---
 
-**📌 DISPOSIÇÃO FINAL**
+## 📌 DISPOSIÇÃO FINAL
 
 > Persistência não é um detalhe técnico;
 > é uma decisão institucional por fase.

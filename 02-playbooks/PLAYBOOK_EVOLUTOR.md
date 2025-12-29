@@ -64,7 +64,7 @@ Nenhuma página pode ser deixada “pela metade”.
 
 ### ETAPA E0 — Verificação no Passaporte (OBRIGATÓRIA)
 
-**⛔ REGRA CRÍTICA: TODA PÁGINA DEVE EXISTIR NO PASSAPORTE ANTES DA CRIAÇÃO**
+#### ⛔ REGRA CRÍTICA: TODA PÁGINA DEVE EXISTIR NO PASSAPORTE ANTES DA CRIAÇÃO\*\*
 
 Antes de iniciar qualquer trabalho:
 

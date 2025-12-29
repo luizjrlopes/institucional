@@ -6,7 +6,7 @@
 
 ---
 
-**OFFICIAL DOC**
+## OFFICIAL DOC
 
 ---
 
@@ -23,15 +23,17 @@
 1. [Objetivo](#1-objetivo)
 2. [Escopo](#2-escopo)
 3. [Princípios Institucionais](#3-princípios-institucionais)
-4. **Processo Sequencial (Fases Internas do Dossiê)**
-   - [Fase D0 — Preparação Institucional](#fase-d0-Preparação-Institucional)
-   - [Fase D1 — Estrutura Base](#fase-d1-estrutura-base-frontend--backend)
-   - [Fase D2 — Usuário/Auth](#fase-d2-usuário-e-autenticação)
-   - [Fase D3 — Domínio](#fase-d3-páginas-de-domínio)
-   - [Fase D4 — Governança](#fase-d4-governança)
-5. **Finalização**
-   - [Regras de Decisão](#9-regras-institucionais-de-decisão)
-   - [Conformidade](#10-critério-de-conformidade)
+4. Processo Sequencial (Fases Internas do Dossiê)
+   1. [Fase D0 — Preparação Institucional](#fase-d0--preparação-institucional)
+   2. [Fase D1 — Estrutura Base]
+      (#fase-d1--estrutura-base)
+   3. [Fase D2 — Usuário e Autenticação](#fase-d2--usuário-e-autenticação)
+   4. [Fase D3 — Páginas de Domínio](#fase-d3--páginas-de-domínio)
+   5. [Fase D4 — Governança]
+      (#fase-d4--governança)
+5. Finalização
+   1. [Regras Institucionais de Decisão](#9-regras-institucionais-de-decisão)
+   2. [Critério de Conformidade](#10-critério-de-conformidade)
 
 ---
 
@@ -39,7 +41,7 @@
 
 Este documento estabelece o processo institucional **obrigatório** para criação de aplicações Next.js Fullstack, utilizando o App Router e a arquitetura de backend integrado (Opção A).
 
-### Benefícios:
+### Benefícios
 
 - ✓ Base arquitetural sólida
 - ✓ Evolução previsível e governável
@@ -90,7 +92,7 @@ Ordem de criação mais importante que velocidade inicial.
 
 > **Nota institucional obrigatória:** O MongoDB (com Mongoose) é o alvo institucional de persistência em produção. Durante a Fase MOC (fase de construção/integração com MOCs), NENHUMA base de dados externa deve ser utilizada como fonte primária de dados; os MOCs residem exclusivamente em `data/` e são a fonte de verdade até a migração explícita.
 
-#### UI / Componentização:
+#### UI / Componentização
 
 - **Shared UI:** `src/components/` (Header, Footer, Modals, Loading, Base Form)
 - **Feature UI:** `src/features/<dominio>` (Obrigatório)
@@ -100,9 +102,9 @@ Ordem de criação mais importante que velocidade inicial.
 - Tokens Access/Refresh seguros
 - Endpoints: login, register, logout, me, reset/forgot password
 
-#### Camadas Backend:
+#### Camadas Backend
 
-```
+```text
 route.ts (HTTP) → controllers → services → repositories → models
 ```
 
@@ -114,7 +116,7 @@ route.ts (HTTP) → controllers → services → repositories → models
 
 ### Frontend — Base
 
-```
+```text
 src/app/layout.tsx
 src/app/page.tsx
 src/components/ (Shared somente)
@@ -129,7 +131,7 @@ src/utils/
 
 ### Backend — Base
 
-```
+```text
 app/api/health/route.ts
 server/config/env.ts
 server/db/client.ts
@@ -169,7 +171,7 @@ Validar integração completa front ↔ back, com login funcional até uma home 
 
 **ROTAS:**
 
-```
+```text
 /api/auth/[login|register|logout|me|forgot|reset]
 ```
 
@@ -255,7 +257,7 @@ Domínio específico, não reutilizável genericamente.
 
 ## 10. Critério de Conformidade
 
-### Uma aplicação está em conformidade quando:
+### Uma aplicação está em conformidade quando
 
 - ✅ Todas as etapas seguidas
 - ✅ Nenhuma camada misturada
@@ -272,11 +274,11 @@ Este documento transforma a criação de aplicações Next.js em um processo ins
 
 ### 📊 Status Institucional
 
-**Homologado & Mandatório**
+## Homologado & Mandatório
 
-**Governança Técnica**
+**Governança Técnica**  
 Engenharia de Software — v1.0
 
 ---
 
-_© 2025 - Documentação Institucional Oficial - Padronização de Processos Fullstack_
+© 2025 - Documentação Institucional Oficial - Padronização de Processos Fullstack

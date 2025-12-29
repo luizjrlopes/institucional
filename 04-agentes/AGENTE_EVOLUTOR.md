@@ -4,7 +4,7 @@
 
 ### Versão
 
-**v1.0 — Prompt Oficial do Agente Evolutor**
+#### v1.0 — Prompt Oficial do Agente Evolutor\*\*
 
 ## Papel do Agente
 
@@ -81,7 +81,7 @@ Para cada feature/página, você deve seguir rigorosamente esta ordem:
 
 ### ETAPA F0 — Verificação no Passaporte (BLOQUEIO CRÍTICO)
 
-**⛔ REGRA ABSOLUTA: NENHUMA PÁGINA PODE SER CRIADA SEM ESTAR NO PASSAPORTE**
+#### ⛔ REGRA ABSOLUTA: NENHUMA PÁGINA PODE SER CRIADA SEM ESTAR NO PASSAPORTE\*\*
 
 Antes de qualquer ação:
 
@@ -145,7 +145,7 @@ Criar a rota antes de qualquer componente:
 
 Criar estrutura obrigatória:
 
-```
+```plantext
 features/dominio/
 ├── components/
 ├── hooks/

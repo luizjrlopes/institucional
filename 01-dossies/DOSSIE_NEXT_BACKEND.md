@@ -39,7 +39,7 @@
 
 Este dossiê define o padrão oficial de organização do backend em projetos Next.js utilizando o App Router, adotando o modelo de backend integrado ao frontend.
 
-### O objetivo é:
+### O objetivo é
 
 - Preservar a arquitetura clássica de backend Node.js (camadas bem definidas)
 - Evitar acoplamento excessivo entre lógica de domínio e camada HTTP
@@ -70,7 +70,7 @@ A arquitetura descrita neste documento segue os princípios:
 
 ## 3. Visão Geral da Estrutura
 
-```
+```plaintext
 src/
   app/
     api/                # Camada HTTP (rotas do backend)
@@ -88,19 +88,19 @@ src/
 
 **Pasta:** `src/app/api/`
 
-### Responsabilidade:
+### Responsabilidade (Configuração)
 
 Implementar endpoints HTTP do backend, equivalentes à pasta `routes/` em aplicações Express.
 
-### Características:
+### Características
 
 - Cada rota é representada por uma pasta
 - O arquivo `route.ts` é o handler HTTP
 - O nome da pasta define a URL pública (/api/...)
 
-### Exemplo:
+### Exemplo
 
-```
+```plaintext
 src/app/api/users/route.ts
 src/app/api/users/[id]/route.ts
 ```
@@ -132,13 +132,13 @@ Esta pasta contém todo o backend estruturado, independente da existência do Ne
 
 **Arquivo:** `env.ts`
 
-### Responsabilidade:
+### Responsabilidade
 
 - Centralizar leitura de variáveis de ambiente
 - Validar presença e formato
 - Exportar objeto tipado de configuração
 
-### Justificativa:
+### Justificativa
 
 Evita falhas silenciosas em produção e garante previsibilidade de ambiente.
 
@@ -173,7 +173,7 @@ Evita falhas silenciosas em produção e garante previsibilidade de ambiente.
 
 **Exemplo:** `User.model.ts`
 
-### Responsabilidade:
+### Responsabilidade - Modelos de Domínio
 
 - Definir a estrutura da entidade
 - Representar o domínio de forma explícita
@@ -192,13 +192,13 @@ Evita falhas silenciosas em produção e garante previsibilidade de ambiente.
 
 **Exemplo:** `User.repository.ts`
 
-### Responsabilidade:
+### Responsabilidade - Repositórios
 
 - Executar operações de persistência
 - Encapsular queries
 - Isolar o ORM/driver do resto do sistema
 
-### Benefícios:
+### Benefícios
 
 - Facilita testes
 - Permite troca de banco/ORM
@@ -210,7 +210,7 @@ Evita falhas silenciosas em produção e garante previsibilidade de ambiente.
 - Durante a Fase MOC (ver Cláusula 10 do MAPA_INSTITUCIONAL_V2), usar adapter DataRepository que consome MOCs persistidos em `data/` (arquivos ou memória). É proibido utilizar ou referir `mock/data`.
 - Na migração para Mongo Atlas (após ETAPA 7 do FLUXO_ORQUESTRADOR), trocar apenas o adapter pela implementação Mongoose, mantendo contratos e DTOs.
 
-### ⚠️ Salvaguardas para evitar problemas nas rotas da API:
+### ⚠️ Salvaguardas para evitar problemas nas rotas da API
 
 1. **DTOs padronizados**: Definir tipos de entrada/saída (DTOs) desde o início que funcionem para ambos adapters.
 2. **Schemas Mongoose como referência**: Criar schemas Mongoose desde já (sem conectar ao banco) e usar seus tipos como contrato; o mock deve simular a mesma estrutura.
@@ -227,7 +227,7 @@ Evita falhas silenciosas em produção e garante previsibilidade de ambiente.
 
 **Exemplo:** `User.service.ts`, `Auth.service.ts`
 
-### Responsabilidade:
+### Responsabilidade - Serviços
 
 - Implementar casos de uso
 - Orquestrar repositórios
@@ -244,7 +244,7 @@ Evita falhas silenciosas em produção e garante previsibilidade de ambiente.
 
 **Exemplo:** `User.controller.ts`
 
-### Responsabilidade:
+### Responsabilidade - Controllers
 
 - Adaptar a entrada HTTP para o domínio
 - Coordenar validações
@@ -261,13 +261,13 @@ Evita falhas silenciosas em produção e garante previsibilidade de ambiente.
 
 **Exemplos:** `requireAuth.ts`, `rateLimit.ts`
 
-### Responsabilidade:
+### Responsabilidade - Middlewares
 
 - Autenticação
 - Autorização
 - Proteções transversais
 
-### Podem ser usados:
+### Podem ser usados
 
 - Diretamente em `route.ts`
 - Ou integrados via `middleware.ts` do Next, quando aplicável
@@ -280,7 +280,7 @@ Evita falhas silenciosas em produção e garante previsibilidade de ambiente.
 
 **Exemplos:** `auth.schemas.ts`, `user.schemas.ts`
 
-### Responsabilidade:
+### Responsabilidade - Validação
 
 - Validar input (Zod/Yup/etc.)
 - Garantir integridade antes de chegar ao service
@@ -293,7 +293,7 @@ Evita falhas silenciosas em produção e garante previsibilidade de ambiente.
 
 **Pasta:** `src/server/utils/`
 
-### Arquivos:
+### Arquivos
 
 #### `errors.ts`
 
@@ -315,7 +315,7 @@ Logging estruturado
 
 **Exemplo:** `GET /api/users/[id]`
 
-```
+```plaintext
 1. route.ts recebe request
    ↓
 2. Controller interpreta a entrada
@@ -347,7 +347,7 @@ Logging estruturado
 
 Quando necessário, esta estrutura permite evolução para:
 
-```
+```plaintext
 src/server/modules/<feature>/
 ```
 
@@ -363,4 +363,4 @@ Ele elimina improviso, reduz acoplamento e prepara o projeto para crescimento su
 
 ---
 
-_© 2025 - Documentação de Padrão Institucional - Engenharia de Software_
+## © 2025 - Documentação de Padrão Institucional - Engenharia de Software

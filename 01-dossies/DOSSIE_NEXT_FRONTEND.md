@@ -61,7 +61,7 @@ Este dossiê define o padrão oficial de arquitetura de frontend para aplicaçõ
 
 ## 3. Visão Geral da Estrutura
 
-```
+```plaintext
 src/                                   # Código da aplicação
 │
 ├── app/                              # Rotas (App Router)
@@ -235,7 +235,7 @@ O frontend deve tratar páginas de domínio como "páginas específicas", com do
 
 **Responsabilidade:** Conter UI específica de um domínio funcional.
 
-```
+```plaintext
 features/
   paginaEspecifica/
     components/
@@ -336,7 +336,7 @@ Reset, estilos globais e normalizações
 
 ## 14. Fluxo Oficial de Renderização
 
-```
+```plaintext
 1. Usuário acessa rota (app/...)
    ↓
 2. Página (page.tsx) monta a UI
@@ -396,10 +396,10 @@ Este padrão institucional estabelece o frontend como uma camada arquitetural de
 
 ### 📊 Status do Documento
 
-**Aprovado para Implementação**
+#### Aprovado para Implementação
 
-_Onboarding rápido & Eficiência Técnica_
+- Onboarding rápido & Eficiência Técnica\_
 
 ---
 
-_© 2025 - Documentação de Padrão Institucional - Engenharia de Software Frontend_
+- © 2025 - Documentação de Padrão Institucional - Engenharia de Software Frontend\_

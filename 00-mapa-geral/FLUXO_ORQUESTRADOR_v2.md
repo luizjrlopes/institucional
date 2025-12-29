@@ -1,5 +1,7 @@
 # 🔁 FLUXO_ORQUESTRADOR.md
 
+<!-- markdownlint-disable MD024 MD036 -->
+
 Orquestração Institucional de Interações Humano ↔ Agentes
 
 **Versão:** v2.0  
@@ -40,7 +42,7 @@ Ele **EXECUTA** o que os outros **MANDAM**.
 
 ## 3. VISÃO GERAL DO FLUXO (MACRO)
 
-```
+```text
 ETAPA 0 — Preparação (Humano)
         ↓
 ETAPA 1 — Criador (Scaffold)
@@ -84,7 +86,7 @@ Estudo de:
 
 Preparar ambiente para o scaffold inicial (não exige referências do produto ainda)
 
-#### Saída obrigatória
+#### Saída obrigatória — ETAPA 0
 
 Ambiente pronto para execução do scaffold
 
@@ -132,7 +134,7 @@ Criar projeto Next.js com:
 
 Criar e preencher:
 
-```
+```code
 05b-exemplos-etapa-mock/
 ├── html/ (mínimo 1 HTML)
 ├── imagens/ (mínimo 1 imagem)
@@ -265,18 +267,18 @@ Nenhum ajuste local de contrato é permitido sem atualização do Passaporte.
 
 Para cada página/feature/domínio implementado, o Evolutor DEVE executar:
 
-1.  Definir ou confirmar contratos (DTOs, tipos, schemas lógicos) do domínio **conforme especificado no Passaporte**
-2.  Criar OU atualizar o MOC correspondente em `data/<dominio>/<entidade>.json`
-3.  O MOC inicial PODE ser mínimo, desde que:
+1. Definir ou confirmar contratos (DTOs, tipos, schemas lógicos) do domínio **conforme especificado no Passaporte**
+2. Criar OU atualizar o MOC correspondente em `data/<dominio>/<entidade>.json`
+3. O MOC inicial PODE ser mínimo, desde que:
 
-        - represente fielmente os contratos definidos
-        - permita o funcionamento real da página
-        - não contenha campos fictícios que não existirão em produção
+   - represente fielmente os contratos definidos
+   - permita o funcionamento real da página
+   - não contenha campos fictícios que não existirão em produção
 
-4.  Implementar backend (services/repositories) consumindo o MOC via adapter
-5.  Implementar frontend consumindo apenas via services
-6.  Implementar estados obrigatórios (loading/erro/vazio)
-7.  Validar funcionamento ponta a ponta
+4. Implementar backend (services/repositories) consumindo o MOC via adapter
+5. Implementar frontend consumindo apenas via services
+6. Implementar estados obrigatórios (loading/erro/vazio)
+7. Validar funcionamento ponta a ponta
 
 #### Critério de validade da página
 
@@ -349,12 +351,12 @@ RELATORIO_AUDITORIA.md
 
 #### Processo obrigatório
 
-**Passo 1 — Importação**
+#### Passo 1 — Importação
 
 - Migrar dados de `data/` para Mongo Atlas
 - Preservar contratos e IDs
 
-**Passo 2 — Troca de Adapter**
+#### Passo 2 — Troca de Adapter
 
 - Substituir DataRepository por MongoRepository
 - ❌ Não alterar UI, services ou controllers

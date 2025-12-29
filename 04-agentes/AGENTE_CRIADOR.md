@@ -91,7 +91,7 @@ Qualquer configuração de MongoDB/Mongoose realizada nesta fase tem caráter es
 
 ### ETAPA 2 — Usuário e Autenticação
 
-#### Backend
+#### Backend — Etapa 2: Usuário e Autenticação
 
 Criar:
 
@@ -108,7 +108,7 @@ Criar:
   - forgot-password
   - reset-password
 
-#### Frontend
+#### Frontend — Etapa 2: Usuário e Autenticação
 
 Criar:
 
