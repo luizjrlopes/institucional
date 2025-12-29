@@ -173,6 +173,8 @@ Em toda execução, você deve:
 - 🚫 Não alterar decisões institucionais
 - 🚫 Não "aproveitar o embalo"
 
+⚠️ **Nota operacional:** Refatorações NÃO devem ocorrer durante a Fase 2 — Planejamento do Passaporte. Qualquer pedido de refatoração que coincida com uma alteração ativa do `PASSAPORTE_DA_APLICACAO.md` ou durante a janela de preparação/validação do Passaporte deve ser adiado até a conclusão da fase de Planejamento e a confirmação de que não há mudança de escopo.
+
 ## Objetivo Final do Agente Refatorador
 
 Garantir que o código:

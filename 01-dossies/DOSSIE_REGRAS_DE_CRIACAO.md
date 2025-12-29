@@ -2,6 +2,8 @@
 
 ## Regras de Criação de Aplicações Next.js Fullstack
 
+> Nota terminológica: As "Fases" descritas neste Dossiê são internas ao próprio Dossiê (Fase D\*) e não substituem, nem conflitam com, as "Etapas" operacionais do `FLUXO_ORQUESTRADOR`. As Etapas do Fluxo são a referência obrigatória para execução operacional.
+
 ---
 
 **OFFICIAL DOC**
@@ -21,12 +23,12 @@
 1. [Objetivo](#1-objetivo)
 2. [Escopo](#2-escopo)
 3. [Princípios Institucionais](#3-princípios-institucionais)
-4. **Processo Sequencial**
-   - [ETAPA 0: Preparação](#etapa-0-preparação-institucional)
-   - [ETAPA 1: Estrutura Base](#etapa-1-estrutura-base-frontend--backend)
-   - [ETAPA 2: Usuário/Auth](#etapa-2-usuário-e-autenticação)
-   - [ETAPA 3: Domínio](#etapa-3-páginas-de-domínio)
-   - [ETAPA 4: Governança](#etapa-4-governança)
+4. **Processo Sequencial (Fases Internas do Dossiê)**
+   - [Fase D0 — Preparação Institucional](#fase-d0-Preparação-Institucional)
+   - [Fase D1 — Estrutura Base](#fase-d1-estrutura-base-frontend--backend)
+   - [Fase D2 — Usuário/Auth](#fase-d2-usuário-e-autenticação)
+   - [Fase D3 — Domínio](#fase-d3-páginas-de-domínio)
+   - [Fase D4 — Governança](#fase-d4-governança)
 5. **Finalização**
    - [Regras de Decisão](#9-regras-institucionais-de-decisão)
    - [Conformidade](#10-critério-de-conformidade)
@@ -71,9 +73,9 @@ Ordem de criação mais importante que velocidade inicial.
 
 ---
 
-## ETAPA 0: Preparação Institucional
+## Fase D0 — Preparação Institucional
 
-**Número:** `0`
+**Número interna do Dossiê:** `D0`
 
 ### 4.1 Objetivo
 
@@ -85,6 +87,8 @@ Ordem de criação mais importante que velocidade inicial.
 | **Roteamento** | App Router                      |
 | **Backend**    | Opção A (`app/api` + `server/`) |
 | **Banco**      | MongoDB / Mongoose              |
+
+> **Nota institucional obrigatória:** O MongoDB (com Mongoose) é o alvo institucional de persistência em produção. Durante a Fase MOC (fase de construção/integração com MOCs), NENHUMA base de dados externa deve ser utilizada como fonte primária de dados; os MOCs residem exclusivamente em `data/` e são a fonte de verdade até a migração explícita.
 
 #### UI / Componentização:
 
@@ -102,7 +106,7 @@ Ordem de criação mais importante que velocidade inicial.
 route.ts (HTTP) → controllers → services → repositories → models
 ```
 
-### ✅ CRITÉRIO DE ACEITE DA ETAPA 0
+### ✅ CRITÉRIO DE ACEITE DA FASE D0
 
 **✓** Estrutura documental criada e validada
 
@@ -136,7 +140,11 @@ server/utils/logger.ts
 
 - Repositórios e services devem ser definidos por interface para permitir adapter DataRepository durante a Fase MOC (ver Cláusula 10 do MAPA_INSTITUCIONAL_V2) antes da conexão real ao Mongo Atlas.
 
-### ✅ CRITÉRIOS DE ACEITE DA ETAPA 1
+**Nota operacional sobre `src/server/db/client.ts` e Mongoose:**
+
+O arquivo `src/server/db/client.ts` poderá conter a configuração estrutural (esqueleto) do cliente Mongo/Mongoose, mas durante a Fase MOC ele NÃO deve estabelecer conexões ativas nem ser usado como fonte primária de dados. Enquanto durar a Fase MOC, os MOCs em `data/` são a fonte oficial de verdade e o MongoDB só será utilizado como tal na Fase 4 — Transição para Produção.
+
+### ✅ CRITÉRIOS DE ACEITE DA FASE D1
 
 - ✓ Projeto compila
 - ✓ `/api/health` responde
@@ -145,9 +153,9 @@ server/utils/logger.ts
 
 ---
 
-## ETAPA 2: Usuário e Autenticação
+## Fase D2 — Usuário e Autenticação
 
-**Número:** `2`
+**Número interna do Dossiê:** `D2`
 
 ### Objetivo
 
@@ -171,7 +179,7 @@ Validar integração completa front ↔ back, com login funcional até uma home 
 
 - /login
 - /cadastro
-- /resetarSenha
+- /reset-password
 - /perfil
 - / (home protegida)
 
@@ -190,9 +198,9 @@ Validar integração completa front ↔ back, com login funcional até uma home 
 
 ---
 
-## ETAPA 3: Páginas de Domínio
+## Fase D3 — Páginas de Domínio
 
-**Número:** `3`
+**Número interna do Dossiê:** `D3`
 
 ### Ordem de criação por página
 

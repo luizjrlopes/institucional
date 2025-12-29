@@ -31,89 +31,28 @@ O projeto segue:
 
 - A autenticação está funcional
 - A home/dashboard inicial existe
-- A estrutura src/features/ já foi criada
-- Se o produto estiver na macro fase 2 com dados simulados, usar adapter de repositório mock/data até a migração final para Mongo Atlas, sem alterar services ou UI.
+- A estrutura `src/features/` já foi criada pelo Agente Criador
+- Durante a Fase MOC, todas as informações simuladas DEVEM residir em `data/` e o Evolutor usa o adapter DataRepository que consome esses MOCs. É proibido referir ou criar `mock/data`.
+
+**Autoridade Operacional:**
+
+Toda evolução implementada pelo AGENTE_EVOLUTOR ocorre exclusivamente dentro da **ETAPA 4** do `FLUXO_ORQUESTRADOR`. O `FLUXO_ORQUESTRADOR` é a autoridade operacional que determina quando a Evolução pode iniciar, pausar ou ser bloqueada.
 
 ⚠️ **Se qualquer pré-condição não ser atendida, interrompa e solicite correção.**
 
-## Como Processar Referências do Produto
+## Referências e Responsabilidade do Evolutor
 
-**⚠️ IMPORTANTE:** Se você está gerando o PASSAPORTE pela primeira vez, você deve PRIMEIRO analisar as referências do produto.
+- As referências visuais (HTML, imagens, notas) são analisadas e consolidadas pelo **Agente Gerador de Passaporte**. O **Agente Evolutor** recebe o `PASSAPORTE_DA_APLICACAO.md` como insumo normativo único.
 
-**Localização:** `institucional/05-referencias/05b-exemplos-etapa-mock/`
+- O AGENTE_EVOLUTOR NÃO interpreta, redefine ou reavalia referências visuais. Qualquer necessidade de esclarecer ou ampliar o Passaporte deve ser encaminhada ao Agente Gerador de Passaporte ou ao humano responsável pelo produto.
 
-### Etapas de Análise
+**Regras institucionais adicionais (obrigatórias):**
 
-1. **Listar Conteúdo**
+1. O MOC é criado OU atualizado pelo AGENTE_EVOLUTOR como parte integrante da implementação de cada página — o humano NÃO fornece o MOC.
 
-   ```
-   - html/*.html (exemplos de layout)
-   - imagens/*.png|jpg (mockups, wireframes)
-   - notas.md (especificações escritas)
-   ```
+2. Se o `PASSAPORTE_DA_APLICACAO.md` for alterado ou atualizado enquanto o AGENTE_EVOLUTOR estiver executando tarefas, o Evolutor **deve pausar imediatamente** toda execução em curso e aguardar revalidação do Passaporte antes de retomar.
 
-2. **Analisar Cada HTML**
-
-   - Identificar qual página representa (ex: lista de cursos, detalhe do curso)
-   - Mapear elementos interativos (botões, formulários, filtros)
-   - Identificar dados dinâmicos (listas, cards, tabelas)
-   - Detectar navegação (links entre páginas)
-
-3. **Analisar Cada Imagem**
-
-   - Confirmar ou complementar informações dos HTMLs
-   - Identificar estados visuais (loading, erro, vazio)
-   - Capturar detalhes de design que afetam funcionalidade
-
-4. **Ler notas.md Completo**
-
-   - Extrair requisitos funcionais
-   - Identificar regras de negócio
-   - Mapear fluxos de usuário
-   - Detectar páginas não visualizadas em HTML/imagens
-
-5. **Consolidar em Lista de Páginas**
-
-   - Para cada página, definir:
-     - Nome e rota (ex: `/cursos`, `/cursos/[id]`)
-     - Objetivo (ex: "listar todos os cursos disponíveis")
-     - Ações do usuário (ex: "filtrar por categoria", "clicar em card")
-     - Dados exibidos (ex: "título, descrição, imagem, categoria")
-     - Estados (ex: "loading", "erro", "lista vazia")
-   - Agrupar páginas em domínios (ex: `courses`, `profile`, `admin`)
-
-6. **Definir Contratos Técnicos**
-   - Para cada página, especificar:
-     - Endpoints da API (ex: `GET /api/courses`, `GET /api/courses/:id`)
-     - Modelos de dados (ex: `Course { id, title, description, category }`)
-     - Contextos globais necessários (se houver)
-
-### Exemplo de Análise
-
-**Arquivo:** `html/pagina-cursos.html`
-**Contém:** Grid de cards com título, imagem, categoria e botão "Ver Detalhes"
-
-**Resultado da Análise:**
-
-- Página: Lista de Cursos
-- Rota: `/cursos`
-- Ações: filtrar por categoria, buscar por título, clicar em card
-- Dados: array de cursos (id, title, image, category)
-- API: `GET /api/courses?category=X&search=Y`
-- Modelo: `Course { id, title, description, category, imageUrl, instructor }`
-- Estados: loading, erro, lsta vazia
-
-### Regras de Interpretação
-
-- **Não invente páginas** que não existem nas referências
-- **Não omita páginas** que estão claramente indicadas
-- **Não assuma funcionalidades** não demonstradas ou descritas
-- **Se algo não estiver claro**, pergunte ao usuário antes de prosseguir
-- **Respeite a estrutura isual** dos HTMLs e imagens fornecidos
-
-### Após Análise Completa
-
-Gere o **PASSAPORTE_DA_APLICACAO.md** com todas as páginas identificadas, seguindo o template institucional.
+3. Toda ação do Evolutor deve obedecer às ordens e bloqueios explícitos definidos no `FLUXO_ORQUESTRADOR`. Qualquer conflito entre instruções locais e o FLUXO deve ser resolvido em favor do `FLUXO_ORQUESTRADOR`.
 
 ---
 

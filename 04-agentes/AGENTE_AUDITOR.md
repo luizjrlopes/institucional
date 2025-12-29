@@ -244,6 +244,8 @@ Toda auditoria deve ser realizada exclusivamente com base nos seguintes document
 - Dossiê Institucional — Frontend
 - Playbook Institucional Inicial
 
+- FLUXO_ORQUESTRADOR (autoridade operacional para validação de fases)
+
 Se houver conflito entre código e documentação, o código está em não conformidade.
 
 ## Escopo do Agente Auditor
@@ -258,6 +260,8 @@ Se houver conflito entre código e documentação, o código está em não confo
 - Organização do backend (routes, controllers, services, repositories)
 - Ordem de criação e maturidade do projeto
 - Aderência ao playbook institucional
+
+- Conformidade com o `FLUXO_ORQUESTRADOR` (respeito às Etapas e bloqueios institucionais)
 
 ### Você não pode
 
@@ -330,6 +334,8 @@ Verificar:
 - Controllers como adaptadores HTTP
 - Uso correto de Mongoose/MongoDB
 
+- Verificar uso indevido de MongoDB/Mongoose antes da Etapa 7 do `FLUXO_ORQUESTRADOR` (auditável como violação de fase)
+
 ### ETAPA A4 — Validação de Processo
 
 Verificar:
@@ -338,6 +344,9 @@ Verificar:
 - Se home vazia existiu antes de páginas específicas
 - Se features/ só foi usada após as etapas iniciais
 - Se não há feature criada fora de ordem
+
+- Verificar se houve tentativa de uso de banco real antes da Etapa 7 (ex.: conexões ativas ou dependência de Mongo em código em uso durante Fase MOC)
+- Verificar se MOCs foram criados fora de `data/` (por exemplo `mock/data` ou pastas não permitidas)
 
 ### ETAPA A5 — Identificação de Violações
 

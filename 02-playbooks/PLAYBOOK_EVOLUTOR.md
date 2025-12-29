@@ -26,62 +26,27 @@ O Evolutor **só pode iniciar** se:
 - `features/` existir
 - PASSAPORTE_DA_APLICACAO.md existir
 - Passaporte estiver **validado**
-- Se a macro fase 2 estiver em andamento, usar o adapter de repositório mock/data até a migração final para Mongo Atlas.
+- Durante a Fase MOC, os MOCs DEVEM residir em `data/` e o Evolutor utiliza o adapter DataRepository correspondente. É proibido referir ou criar `mock/data`.
 
 Se qualquer item falhar, **bloquear execução**.
 
+### 2.1 Dependências e compatibilidade (obrigatório)
+
+**Regra institucional:** garantir que as dependências listadas em `package.json` estejam travadas e compatíveis entre si.
+
+- Manter o lockfile (`package-lock.json` / `pnpm-lock.yaml` / `yarn.lock`) no repositório.
+- Usar `npm ci`/equivalente no CI para instalações reprodutíveis.
+- Preferir versões estáveis e testadas; evitar misturar majors incompatíveis.
+- Após atualizar dependências, executar build e testes locais/CI antes de avançar.
+- Documentar exceções ou upgrades críticos no Passaporte ou changelog.
+
 ---
 
-## 2.1 ETAPA PRE-0 — Análise de Referências do Produto (ANTES do Passaporte)
+### Observação: Responsabilidade sobre Referências
 
-Antes de gerar o Passaporte, o **Gerador de Passaporte** deve analisar as referências do produto:
+- A análise e consolidação das referências visuais (HTML, imagens, notas.md) é atribuição exclusiva do **Agente Gerador de Passaporte**.
 
-**Localização:** `05-referencias/05b-exemplos-etapa-mock/`
-
-**Conteúdo esperado:**
-
-- `html/` — Exemplos de layouts e estruturas visuais
-- `imagens/` — Mockups, wireframes, designs
-- `notas.md` — Especificações, requisitos, descrições de funcionalidades
-
-**Processo de Análise:**
-
-1. **Inventariar Referências**
-
-   - Listar todos os HTMLs disponíveis
-   - Listar todas as imagens disponíveis
-   - Ler notas.md completo
-
-2. **Identificar Páginas**
-
-   - Cada HTML geralmente representa uma página ou seção
-   - Imagens podem mostrar múltiplas páginas ou estados da mesma página
-   - Notas podem especificar páginas adicionais não visualizadas
-
-3. **Extrair Funcionalidades**
-
-   - Para cada página identificada, mapear:
-     - Ações do usuário (botões, formulários, filtros)
-     - Dados exibidos (listas, cards, detalhes)
-     - Navegação (links, menus, breadcrumbs)
-     - Estados especiais (loading, erro, vazio)
-
-4. **Definir Domínios**
-
-   - Agrupar páginas relacionadas em domínios lógicos
-   - Ex: páginas de cursos → domínio `courses`
-   - Ex: páginas de perfil → domínio `profile`
-
-5. **Mapear Contratos Técnicos**
-   - Para cada funcionalidade, definir:
-     - Endpoints da API necessários
-     - Modelos de dados
-     - Estados globais (se necessário)
-
-**Resultado:** Lista completa de páginas a serem incluídas no Passaporte.
-
-**⚠️ Regra Crítica:**  
-Se não houver referências suficientes para definir uma página, **não invente**. Solicite ao usuário mais informações ou referências adicionais.
+- O Playbook do Evolutor assume que o `PASSAPORTE_DA_APLICACAO.md` já contém todas as informações necessárias. O Evolutor não deve realizar análises de referência para alterar o Passaporte; qualquer dúvida deve ser direcionada ao Gerador.
 
 ---
 
@@ -224,10 +189,10 @@ Ao final de cada página:
 - Código organizado
 - Pronta para auditoria
 
-### Observação (Macro Fase 2 — dados simulados)
+### Observação (Fase 3 — Fase MOC)
 
-- Enquanto durar a fase de dados simulados, usar o adapter de repositório mock/data como backend.
-- Quando a aplicação completa estiver funcional, trocar apenas o adapter para Mongo Atlas, mantendo os mesmos contratos/DTOs e services/UI inalterados.
+- Enquanto durar a Fase MOC, usar o adapter de repositório que consome MOCs em `data/` como backend. É proibido referir ou criar `mock/data`.
+- Quando a aplicação completa estiver funcional com MOCs em `data/`, trocar apenas o adapter para Mongo Atlas, mantendo os mesmos contratos/DTOs e services/UI inalterados.
 
 ---
 

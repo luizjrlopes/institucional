@@ -38,6 +38,8 @@ Para cada página, verificar:
 - estados definidos
 - backend declarado
 
+- verificar que os slugs técnicos estão em inglês e em `kebab-case` (ex.: `/reset-password`)
+
 ### V3 — Arquitetura
 
 Verificar:
@@ -45,6 +47,13 @@ Verificar:
 - separação de camadas
 - shared vs feature
 - dependência de auth correta
+
+- verificar alinhamento explícito com os Dossiês institucionais e com o `FLUXO_ORQUESTRADOR` (etapas e bloqueios aplicáveis)
+
+### V4 — Fase e Consistência
+
+- confirmar que a página proposta está sendo implementada na Fase correta (por exemplo: não iniciar implementação na Fase MOC sem Passaporte validado)
+- certificar que novos itens adicionados ao Passaporte respeitam a regra de reentrada (Passaporte só autoriza execução após validação)
 
 ### V4 — Ordem
 

@@ -8,7 +8,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Rotas públicas que não precisam de autenticação
-  const publicRoutes = ["/login", "/cadastro", "/resetarSenha"];
+  const publicRoutes = ["/login", "/cadastro", "/reset-password"];
   const isPublicRoute = publicRoutes.some((route) =>
     pathname.startsWith(route)
   );

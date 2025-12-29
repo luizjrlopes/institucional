@@ -1,5 +1,7 @@
 # Dossiê Institucional
 
+> Nota terminológica: As "Fases" descritas neste Dossiê são internas ao próprio Dossiê e não substituem, nem conflitam com, as "Etapas" do `FLUXO_ORQUESTRADOR`.
+
 ## Arquitetura de Frontend — Next.js (App Router)
 
 ---

@@ -81,7 +81,11 @@ Criar apenas:
 - `server/utils/errors.ts`
 - `server/utils/response.ts`
 
-> Nota: definir interfaces de repositório/serviço de modo a permitir adapter mock/data durante a macro fase 2 (produto) antes de conectar ao Mongo Atlas.
+> Nota: definir interfaces de repositório/serviço de modo a permitir adapter que consuma MOCs em `data/` durante a Macro Fase MOC (produto) antes de conectar ao Mongo Atlas. É PROIBIDO utilizar ou referir `mock/data`.
+
+**Nota operacional obrigatória sobre Mongo/Mongoose:**
+
+Qualquer configuração de MongoDB/Mongoose realizada nesta fase tem caráter estritamente estrutural (esqueleto de configuração, tipos e helpers) e **não** deve estabelecer conexões ativas nem ser considerada fonte de dados primária durante a Fase MOC. Durante toda a Fase MOC os MOCs em `data/` são a fonte oficial de verdade. A conexão ativa ao MongoDB só pode ocorrer na Fase 4 — Transição para Produção, mediante sinalização explícita.
 
 ✔ **Critério:** projeto compila e `/api/health` responde
 
@@ -110,7 +114,7 @@ Criar:
 
 - `/login`
 - `/cadastro`
-- `/resetarSenha`
+- `/reset-password`
 - `/perfil` (placeholder)
 - `/` (home protegida vazia)
 - Provider de sessão
@@ -130,15 +134,15 @@ Usuário consegue cadastrar → logar → acessar home vazia → deslogar
 
 ### ETAPA 4 — Preparação para Features
 
-- Criar estrutura `src/features/`
+- Criar estrutura `src/features/` (se já não foi criada ao final da Etapa 1)
 - Não implementar domínio ainda
 - Apenas preparar o terreno
 
-### Macro Fase 2 (produto com dados simulados)
+### Fase 3 — Fase MOC
 
-- Construir todas as páginas, componentes e APIs usando adapter de repositório mock/data (arquivos ou memória) com os mesmos contratos (DTOs) previstos para o banco real.
+- Construir todas as páginas, componentes e APIs usando adapter de repositório que consome MOCs em `data/` (arquivos ou memória) com os mesmos contratos (DTOs) previstos para o banco real.
 - Services e controllers permanecem idênticos; apenas o adapter de repositório muda.
-- Somente após todo o produto estar funcional com mock/data, trocar o adapter para Mongo Atlas mantendo interfaces e contratos; nenhuma mudança na UI ou services.
+- Somente após todo o produto estar funcional com MOCs em `data/`, trocar o adapter para Mongo Atlas mantendo interfaces e contratos; nenhuma mudança na UI ou services.
 
 ### ⚠️ Importante: Rotas da API não mudam
 

@@ -1,5 +1,7 @@
 # Dossiê Institucional
 
+> Nota terminológica: As "Fases" descritas neste Dossiê são internas ao próprio Dossiê e não substituem, nem conflitam com, as "Etapas" do `FLUXO_ORQUESTRADOR`. Use o FLUXO como referência operacional.
+
 ## Arquitetura de Backend — Next.js
 
 ### Opção A: Backend Integrado ao App Router
@@ -150,9 +152,11 @@ Evita falhas silenciosas em produção e garante previsibilidade de ambiente.
 
 **Responsabilidade:**
 
-- Criar e configurar o cliente do banco de dados
+- Criar e configurar o cliente do banco de dados (definição estrutural)
 - Garantir reutilização da conexão (especialmente em dev)
 - **Equivalente clássico:** `database/index.ts`
+
+**Nota operacional:** A configuração em `client.ts` nesta fase é estrutural: o arquivo pode conter código, tipos e helpers do cliente Mongo/Mongoose, porém NÃO deve abrir conexões ativas nem ser utilizado como fonte primária de dados durante a Fase MOC. Durante a Fase MOC os dados primários são os MOCs em `data/`. A conexão real ao MongoDB só é efetuada na Fase 4 — Transição para Produção.
 
 ### `index.ts`
 
@@ -203,7 +207,7 @@ Evita falhas silenciosas em produção e garante previsibilidade de ambiente.
 ### Nota sobre adapters (Fase MOC → Mongo)
 
 - Definir interfaces de repositório e usar uma factory para injetar implementações.
-- Durante a Fase MOC (ver Cláusula 10 do MAPA_INSTITUCIONAL_V2), usar adapter DataRepository (mock/data em arquivos ou memória) sem alterar services/controllers.
+- Durante a Fase MOC (ver Cláusula 10 do MAPA_INSTITUCIONAL_V2), usar adapter DataRepository que consome MOCs persistidos em `data/` (arquivos ou memória). É proibido utilizar ou referir `mock/data`.
 - Na migração para Mongo Atlas (após ETAPA 7 do FLUXO_ORQUESTRADOR), trocar apenas o adapter pela implementação Mongoose, mantendo contratos e DTOs.
 
 ### ⚠️ Salvaguardas para evitar problemas nas rotas da API:

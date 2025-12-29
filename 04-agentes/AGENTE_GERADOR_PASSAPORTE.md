@@ -28,10 +28,10 @@ Antes de iniciar, confirme:
 - Estrutura base criada
 - Autenticação funcional
 - Home vazia protegida existente
-- Existe uma pasta de referências fornecida pelo usuário, contendo:
-  - HTMLs de exemplo
-  - Imagens de layout/design
-  - (Opcional) notas textuais
+- Existe a pasta oficial de referências: `05-referencias/05b-exemplos-etapa-mock/` contendo:
+  - `html/` — HTMLs de exemplo
+  - `imagens/` — imagens e mockups
+  - `notas.md` — anotações e especificações funcionais (opcional)
 
 ⚠️ **Se alguma pré-condição não for atendida, interrompa e solicite correção.**
 
@@ -49,7 +49,7 @@ As referências (HTML/imagens) não têm autoridade arquitetural. Elas são insu
 
 ## Entradas Esperadas
 
-- Caminho da pasta de referências (ex.: /referencias/)
+- Caminho da pasta de referências: `05-referencias/05b-exemplos-etapa-mock/`
 - HTMLs (estrutura e comportamento)
 - Imagens (layout, hierarquia, estilo)
 - Observações funcionais (se existirem)
@@ -58,34 +58,35 @@ Você deve ler tudo antes de produzir qualquer saída.
 
 ## Evolução Incremental do Passaporte
 
-O Passaporte **não é imutável**. Ele pode ser atualizado para incluir novas páginas durante a evolução do projeto.
+O Passaporte **não é imutável**. Ele pode ser atualizado para incluir novas páginas durante a evolução do projeto, inclusive após o início da Fase MOC — desde que qualquer atualização seja validada pelo Agente Validador de Passaporte **antes** de autorizar nova execução pelo Evolutor.
 
 **Cenário 1: Passaporte Inicial Completo**
 
 - Todas as páginas identificadas nas referências são incluídas
 - Passaporte validado antes da execução do Evolutor
 
-**Cenário 2: Adição de Nova Página Após Início**
+**Cenário 2: Adição de Nova Página Após Início (REENTRADA DA FASE 2)**
 
 Se o usuário solicitar uma página que **não está no Passaporte atual**:
 
 1. **Verificar se há referências para a nova página**
 
-   - Se houver: analisar e adicionar ao Passaporte seguindo o mesmo processo
-   - Se não houver: solicitar ao usuário fornecer referências (HTML, imagem, especificação)
+- Se houver: analisar e adicionar ao Passaporte seguindo o mesmo processo
+- Se não houver: solicitar ao usuário fornecer referências (HTML, imagem, especificação)
 
 2. **Atualizar PASSAPORTE_DA_APLICACAO.md**
 
-   - Adicionar nova entrada na seção "2. Inventário de Páginas"
-   - Incluir todos os campos obrigatórios (objetivo, rota, ações, estados, contratos)
+- Adicionar nova entrada na seção "2. Inventário de Páginas"
+- Incluir todos os campos obrigatórios (objetivo, rota, ações, estados, contratos)
 
 3. **Validar Passaporte Atualizado**
 
-   - Executar Agente Validador de Passaporte
-   - Garantir que a nova página está conforme os dossiês institucionais
+- Executar Agente Validador de Passaporte
+- Garantir que a nova página está conforme os dossiês institucionais
 
 4. **Autorizar Evolutor**
-   - Somente após validação, o Agente Evolutor pode criar a página
+
+- Somente após validação, o Agente Evolutor pode criar a página
 
 **⚠️ IMPORTANTE:**
 

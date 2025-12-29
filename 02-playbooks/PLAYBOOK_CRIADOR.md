@@ -43,7 +43,7 @@ src/utils/
 
 #### Regras obrigatórias (Frontend)
 
-- PROIBIDO criar `src/features/` nesta etapa
+- OBRIGATÓRIO criar `src/features/` vazia ao final da Etapa 1 (estrutura base)
 - PROIBIDO fazer fetch direto em UI (página/componente)
 - PROIBIDO colocar componente específico de domínio em `src/components/`
 
@@ -61,10 +61,15 @@ src/server/utils/
     logger.ts (se institucional)
 ```
 
-#### Observação sobre mock/data (planejado)
+#### Observação sobre MOCs e persistência (planejado)
 
-- Definir interfaces de repositório/serviço desde já para permitir um adapter mock (data/) durante a macro fase 2 (produto) antes de conectar ao Mongo Atlas.
+- Definir interfaces de repositório/serviço desde já para permitir um adapter que consuma MOCs persistidos em `data/` durante a macro Fase MOC (produto) antes de conectar ao Mongo Atlas.
+- É PROIBIDO criar ou referir qualquer pasta denominada `mock/data`.
 - A troca para Mongo deve ocorrer apenas trocando o adapter na factory, sem mudar contratos ou UI/services.
+
+**Nota operacional sobre `src/server/db/client.ts` e Mongoose:**
+
+O arquivo `src/server/db/client.ts` pode conter a definição estrutural do cliente Mongo/Mongoose (esqueleto de configuração, tipagens e helpers), mas NUNCA deve estabelecer uma conexão ativa com um banco externo nem ser usado como fonte primária de dados durante a Fase MOC. Durante a Fase MOC a fonte oficial de verdade são os MOCs em `data/` consumidos via adapter `DataRepository`.
 
 #### Regras obrigatórias (Backend)
 
@@ -79,6 +84,15 @@ src/server/utils/
 - ✔ `/api/health` responde 200
 - ✔ `env.ts` centraliza e valida variáveis obrigatórias (sem `process.env` espalhado)
 - ✔ `db/client.ts` configura Mongoose (mesmo sem domínio ainda)
+
+### 1.5 Dependências e compatibilidade
+
+**Regra institucional (obrigatória):** escolher e travar versões de pacotes garantindo compatibilidade e estabilidade entre si.
+
+- Manter lockfile (`package-lock.json` / `pnpm-lock.yaml` / `yarn.lock`) no repositório e usar `npm ci`/equivalente no CI.
+- Preferir versões comprovadas e compatíveis (evitar misturar majors incompatíveis, ex.: React/React DOM).
+- Executar build e testes locais/CI após atualizar dependências; rodar `npm audit`/ferramentas de segurança.
+- Documentar exceções de versão no changelog ou Passaporte da aplicação.
 
 ## ETAPA 2 — Usuário e Autenticação (OBRIGATÓRIA até Home vazia protegida)
 
@@ -151,7 +165,7 @@ src/app/api/auth/reset-password/route.ts
 ```code
 src/app/login/page.tsx
 src/app/cadastro/page.tsx
-src/app/resetarSenha/page.tsx
+src/app/reset-password/page.tsx
 src/app/perfil/page.tsx (placeholder)
 src/app/page.tsx (Home vazia protegida)
 ```

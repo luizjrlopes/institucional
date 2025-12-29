@@ -66,6 +66,8 @@ Playbook do Criador
 
 Playbook do Evolutor
 
+FLUXO_ORQUESTRADOR
+
 Passaporte da Aplicação
 
 Referências do Produto (HTML, imagens, notas)
@@ -119,8 +121,9 @@ PLAYBOOK_EVOLUTOR
 
 FLUXO_ORQUESTRADOR
 
-4.2.2.1. O FLUXO_ORQUESTRADOR é o instrumento normativo de execução.
-O README possui caráter meramente informativo.
+4.2.2.1. O FLUXO_ORQUESTRADOR é o documento operacional normativo responsável por executar, em ordem obrigatória, as diretrizes estabelecidas por este MAPA, pelos Dossiês Institucionais e pelos Playbooks.
+
+4.2.2.2. O README não possui autoridade normativa; porém, sua leitura é obrigatória para compreensão do sistema institucional antes do início de qualquer execução do fluxo.
 
 4.2.3 Documentos de Planejamento por Projeto
 
@@ -188,29 +191,27 @@ não pode ser automatizado,
 
 não possui validade institucional.
 
-CLÁUSULA 6 — DO USO DE mock/data (REGRA EXPRESSA)
+CLÁUSULA 6 — DO USO DE MOCs E PROIBIÇÃO DE "mock/data"
 
-6.1. É PERMITIDO o uso de repositório mock/data exclusivamente em fases iniciais do projeto.
+6.1. Fica expressamente PROIBIDO o uso do termo, referência ou pasta denominada `mock/data` no âmbito institucional.
 
-6.2. Condições obrigatórias:
+6.2. Definição normativa: todo MOC institucional DEVE residir exclusivamente na pasta raiz `data/` do projeto. Referir-se a artefatos de dados simulados como "MOC em /data" é a forma normativa obrigatória.
 
-contratos não podem mudar,
+6.3. Condições obrigatórias para MOCs:
 
-DTOs e tipos devem ser idênticos aos definitivos,
+- contratos não podem mudar,
+- DTOs e tipos devem ser idênticos aos definitivos,
+- services e controllers permanecem inalterados.
 
-services e controllers permanecem inalterados.
+  6.4. A migração para banco definitivo ocorre somente por substituição do adapter de repositório (DataRepository → MongoRepository) conforme Cláusula 10.
 
-6.3. A migração para banco definitivo ocorre somente por substituição do adapter de repositório.
+  6.5. É PROIBIDO:
 
-6.4. É PROIBIDO:
+- lógica específica para MOC que não exista em produção,
+- alteração de contratos na migração,
+- acoplamento da UI à persistência.
 
-lógica específica para mock,
-
-alteração de contratos na migração,
-
-acoplamento da UI à persistência.
-
-6.5. Violação desta cláusula invalida a execução da etapa.
+  6.6. Violação desta cláusula invalida a execução da etapa e constitui descumprimento institucional grave.
 
 CLÁUSULA 7 — DOS AGENTES INSTITUCIONAIS
 
