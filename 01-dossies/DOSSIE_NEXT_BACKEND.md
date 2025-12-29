@@ -200,6 +200,21 @@ Evita falhas silenciosas em produção e garante previsibilidade de ambiente.
 - Permite troca de banco/ORM
 - Mantém services limpos
 
+### Nota sobre adapters (Fase MOC → Mongo)
+
+- Definir interfaces de repositório e usar uma factory para injetar implementações.
+- Durante a Fase MOC (ver Cláusula 10 do MAPA_INSTITUCIONAL_V2), usar adapter DataRepository (mock/data em arquivos ou memória) sem alterar services/controllers.
+- Na migração para Mongo Atlas (após ETAPA 7 do FLUXO_ORQUESTRADOR), trocar apenas o adapter pela implementação Mongoose, mantendo contratos e DTOs.
+
+### ⚠️ Salvaguardas para evitar problemas nas rotas da API:
+
+1. **DTOs padronizados**: Definir tipos de entrada/saída (DTOs) desde o início que funcionem para ambos adapters.
+2. **Schemas Mongoose como referência**: Criar schemas Mongoose desde já (sem conectar ao banco) e usar seus tipos como contrato; o mock deve simular a mesma estrutura.
+3. **IDs consistentes**: Mock deve gerar IDs compatíveis com ObjectId (string de 24 chars hex) ou usar biblioteca que simule ObjectId.
+4. **Validações espelhadas**: Se o schema Mongoose tem validações (required, enum, min/max), o mock deve validar da mesma forma antes de "persistir".
+5. **Testes de contrato**: Criar testes que validem que mock e Mongo retornam a mesma estrutura para as mesmas operações.
+6. **Sem lógica específica do adapter em services**: Services nunca devem saber se estão usando mock ou Mongo; apenas interfaces genéricas (findById, create, update, delete).
+
 ---
 
 ## 10. Serviços (Regra de Negócio)

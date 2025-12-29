@@ -4,6 +4,11 @@ Trecho Oficial — Estrutura Base → Usuário/Auth (100% conforme)
 
 ## ETAPA 1 — Montagem da Estrutura Base Institucional (OBRIGATÓRIA)
 
+### 1.0 Pré-etapas operacionais (antes de 1.2)
+
+- **Casca vazia:** criar toda a árvore prevista (frontend/backend) com arquivos vazios suficientes para compilar.
+- **Preencher padrões institucionais:** popular apenas os arquivos padrão que são iguais para qualquer projeto (Loading, AlertService, layout com providers, registry, theme/GlobalStyles, api.ts, helpers de erro/resposta/logger). Sem domínio.
+
 ### 1.1 Objetivo
 
 Criar toda a estrutura base de Frontend e Backend conforme os dossiês institucionais, sem domínio e sem feature, garantindo compilação e endpoint de saúde.
@@ -55,6 +60,11 @@ src/server/utils/
     response.ts
     logger.ts (se institucional)
 ```
+
+#### Observação sobre mock/data (planejado)
+
+- Definir interfaces de repositório/serviço desde já para permitir um adapter mock (data/) durante a macro fase 2 (produto) antes de conectar ao Mongo Atlas.
+- A troca para Mongo deve ocorrer apenas trocando o adapter na factory, sem mudar contratos ou UI/services.
 
 #### Regras obrigatórias (Backend)
 

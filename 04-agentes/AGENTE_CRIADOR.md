@@ -54,6 +54,11 @@ Você deve executar exatamente nesta ordem:
 
 ### ETAPA 1 — Estrutura Base (Sem Domínio)
 
+**Pré-execução operacional:**
+
+- Criar a casca vazia (estrutura completa com arquivos vazios suficientes para compilar).
+- Em seguida, preencher apenas os padrões institucionais (Loading, AlertService, layout com providers, registry, theme/GlobalStyles, api.ts, helpers de erro/resposta/logger), ainda sem domínio.
+
 #### Frontend
 
 Criar apenas:
@@ -75,6 +80,8 @@ Criar apenas:
 - `server/db/client.ts`
 - `server/utils/errors.ts`
 - `server/utils/response.ts`
+
+> Nota: definir interfaces de repositório/serviço de modo a permitir adapter mock/data durante a macro fase 2 (produto) antes de conectar ao Mongo Atlas.
 
 ✔ **Critério:** projeto compila e `/api/health` responde
 
@@ -126,6 +133,22 @@ Usuário consegue cadastrar → logar → acessar home vazia → deslogar
 - Criar estrutura `src/features/`
 - Não implementar domínio ainda
 - Apenas preparar o terreno
+
+### Macro Fase 2 (produto com dados simulados)
+
+- Construir todas as páginas, componentes e APIs usando adapter de repositório mock/data (arquivos ou memória) com os mesmos contratos (DTOs) previstos para o banco real.
+- Services e controllers permanecem idênticos; apenas o adapter de repositório muda.
+- Somente após todo o produto estar funcional com mock/data, trocar o adapter para Mongo Atlas mantendo interfaces e contratos; nenhuma mudança na UI ou services.
+
+### ⚠️ Importante: Rotas da API não mudam
+
+- As rotas (`app/api/**/route.ts`) apenas orquestram: recebem request → validam → chamam controller → retornam response.
+- Controllers e services não sabem se estão usando mock ou Mongo; apenas chamam a interface do repositório.
+- Para evitar inconsistências:
+  1. Definir schemas Mongoose desde o início e usar seus tipos como contrato para DTOs.
+  2. Mock deve simular mesma estrutura, IDs compatíveis (ObjectId) e validações do schema.
+  3. Testes de contrato garantem que mock e Mongo retornam estruturas idênticas.
+  4. Nenhuma lógica específica de adapter em services (só interfaces genéricas: findById, create, update, delete).
 
 ## Regras de Criação (NÃO QUEBRAR)
 

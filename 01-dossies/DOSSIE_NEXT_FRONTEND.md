@@ -149,7 +149,7 @@ src/                                   # Código da aplicação
 #### 📄 page.tsx → Server Component (padrão)
 
 - Executado apenas no servidor
-- Responsável por **lógica principal** e **fetch de dados**
+- Responsável por **lógica principal** e **obtenção de dados via services (server-side)**
 - Renderiza inicialmente toda a estrutura HTML
 - **NÃO pode usar:** useState, useEffect, event listeners, hooks de contexto
 
@@ -166,7 +166,7 @@ src/                                   # Código da aplicação
 // src/app/paginaEspecifica/page.tsx
 // ✅ Server Component (padrão)
 export default async function Page() {
-  // ✅ Pode fazer fetch aqui
+// ✅ Pode obter dados via services aqui (proibido fetch cru)
   return <Main /> {/* Renderiza componente cliente */}
 }
 ```
@@ -315,9 +315,10 @@ Reset, estilos globais e normalizações
 
 **Pasta:** `src/data/`
 
-**Responsabilidade:** Mocks, dados iniciais e seeds de frontend.
+**Responsabilidade:** Dados estáticos de UI, mocks e seeds de frontend.
 
 > ⚠️ **Nunca devem conter lógica.**
+> ⚠️ **Atenção:** src/data/ é exclusivo para dados estáticos de UI. O MOC institucional vive em `/data` (raiz do projeto), nunca em src/data/.
 
 ---
 

@@ -30,7 +30,6 @@
 5. **Finalização**
    - [Regras de Decisão](#9-regras-institucionais-de-decisão)
    - [Conformidade](#10-critério-de-conformidade)
-   - [Conclusão](#11-conclusão)
 
 ---
 
@@ -42,23 +41,11 @@ Este documento estabelece o processo institucional **obrigatório** para criaç�
 
 - ✓ Base arquitetural sólida
 - ✓ Evolução previsível e governável
-- ✓ Prevenção de improvisos
-- ✓ Crescimento sustentável
-- ✓ Compreensão por humanos e agentes automatizados
-
----
 
 ## 2. Escopo
 
-**Aplica-se a:**
-
-- `/01` Qualquer nova aplicação Next.js criada sob este padrão.
 - `/02` Qualquer agente automatizado responsável por gerar código.
 - `/03` Qualquer evolução estrutural relevante (novos módulos, grandes features).
-
-> 💡 **Importante:** Não substitui os dossiês específicos de Frontend e Backend, mas os orquestra.
-
----
 
 ## 3. Princípios Institucionais
 
@@ -78,10 +65,6 @@ UI orientada a domínio, não a telas soltas.
 
 Shared ≠ genérico por conveniência.
 
-### Documentação
-
-Documentação como parte integrante do produto final.
-
 ### Ordem & Método
 
 Ordem de criação mais importante que velocidade inicial.
@@ -93,8 +76,6 @@ Ordem de criação mais importante que velocidade inicial.
 **Número:** `0`
 
 ### 4.1 Objetivo
-
-Definir o contrato arquitetural antes da criação de qualquer código funcional.
 
 ### 4.2 Decisões Obrigatórias (Padrão Institucional Fixo)
 
@@ -111,9 +92,7 @@ Definir o contrato arquitetural antes da criação de qualquer código funcional
 - **Feature UI:** `src/features/<dominio>` (Obrigatório)
 - **Promoção para Shared:** Somente após 2+ páginas de uso real
 
-#### Autenticação:
-
-- Sessão com cookie HTTP-only persistido no MongoDB
+- Sessão com cookie HTTP-only (contrato institucional)
 - Tokens Access/Refresh seguros
 - Endpoints: login, register, logout, me, reset/forgot password
 
@@ -129,21 +108,20 @@ route.ts (HTTP) → controllers → services → repositories → models
 
 ---
 
-## ETAPA 1: Estrutura Base (Frontend + Backend)
-
-**Número:** `1`
-
 ### Frontend — Base
 
 ```
-app/layout.tsx
-app/page.tsx
-components/ (Shared somente)
-styles/
-store/
-services/api.ts
-utils/
+src/app/layout.tsx
+src/app/page.tsx
+src/components/ (Shared somente)
+src/styles/
+src/store/
+src/services/api.ts
+src/utils/
 ```
+
+- Primeiro criar a casca: arquivos vazios na estrutura acima, apenas o necessário para compilar.
+- Em seguida, preencher somente os padrões institucionais (Loading, AlertService, layout com providers, theme/GlobalStyles, registry, api.ts, helpers de erro/resposta/logger), ainda sem domínio.
 
 ### Backend — Base
 
@@ -155,6 +133,8 @@ server/utils/errors.ts
 server/utils/response.ts
 server/utils/logger.ts
 ```
+
+- Repositórios e services devem ser definidos por interface para permitir adapter DataRepository durante a Fase MOC (ver Cláusula 10 do MAPA_INSTITUCIONAL_V2) antes da conexão real ao Mongo Atlas.
 
 ### ✅ CRITÉRIOS DE ACEITE DA ETAPA 1
 

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 1. ADAPTE AQUI: Título da Aba -->
+    <title>Login | Nome do seu Sistema</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      /* 2. ADAPTE AQUI: Cor Principal do Projeto */
+      :root {
+        --primary-color: #2563eb; /* Azul padrão, troque pelo Hex da sua marca */
+        --primary-hover: #1d4ed8;
+      }
+
+      .bg-brand {
+        background-color: var(--primary-color);
+      }
+      .bg-brand:hover {
+        background-color: var(--primary-hover);
+      }
+      .text-brand {
+        color: var(--primary-color);
+      }
+      .focus-ring-brand:focus {
+        --tw-ring-color: var(--primary-color);
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+    <div class="min-h-screen flex items-center justify-center p-4">
+      <div
+        class="max-w-md w-full space-y-8 bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700"
+      >
+        <!-- SEÇÃO DE IDENTIDADE DO PROJETO -->
+        <div class="text-center">
+          <!-- 3. ADAPTE AQUI: Coloque uma logotipo temporario relacionada ao projeto atual -->
+          <img
+            src="logo.png"
+            alt="Logotipo do Projeto"
+            class="inline-flex items-center justify-center w-16 h-16 bg-brand rounded-xl mb-4 shadow-lg object-contain"
+          />
+
+          <!-- 4. ADAPTE AQUI: Nome e Descrição -->
+          <h2
+            class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight"
+          >
+            Nome do Projeto
+          </h2>
+          <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
+            Sua frase de efeito ou descrição curta do sistema.
+          </p>
+        </div>
+
+        <!-- FORMULÁRIO DE ACESSO -->
+        <form id="loginForm" class="mt-8 space-y-5">
+          <div class="space-y-4">
+            <!-- Campo de Usuário/Email -->
+            <div>
+              <label
+                for="email"
+                class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
+              >
+                E-mail ou Usuário
+              </label>
+              <div class="relative">
+                <div
+                  class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                >
+                  <i data-lucide="user" class="h-5 w-5 text-slate-400"></i>
+                </div>
+                <input
+                  id="email"
+                  name="email"
+                  type="text"
+                  required
+                  class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus-ring-brand focus:border-transparent transition-all"
+                  placeholder="digite seu acesso"
+                />
+              </div>
+            </div>
+
+            <!-- Campo de Senha -->
+            <div>
+              <div class="flex justify-between items-center mb-1">
+                <label
+                  for="password"
+                  class="block text-sm font-medium text-slate-700 dark:text-slate-300"
+                  >Senha</label
+                >
+                <a
+                  href="#"
+                  class="text-xs font-semibold text-brand hover:underline"
+                  >Esqueceu a senha?</a
+                >
+              </div>
+              <div class="relative">
+                <div
+                  class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                >
+                  <i data-lucide="lock" class="h-5 w-5 text-slate-400"></i>
+                </div>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  class="block w-full pl-10 pr-12 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus-ring-brand focus:border-transparent transition-all"
+                  placeholder="••••••••"
+                />
+                <button
+                  type="button"
+                  id="togglePassword"
+                  class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"
+                >
+                  <i data-lucide="eye" id="eyeIcon" class="h-5 w-5"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botão de Ação Principal -->
+          <button
+            type="submit"
+            class="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-brand shadow-md transition-all active:scale-[0.98]"
+          >
+            Entrar no Sistema
+          </button>
+        </form>
+
+        <!-- 5. ADAPTE AQUI: Links Adicionais (Opcional) -->
+        <div class="pt-4 border-t border-slate-100 dark:border-slate-700">
+          <p class="text-center text-sm text-slate-500 dark:text-slate-400">
+            Precisa de ajuda?
+            <a href="#" class="font-semibold text-brand hover:underline"
+              >Fale com o suporte</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Inicialização automática de ícones
+      lucide.createIcons();
+
+      // Lógica de visualização de senha (Padrão para qualquer projeto)
+      const toggleBtn = document.getElementById("togglePassword");
+      const passwordInput = document.getElementById("password");
+      const eyeIcon = document.getElementById("eyeIcon");
+
+      toggleBtn.addEventListener("click", () => {
+        const isPassword = passwordInput.type === "password";
+        passwordInput.type = isPassword ? "text" : "password";
+        eyeIcon.setAttribute("data-lucide", isPassword ? "eye-off" : "eye");
+        lucide.createIcons();
+      });
+
+      // Captura do formulário (Substitua pela sua lógica de API/Backend)
+      document.getElementById("loginForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        console.log("Dados capturados:", Object.fromEntries(formData));
+      });
+    </script>
+  </body>
+</html>

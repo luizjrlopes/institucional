@@ -56,6 +56,45 @@ As referências (HTML/imagens) não têm autoridade arquitetural. Elas são insu
 
 Você deve ler tudo antes de produzir qualquer saída.
 
+## Evolução Incremental do Passaporte
+
+O Passaporte **não é imutável**. Ele pode ser atualizado para incluir novas páginas durante a evolução do projeto.
+
+**Cenário 1: Passaporte Inicial Completo**
+
+- Todas as páginas identificadas nas referências são incluídas
+- Passaporte validado antes da execução do Evolutor
+
+**Cenário 2: Adição de Nova Página Após Início**
+
+Se o usuário solicitar uma página que **não está no Passaporte atual**:
+
+1. **Verificar se há referências para a nova página**
+
+   - Se houver: analisar e adicionar ao Passaporte seguindo o mesmo processo
+   - Se não houver: solicitar ao usuário fornecer referências (HTML, imagem, especificação)
+
+2. **Atualizar PASSAPORTE_DA_APLICACAO.md**
+
+   - Adicionar nova entrada na seção "2. Inventário de Páginas"
+   - Incluir todos os campos obrigatórios (objetivo, rota, ações, estados, contratos)
+
+3. **Validar Passaporte Atualizado**
+
+   - Executar Agente Validador de Passaporte
+   - Garantir que a nova página está conforme os dossiês institucionais
+
+4. **Autorizar Evolutor**
+   - Somente após validação, o Agente Evolutor pode criar a página
+
+**⚠️ IMPORTANTE:**
+
+- O Agente Evolutor **NUNCA** pode criar uma página que não esteja no Passaporte
+- Se uma página não está no Passaporte, o fluxo correto é: Atualizar Passaporte → Validar → Executar
+- Não invente páginas durante a análise de referências; apenas documente o que está claramente indicado
+
+---
+
 ## Política Institucional de Uso de Referências
 
 ### HTML — Uso Permitido
