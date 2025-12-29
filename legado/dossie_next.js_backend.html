@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dossiê Institucional - Arquitetura de Backend Next.js</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+        scroll-behavior: smooth;
+      }
+      .code-block {
+        background-color: #f8fafc;
+        border-left: 4px solid #3b82f6;
+        padding: 1rem;
+        font-family: monospace;
+        border-radius: 0.375rem;
+      }
+      .institutional-rule {
+        background-color: #fef2f2;
+        border: 1px solid #fecaca;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        color: #991b1b;
+      }
+      .sidebar-link:hover {
+        color: #2563eb;
+        background-color: #eff6ff;
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-900 leading-relaxed">
+    <div class="flex min-h-screen">
+      <!-- Sidebar Navigation -->
+      <aside
+        class="hidden lg:block w-72 bg-white border-r border-slate-200 sticky top-0 h-screen overflow-y-auto p-6"
+      >
+        <h2
+          class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4"
+        >
+          Sumário
+        </h2>
+        <nav class="space-y-1">
+          <a href="#obj" class="block p-2 text-sm rounded sidebar-link"
+            >1. Objetivo</a
+          >
+          <a href="#prin" class="block p-2 text-sm rounded sidebar-link"
+            >2. Princípios</a
+          >
+          <a href="#vis" class="block p-2 text-sm rounded sidebar-link"
+            >3. Visão Geral</a
+          >
+          <a href="#cam-rotas" class="block p-2 text-sm rounded sidebar-link"
+            >4. Camada de Rotas</a
+          >
+          <a href="#cam-back" class="block p-2 text-sm rounded sidebar-link"
+            >5. Camada de Backend</a
+          >
+          <a href="#conf" class="block p-2 text-sm rounded sidebar-link"
+            >6. Configuração</a
+          >
+          <a href="#db" class="block p-2 text-sm rounded sidebar-link"
+            >7. Banco de Dados</a
+          >
+          <a href="#mod" class="block p-2 text-sm rounded sidebar-link"
+            >8. Modelos</a
+          >
+          <a href="#repo" class="block p-2 text-sm rounded sidebar-link"
+            >9. Repositórios</a
+          >
+          <a href="#serv" class="block p-2 text-sm rounded sidebar-link"
+            >10. Serviços</a
+          >
+          <a href="#cont" class="block p-2 text-sm rounded sidebar-link"
+            >11. Controllers</a
+          >
+          <a href="#mid" class="block p-2 text-sm rounded sidebar-link"
+            >12. Middlewares</a
+          >
+          <a href="#val" class="block p-2 text-sm rounded sidebar-link"
+            >13. Validação</a
+          >
+          <a href="#util" class="block p-2 text-sm rounded sidebar-link"
+            >14. Utilitários</a
+          >
+          <a href="#flux" class="block p-2 text-sm rounded sidebar-link"
+            >15. Fluxo de Execução</a
+          >
+          <a
+            href="#obr"
+            class="block p-2 text-sm rounded sidebar-link font-bold text-red-600"
+            >16. Regras Obrigatórias</a
+          >
+          <a href="#esc" class="block p-2 text-sm rounded sidebar-link"
+            >17. Escalabilidade</a
+          >
+          <a href="#concl" class="block p-2 text-sm rounded sidebar-link"
+            >18. Conclusão</a
+          >
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 max-w-4xl mx-auto px-6 py-12 bg-white lg:shadow-sm">
+        <header class="mb-12 pb-8 border-b border-slate-200">
+          <h1 class="text-4xl font-extrabold text-slate-900 mb-2">
+            Dossiê Institucional
+          </h1>
+          <p class="text-xl text-blue-600 font-medium mb-4">
+            Arquitetura de Backend — Next.js (Opção A: Backend Integrado ao App
+            Router)
+          </p>
+          <div
+            class="inline-flex items-center px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm font-semibold"
+          >
+            Versão v1.0 — Padrão Institucional
+          </div>
+        </header>
+
+        <!-- Section 1 -->
+        <section id="obj" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >1</span
+            >
+            Objetivo do Documento
+          </h2>
+          <p class="mb-4 text-slate-700">
+            Este dossiê define o padrão oficial de organização do backend em
+            projetos Next.js utilizando o App Router, adotando o modelo de
+            backend integrado ao frontend.
+          </p>
+          <p class="font-semibold text-slate-800 mb-2">O objetivo é:</p>
+          <ul class="list-disc pl-6 space-y-2 text-slate-700">
+            <li>
+              Preservar a arquitetura clássica de backend Node.js (camadas bem
+              definidas)
+            </li>
+            <li>
+              Evitar acoplamento excessivo entre lógica de domínio e camada HTTP
+            </li>
+            <li>Permitir crescimento do projeto sem degradação estrutural</li>
+            <li>Facilitar onboarding, revisão de código e auditoria técnica</li>
+          </ul>
+        </section>
+
+        <!-- Section 2 -->
+        <section id="prin" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >2</span
+            >
+            Princípios Arquiteturais
+          </h2>
+          <p class="mb-4">
+            A arquitetura descrita neste documento segue os princípios:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              Separação de responsabilidades
+            </div>
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              Camadas explícitas
+            </div>
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              Código orientado a domínio
+            </div>
+            <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+              Rotas como portas de entrada, não como lógica
+            </div>
+            <div
+              class="p-4 bg-slate-50 border border-slate-200 rounded-lg md:col-span-2"
+            >
+              Escalabilidade sem reestruturação radical
+            </div>
+          </div>
+          <p class="text-slate-700 italic">
+            O Next.js é utilizado como framework fullstack, porém com distinção
+            clara entre:
+          </p>
+          <ul class="list-disc pl-6 space-y-1 mt-2 text-slate-700 font-medium">
+            <li>Camada de interface (UI)</li>
+            <li>Camada HTTP (API)</li>
+            <li>Camada de domínio (backend)</li>
+          </ul>
+        </section>
+
+        <!-- Section 3 -->
+        <section id="vis" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >3</span
+            >
+            Visão Geral da Estrutura
+          </h2>
+          <div class="code-block mb-4">
+            <pre>
+src/
+  app/
+    api/                # Camada HTTP (rotas do backend)
+  server/               # Backend estruturado por camadas</pre
+            >
+          </div>
+          <ul class="space-y-2">
+            <li>
+              <code class="bg-slate-100 px-1 rounded">src/app/api/**</code>
+              representa a camada de rotas
+            </li>
+            <li>
+              <code class="bg-slate-100 px-1 rounded">src/server/**</code>
+              representa o backend propriamente dito
+            </li>
+          </ul>
+          <p
+            class="mt-4 font-bold text-blue-800 border-l-4 border-blue-600 pl-4"
+          >
+            Essa separação é obrigatória no padrão institucional.
+          </p>
+        </section>
+
+        <!-- Section 4 -->
+        <section id="cam-rotas" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >4</span
+            >
+            Camada de Rotas (HTTP)
+          </h2>
+          <p class="font-bold mb-2">
+            Pasta: <code class="text-blue-600">src/app/api/</code>
+          </p>
+          <p class="mb-4 underline decoration-slate-300">Responsabilidade:</p>
+          <p class="mb-4">
+            Implementar endpoints HTTP do backend, equivalentes à pasta
+            <code class="bg-slate-100 px-1 rounded">routes/</code> em aplicações
+            Express.
+          </p>
+
+          <p class="font-semibold mb-2">Características:</p>
+          <ul class="list-disc pl-6 space-y-1 mb-6">
+            <li>Cada rota é representada por uma pasta</li>
+            <li>
+              O arquivo
+              <code class="bg-slate-100 px-1 rounded">route.ts</code> é o
+              handler HTTP
+            </li>
+            <li>O nome da pasta define a URL pública (/api/...)</li>
+          </ul>
+
+          <p class="font-semibold mb-2">Exemplo:</p>
+          <div class="code-block mb-6">
+            src/app/api/users/route.ts<br />
+            src/app/api/users/[id]/route.ts
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <p class="font-bold text-green-700 mb-2">
+                Responsabilidades permitidas:
+              </p>
+              <ul class="list-disc pl-5 text-sm space-y-1">
+                <li>Leitura de request (params, headers, body)</li>
+                <li>Validação inicial</li>
+                <li>Chamada de controller ou service</li>
+                <li>Retorno de Response</li>
+              </ul>
+            </div>
+            <div>
+              <p class="font-bold text-red-700 mb-2">
+                Responsabilidades proibidas:
+              </p>
+              <ul class="list-disc pl-5 text-sm space-y-1">
+                <li>Regras de negócio</li>
+                <li>Queries diretas ao banco</li>
+                <li>Lógica complexa</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="institutional-rule mt-6">
+            <strong>Regra institucional:</strong>
+            <code class="font-bold">route.ts</code> é uma porta de entrada,
+            nunca o local da lógica principal.
+          </div>
+        </section>
+
+        <!-- Section 5 -->
+        <section id="cam-back" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >5</span
+            >
+            Camada de Backend (Domínio)
+          </h2>
+          <p class="font-bold mb-2">
+            Pasta raiz: <code class="text-blue-600">src/server/</code>
+          </p>
+          <p>
+            Esta pasta contém todo o backend estruturado, independente da
+            existência do Next.js. Ela deve ser pensada como um backend Node.js
+            completo, apenas embutido no projeto.
+          </p>
+        </section>
+
+        <!-- Section 6 -->
+        <section id="conf" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >6</span
+            >
+            Configuração
+          </h2>
+          <p class="font-bold mb-2">
+            <code class="text-blue-600">src/server/config/</code>
+          </p>
+          <p class="mb-2 italic">
+            Arquivo: <code class="bg-slate-100 px-1 rounded">env.ts</code>
+          </p>
+          <p class="font-semibold mb-1 underline">Responsabilidade:</p>
+          <ul class="list-disc pl-6 mb-4">
+            <li>Centralizar leitura de variáveis de ambiente</li>
+            <li>Validar presença e formato</li>
+            <li>Exportar objeto tipado de configuração</li>
+          </ul>
+          <p class="font-semibold mb-1 underline">Justificativa:</p>
+          <p>
+            Evita falhas silenciosas em produção e garante previsibilidade de
+            ambiente.
+          </p>
+        </section>
+
+        <!-- Section 7 -->
+        <section id="db" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >7</span
+            >
+            Banco de Dados
+          </h2>
+          <p class="font-bold mb-2">
+            <code class="text-blue-600">src/server/db/</code>
+          </p>
+          <p class="font-bold mb-2">
+            <code class="bg-slate-100 px-1 rounded">client.ts</code>
+          </p>
+          <p class="font-semibold underline">Responsabilidade:</p>
+          <ul class="list-disc pl-6 mb-4">
+            <li>Criar e configurar o cliente do banco de dados</li>
+            <li>Garantir reutilização da conexão (especialmente em dev)</li>
+            <li>
+              <strong>Equivalente clássico:</strong>
+              <code class="bg-slate-100 px-1 rounded">database/index.ts</code>
+            </li>
+          </ul>
+          <p class="font-bold mb-2">
+            <code class="bg-slate-100 px-1 rounded">index.ts</code>
+          </p>
+          <ul class="list-disc pl-6">
+            <li>Reexportar o client</li>
+            <li>Centralizar imports</li>
+          </ul>
+        </section>
+
+        <!-- Section 8 -->
+        <section id="mod" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >8</span
+            >
+            Modelos de Domínio
+          </h2>
+          <p class="font-bold mb-2">
+            <code class="text-blue-600">src/server/models/</code>
+          </p>
+          <p class="mb-4">
+            Exemplo:
+            <code class="bg-slate-100 px-1 rounded">User.model.ts</code>
+          </p>
+          <p class="font-semibold underline mb-1">Responsabilidade:</p>
+          <ul class="list-disc pl-6 mb-6">
+            <li>Definir a estrutura da entidade</li>
+            <li>Representar o domínio de forma explícita</li>
+          </ul>
+          <div
+            class="institutional-rule border-blue-200 bg-blue-50 text-blue-900"
+          >
+            <strong>Importante:</strong>
+            <ul class="list-disc pl-5 mt-2 text-sm">
+              <li>Models não implementam casos de uso</li>
+              <li>Models não lidam com HTTP</li>
+              <li>Models não conhecem controllers ou rotas</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 9 -->
+        <section id="repo" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >9</span
+            >
+            Repositórios (Acesso a Dados)
+          </h2>
+          <p class="font-bold mb-2">
+            <code class="text-blue-600">src/server/repositories/</code>
+          </p>
+          <p class="mb-4">
+            Exemplo:
+            <code class="bg-slate-100 px-1 rounded">User.repository.ts</code>
+          </p>
+          <p class="font-semibold underline mb-1">Responsabilidade:</p>
+          <ul class="list-disc pl-6 mb-4">
+            <li>Executar operações de persistência</li>
+            <li>Encapsular queries</li>
+            <li>Isolar o ORM/driver do resto do sistema</li>
+          </ul>
+          <p class="font-semibold underline mb-1">Benefícios:</p>
+          <ul class="list-disc pl-6">
+            <li>Facilita testes</li>
+            <li>Permite troca de banco/ORM</li>
+            <li>Mantém services limpos</li>
+          </ul>
+        </section>
+
+        <!-- Section 10 -->
+        <section id="serv" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >10</span
+            >
+            Serviços (Regra de Negócio)
+          </h2>
+          <p class="font-bold mb-2">
+            <code class="text-blue-600">src/server/services/</code>
+          </p>
+          <p class="mb-4">
+            Exemplo:
+            <code class="bg-slate-100 px-1 rounded">User.service.ts</code>,
+            <code class="bg-slate-100 px-1 rounded">Auth.service.ts</code>
+          </p>
+          <p class="font-semibold underline mb-1">Responsabilidade:</p>
+          <ul class="list-disc pl-6 mb-6">
+            <li>Implementar casos de uso</li>
+            <li>Orquestrar repositórios</li>
+            <li>Aplicar regras de negócio</li>
+            <li>Integrar serviços externos</li>
+          </ul>
+          <div class="institutional-rule bg-slate-900 text-white border-none">
+            <strong>Regra institucional:</strong> Toda lógica que decide “o que
+            pode ou não pode” pertence ao service.
+          </div>
+        </section>
+
+        <!-- Section 11 -->
+        <section id="cont" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >11</span
+            >
+            Controllers (Camada de Aplicação)
+          </h2>
+          <p class="font-bold mb-2">
+            <code class="text-blue-600">src/server/controllers/</code>
+          </p>
+          <p class="mb-4 text-sm text-slate-500">
+            Exemplo:
+            <code class="bg-slate-100 px-1 rounded text-slate-800 font-medium"
+              >User.controller.ts</code
+            >
+          </p>
+          <p class="font-semibold underline mb-1">Responsabilidade:</p>
+          <ul class="list-disc pl-6 mb-4">
+            <li>Adaptar a entrada HTTP para o domínio</li>
+            <li>Coordenar validações</li>
+            <li>Traduzir retorno de service em resposta padronizada</li>
+            <li>
+              <strong>Equivalente clássico:</strong> Controllers do Express.
+            </li>
+          </ul>
+          <p class="italic text-slate-600">
+            Observação: Embora opcionais em projetos pequenos, são recomendados
+            institucionalmente para evitar acoplamento.
+          </p>
+        </section>
+
+        <!-- Section 12 -->
+        <section id="mid" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >12</span
+            >
+            Middlewares
+          </h2>
+          <p class="font-bold mb-2">
+            <code class="text-blue-600">src/server/middlewares/</code>
+          </p>
+          <p class="mb-2">
+            Exemplos:
+            <code class="bg-slate-100 px-1 rounded">requireAuth.ts</code>,
+            <code class="bg-slate-100 px-1 rounded">rateLimit.ts</code>
+          </p>
+          <p
+            class="font-semibold underline mb-1 text-sm uppercase tracking-tight text-slate-500"
+          >
+            Responsabilidade:
+          </p>
+          <ul class="list-disc pl-6 mb-4">
+            <li>Autenticação</li>
+            <li>Autorização</li>
+            <li>Proteções transversais</li>
+          </ul>
+          <p class="font-medium">Podem ser usados:</p>
+          <ul class="list-disc pl-6">
+            <li>
+              Diretamente em
+              <code class="bg-slate-100 px-1 rounded">route.ts</code>
+            </li>
+            <li>
+              Ou integrados via
+              <code class="bg-slate-100 px-1 rounded">middleware.ts</code> do
+              Next, quando aplicável
+            </li>
+          </ul>
+        </section>
+
+        <!-- Section 13 -->
+        <section id="val" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >13</span
+            >
+            Validação
+          </h2>
+          <p class="font-bold mb-2">
+            <code class="text-blue-600">src/server/validators/</code>
+          </p>
+          <p class="mb-2 italic text-slate-500">
+            Exemplos:
+            <code class="bg-slate-100 px-1 rounded text-slate-800"
+              >auth.schemas.ts</code
+            >,
+            <code class="bg-slate-100 px-1 rounded text-slate-800"
+              >user.schemas.ts</code
+            >
+          </p>
+          <p class="font-semibold underline mb-1">Responsabilidade:</p>
+          <ul class="list-disc pl-6 mb-6">
+            <li>Validar input (Zod/Yup/etc.)</li>
+            <li>Garantir integridade antes de chegar ao service</li>
+          </ul>
+          <div
+            class="institutional-rule border-blue-300 bg-blue-50 text-blue-800"
+          >
+            <strong>Regra institucional:</strong> Services assumem dados já
+            validados.
+          </div>
+        </section>
+
+        <!-- Section 14 -->
+        <section id="util" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >14</span
+            >
+            Utilitários
+          </h2>
+          <p class="font-bold mb-2">
+            <code class="text-blue-600">src/server/utils/</code>
+          </p>
+          <div class="space-y-4">
+            <div>
+              <p class="font-bold underline text-slate-700">
+                <code class="bg-slate-100 px-1 rounded">errors.ts</code>
+              </p>
+              <p class="text-slate-600">Erros de domínio padronizados</p>
+            </div>
+            <div>
+              <p class="font-bold underline text-slate-700">
+                <code class="bg-slate-100 px-1 rounded">response.ts</code>
+              </p>
+              <p class="text-slate-600">Helpers de resposta HTTP</p>
+            </div>
+            <div>
+              <p class="font-bold underline text-slate-700">
+                <code class="bg-slate-100 px-1 rounded">logger.ts</code>
+              </p>
+              <p class="text-slate-600 text-sm">Logging estruturado</p>
+            </div>
+          </div>
+          <p class="mt-4 italic">
+            Esses utilitários garantem consistência e reduzem duplicação.
+          </p>
+        </section>
+
+        <!-- Section 15 -->
+        <section id="flux" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >15</span
+            >
+            Fluxo Oficial de Execução
+          </h2>
+          <p class="mb-4">
+            Exemplo:
+            <code class="text-blue-700 font-medium">GET /api/users/[id]</code>
+          </p>
+          <div class="relative">
+            <div
+              class="absolute left-4 top-0 bottom-0 w-0.5 bg-slate-200"
+            ></div>
+            <ul class="space-y-6 relative">
+              <li class="pl-10 relative">
+                <span
+                  class="absolute left-2.5 top-2.5 w-3 h-3 rounded-full bg-blue-600 border-2 border-white"
+                ></span>
+                <span class="font-bold"
+                  >1.
+                  <code class="bg-slate-100 px-1 rounded">route.ts</code> recebe
+                  request</span
+                >
+              </li>
+              <li class="pl-10 relative">
+                <span
+                  class="absolute left-2.5 top-2.5 w-3 h-3 rounded-full bg-blue-600 border-2 border-white"
+                ></span>
+                <span class="font-bold"
+                  >2. Controller interpreta a entrada</span
+                >
+              </li>
+              <li class="pl-10 relative">
+                <span
+                  class="absolute left-2.5 top-2.5 w-3 h-3 rounded-full bg-blue-600 border-2 border-white"
+                ></span>
+                <span class="font-bold"
+                  >3. Service executa regra de negócio</span
+                >
+              </li>
+              <li class="pl-10 relative">
+                <span
+                  class="absolute left-2.5 top-2.5 w-3 h-3 rounded-full bg-blue-600 border-2 border-white"
+                ></span>
+                <span class="font-bold">4. Repository acessa o banco</span>
+              </li>
+              <li class="pl-10 relative">
+                <span
+                  class="absolute left-2.5 top-2.5 w-3 h-3 rounded-full bg-blue-600 border-2 border-white"
+                ></span>
+                <span class="font-bold">5. Resultado sobe pela cadeia</span>
+              </li>
+              <li class="pl-10 relative">
+                <span
+                  class="absolute left-2.5 top-2.5 w-3 h-3 rounded-full bg-green-600 border-2 border-white"
+                ></span>
+                <span class="font-bold"
+                  >6. Resposta padronizada é retornada</span
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 16 -->
+        <section id="obr" class="mb-12">
+          <h2
+            class="text-2xl font-bold mb-6 text-red-700 flex items-center border-b-2 border-red-100 pb-2"
+          >
+            <span
+              class="mr-3 bg-red-700 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >16</span
+            >
+            Regras Institucionais Obrigatórias
+          </h2>
+          <div class="bg-red-50 border border-red-200 rounded-xl p-8 shadow-sm">
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <svg
+                  class="h-6 w-6 text-red-600 mr-3 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  ></path>
+                </svg>
+                <span class="font-semibold text-red-900"
+                  >Nenhuma query direta em
+                  <code class="bg-red-100 px-1 rounded text-red-700"
+                    >route.ts</code
+                  ></span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="h-6 w-6 text-red-600 mr-3 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  ></path>
+                </svg>
+                <span class="font-semibold text-red-900"
+                  >Nenhuma regra de negócio em controller</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="h-6 w-6 text-red-600 mr-3 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  ></path>
+                </svg>
+                <span class="font-semibold text-red-900"
+                  >Nenhum acesso a
+                  <code class="bg-red-100 px-1 rounded text-red-700"
+                    >process.env</code
+                  >
+                  fora de
+                  <code class="bg-red-100 px-1 rounded text-red-700"
+                    >config/env.ts</code
+                  ></span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="h-6 w-6 text-red-600 mr-3 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  ></path>
+                </svg>
+                <span class="font-semibold text-red-900"
+                  >Backend sempre fora de
+                  <code class="bg-red-100 px-1 rounded text-red-700"
+                    >src/app/</code
+                  >
+                  (exceto app/api)</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="h-6 w-6 text-red-600 mr-3 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  ></path>
+                </svg>
+                <span class="font-semibold text-red-900"
+                  >Cada camada com responsabilidade única</span
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 17 -->
+        <section id="esc" class="mb-12">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >17</span
+            >
+            Escalabilidade Futura
+          </h2>
+          <p class="mb-4">
+            Quando necessário, esta estrutura permite evolução para:
+          </p>
+          <div
+            class="code-block border-green-500 bg-green-50 text-green-900 mb-4 font-bold"
+          >
+            src/server/modules/&lt;feature&gt;/
+          </div>
+          <p class="italic text-slate-700">
+            Sem reescrever o sistema ou quebrar contratos existentes.
+          </p>
+        </section>
+
+        <!-- Section 18 -->
+        <section id="concl" class="mb-12 pt-8 border-t border-slate-200">
+          <h2 class="text-2xl font-bold mb-4 flex items-center">
+            <span
+              class="mr-3 bg-slate-900 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm"
+              >18</span
+            >
+            Conclusão
+          </h2>
+          <p class="text-slate-700 mb-4">
+            Este padrão institucional permite que projetos Next.js atuem como
+            aplicações fullstack robustas, mantendo disciplina arquitetural
+            equivalente a backends Node tradicionais.
+          </p>
+          <p class="text-slate-700 font-medium">
+            Ele elimina improviso, reduz acoplamento e prepara o projeto para
+            crescimento sustentável.
+          </p>
+        </section>
+
+        <footer
+          class="mt-20 pt-8 border-t border-slate-100 text-center text-slate-400 text-xs"
+        >
+          &copy; 2025 - Documentação de Padrão Institucional - Engenharia de
+          Software
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
