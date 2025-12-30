@@ -81,6 +81,7 @@ Você DEVE seguir rigorosamente esta sequência:
    - alinhamento (flex/grid)
    - agrupamento visual lógico
 4. Garantir que:
+- que tudo esteja em styled component e não tenha nenhum estilo Tailwind, nem inline
    - Nenhuma lógica foi alterada
    - Nenhuma funcionalidade foi afetada
    - Nenhuma decisão nova foi introduzida
