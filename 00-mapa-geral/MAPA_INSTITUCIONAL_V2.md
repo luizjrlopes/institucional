@@ -115,7 +115,11 @@ Incluem-se:
 - PASSAPORTE_DA_APLICACAO
 - RELATORIO_VALIDACAO_PASSAPORTE
 
-Nenhuma página, feature ou endpoint pode existir fora do Passaporte validado.
+**Exceção: Páginas Institucionais Base (Bootstrap)**
+É PERMITIDA a existência de um conjunto fixo de páginas e endpoints institucionais base (Autenticação/Onboarding/Sistema), definidos pelos Dossiês, antes do Passaporte do Produto.
+Essas páginas base não são “produto”; são infraestrutura institucional.
+
+Nenhuma outra página, feature ou endpoint pode existir fora do Passaporte validado.
 
 ### 4.2.4 Documentos de Referência
 
@@ -132,6 +136,24 @@ Incluem-se:
 - não criam obrigação técnica,
 - não definem arquitetura,
 - não autorizam execução.
+
+**Exceção normativa — Norma de UI Base:**
+Os arquivos HTML em `05a-exemplos-etapa-criacao-estrutura/referencias-visuais/` (nomes e pastas sempre em kebab-case, idênticos ao descrito) são NORMA OBRIGATÓRIA de UI Base para as páginas institucionais de:
+
+- Autenticação (login, cadastro, email-verification, forgot-password, reset-password)
+- Sistema (access states, system pages)
+- Onboarding inicial (first access)
+
+**É proibido qualquer improviso visual, layout alternativo ou placeholder nessas páginas.**
+
+**Contrato de transformação obrigatório:**
+A estrutura DOM, hierarquia e classes dos HTMLs devem ser preservadas na conversão para páginas Next.js. Só é permitido:
+
+- Substituir nome/título do app por {APP_NAME}
+- Aplicar paleta via tokens/CSS variables (sem alterar layout)
+- Adaptar links/rotas para App Router
+
+Critério de aceite: a UI resultante deve ser visualmente equivalente ao HTML de referência, mudando apenas paleta e nome do app.
 
 ### 4.2.5 Documentos de Histórico
 

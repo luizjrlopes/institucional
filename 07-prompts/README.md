@@ -6,10 +6,10 @@ Esta pasta contém os prompts institucionais que instanciam os agentes responsá
 
 Cada arquivo segue a estrutura PACE (definição institucional):
 
-- **P — Purpose (Propósito):** O objetivo da etapa.
-- **A — Audience (Papel do Agente):** Quem executa e suas restrições.
-- **C — Context (Autoridade e Regras):** Documentos de autoridade e leitura obrigatória.
-- **E — Execution (Escopo de Execução e Saídas):** O que executar, proibições e artefatos gerados.
+- **P — Purpose (Propósito):** O objetivo fundamental da etapa.
+- **A — Audience (Papel do Agente):** Quem executa, seu papel e restrições.
+- **C — Context (Contexto e Regras Institucionais):** Documentos de autoridade, leitura obrigatória e contexto normativo.
+- **E — Execution (Execução e Critérios de Aceite):** O que executar, proibições, artefatos gerados e critérios de conclusão.
 
 ## Arquivos
 

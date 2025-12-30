@@ -1,193 +1,248 @@
-# PLAYBOOK INSTITUCIONAL 01 (Channel 1)
+# 📘 PLAYBOOK_CRIADOR.md
 
-Trecho Oficial — Estrutura Base → Usuário/Auth (100% conforme)
+**Nome:** Playbook Institucional do Agente Criador  
+**Versão:** v1.0 (Consolidada)  
+**Natureza:** Documento Operacional Normativo  
+**Autoridade:** Subordinado ao MAPA_INSTITUCIONAL  
+**Escopo:** Define, com rigor absoluto, o que o AGENTE_CRIADOR deve e não deve fazer durante a ETAPA 1 — Criação da Estrutura Inicial da Aplicação
 
-## ETAPA 1 — Montagem da Estrutura Base Institucional (OBRIGATÓRIA)
+---
 
-### 1.0 Pré-etapas operacionais (antes de 1.2)
+## 1. PAPEL INSTITUCIONAL DO AGENTE CRIADOR
 
-- **Casca vazia:** criar toda a árvore prevista (frontend/backend) com arquivos vazios suficientes para compilar.
-- **Preencher padrões institucionais:** popular apenas os arquivos padrão que são iguais para qualquer projeto (Loading, AlertService, layout com providers, registry, theme/GlobalStyles, api.ts, helpers de erro/resposta/logger). Sem domínio.
+O **AGENTE_CRIADOR** é responsável exclusivamente pela **construção da fundação técnica da aplicação**.
 
-### 1.1 Objetivo
+Ele **NÃO** planeja produto.  
+Ele **NÃO** interpreta domínio.  
+Ele **NÃO** cria funcionalidades de negócio.
 
-Criar toda a estrutura base de Frontend e Backend conforme os dossiês institucionais, sem domínio e sem feature, garantindo compilação e endpoint de saúde.
+Sua função é **preparar o terreno técnico**, garantindo que a aplicação:
 
-### 1.2 Entregas obrigatórias (Frontend Base)
+- compile
+- execute
+- esteja estruturalmente pronta
+- respeite integralmente os documentos institucionais
 
-Criar exatamente a base institucional:
+---
 
-```code
-src/app/
-    layout.tsx (Providers globais + estilos globais)
-    page.tsx (Home placeholder, sem domínio, sem dados reais)
-src/components/ (SOMENTE Shared UI padrão)
-    Header/
-    Footer/ (se padrão do projeto)
-    Modals/
-    Loading/
-    componentes base de formulário (ex.: Checkbox/, Input/, Button/) se fizerem parte do padrão
-src/styles/
-    theme.ts
-    GlobalStyles.ts (ou equivalente institucional)
-src/store/
-    Context.ts
-    Provider.tsx (incluindo o "esqueleto" do estado de sessão)
-src/services/
-    api.ts (client HTTP padronizado)
-src/utils/
-    errors.ts (padrão de erro)
-    storage.ts (persistência local quando aplicável)
-    alert/response helpers (se institucional)
-```
+## 2. POSIÇÃO NA HIERARQUIA INSTITUCIONAL
 
-#### Regras obrigatórias (Frontend)
+O AGENTE_CRIADOR deve obedecer **estritamente** à seguinte hierarquia:
 
-- OBRIGATÓRIO criar `src/features/` vazia ao final da Etapa 1 (estrutura base)
-- PROIBIDO fazer fetch direto em UI (página/componente)
-- PROIBIDO colocar componente específico de domínio em `src/components/`
+1. MAPA_INSTITUCIONAL
+2. Dossiês Institucionais
+3. FLUXO_ORQUESTRADOR
+4. PLAYBOOK_CRIADOR (este documento)
+5. Prompt 01 — Criação da Estrutura Inicial
 
-### 1.3 Entregas obrigatórias (Backend Base — Opção A)
+📌 Nenhuma decisão pode ser tomada fora dessa hierarquia.
 
-Criar exatamente a base institucional:
+---
 
-```code
-src/app/api/health/route.ts (endpoint de saúde)
-src/server/config/env.ts (único ponto de leitura/validação de env)
-src/server/db/client.ts (conexão MongoDB + Mongoose)
-src/server/utils/
-    errors.ts
-    response.ts
-    logger.ts (se institucional)
-```
+## 3. ESCOPO DA ATUAÇÃO (ETAPA 1)
 
-#### Observação sobre MOCs e persistência (planejado)
+### Objetivo da ETAPA 1
 
-- Definir interfaces de repositório/serviço desde já para permitir um adapter que consuma MOCs persistidos em `data/` durante a macro Fase MOC (produto) antes de conectar ao Mongo Atlas.
-- É PROIBIDO criar ou referir qualquer pasta denominada `mock/data`.
-- A troca para Mongo deve ocorrer apenas trocando o adapter na factory, sem mudar contratos ou UI/services.
+Criar a **estrutura técnica base completa** da aplicação, incluindo:
 
-**Nota operacional sobre `src/server/db/client.ts` e Mongoose:**
+- frontend institucional
+- backend estrutural
+- páginas institucionais base (auth e sistema)
+- configuração de ambiente
+- proteção de rotas
+- endpoints mínimos
 
-O arquivo `src/server/db/client.ts` pode conter a definição estrutural do cliente Mongo/Mongoose (esqueleto de configuração, tipagens e helpers), mas NUNCA deve estabelecer uma conexão ativa com um banco externo nem ser usado como fonte primária de dados durante a Fase MOC. Durante a Fase MOC a fonte oficial de verdade são os MOCs em `data/` consumidos via adapter `DataRepository`.
+Tudo isso **SEM** avançar para produto, domínio ou persistência real.
 
-#### Regras obrigatórias (Backend)
+---
 
-- Backend só vive em `src/server/**`
-- Rotas HTTP só vivem em `src/app/api/**/route.ts`
-- PROIBIDO acessar Mongo/Mongoose diretamente dentro de `route.ts`
-- PROIBIDO colocar regra de negócio em `route.ts` (rota é porta de entrada)
+## 4. REFERÊNCIAS OBRIGATÓRIAS
 
-### 1.4 Critérios de aceite (Etapa 1)
+Antes de qualquer ação, o AGENTE_CRIADOR **DEVE LER** integralmente:
 
-- ✔ projeto compila
-- ✔ `/api/health` responde 200
-- ✔ `env.ts` centraliza e valida variáveis obrigatórias (sem `process.env` espalhado)
-- ✔ `db/client.ts` configura Mongoose (mesmo sem domínio ainda)
+### Documentos Institucionais
 
-### 1.5 Dependências e compatibilidade
+- MAPA_INSTITUCIONAL_V2.md
+- FLUXO_ORQUESTRADOR_v2.md
+- DOSSIE_NEXT_FRONTEND.md
+- DOSSIE_NEXT_BACKEND.md
+- DOSSIE_REGRAS_DE_CRIACAO.md
 
-**Regra institucional (obrigatória):** escolher e travar versões de pacotes garantindo compatibilidade e estabilidade entre si.
+### Referências Técnicas Obrigatórias
 
-- Manter lockfile (`package-lock.json` / `pnpm-lock.yaml` / `yarn.lock`) no repositório e usar `npm ci`/equivalente no CI.
-- Preferir versões comprovadas e compatíveis (evitar misturar majors incompatíveis, ex.: React/React DOM).
-- Executar build e testes locais/CI após atualizar dependências; rodar `npm audit`/ferramentas de segurança.
-- Documentar exceções de versão no changelog ou Passaporte da aplicação.
+- `05-referencias/05a-exemplos-etapa-criacao-estrutura/referencias-visuais/*.html`
+- `05-referencias/05a-exemplos-etapa-criacao-estrutura/snippets/*`
 
-## ETAPA 2 — Usuário e Autenticação (OBRIGATÓRIA até Home vazia protegida)
+📌 Essas referências **NÃO são opinativas** nesta etapa — são **base de execução literal**.
 
-### 2.1 Objetivo
+---
 
-Implementar a lógica completa de usuário/autenticação, validando o circuito institucional:
+## 5. ESTRUTURA DE PÁGINA — REGRA FORMAL OBRIGATÓRIA
 
-cadastrar → logar → acessar Home vazia protegida → deslogar
+### Regra Institucional: `page.tsx` + `main.tsx`
 
-#### Autenticação institucional fixa
+Em **TODAS** as páginas criadas na ETAPA 1, a seguinte regra é obrigatória:
 
-- Sessão via cookie HTTP-only
-- Persistência da sessão no MongoDB (collection de sessões ou estratégia equivalente documentada)
-- `me` deve refletir o usuário autenticado
+- `page.tsx`
 
-### 2.2 Entregas obrigatórias (Backend Auth/User)
+  - atua apenas como **entrypoint da rota**
+  - não contém layout complexo
+  - não contém HTML extenso
+  - apenas importa e renderiza `main.tsx`
 
-#### Camadas obrigatórias (todas)
+- `main.tsx`
+  - contém **100% da UI da página**
+  - é o local autorizado para:
+    - transposição dos HTMLs de referência
+    - estrutura visual
+    - formulários
+    - componentes visuais
 
-```code
-src/server/models/User.model.ts
-src/server/repositories/User.repository.ts
-src/server/services/
-    Auth.service.ts (regras de autenticação)
-    User.service.ts (regras de usuário)
-src/server/controllers/
-    Auth.controller.ts (adaptador HTTP → domínio)
-    User.controller.ts
-src/server/validators/
-    auth.schemas.ts
-```
+📌 **Proibido** concentrar UI completa em `page.tsx`.
 
-#### Sessão (persistida)
+---
 
-```code
-src/server/models/Session.model.ts (ou equivalente institucional)
-src/server/repositories/Session.repository.ts
-```
+## 6. UI BASE INSTITUCIONAL — REGRA LITERAL (AUTENTICAÇÃO E SISTEMA)
 
-Lógica de criação/validação/expiração em `Auth.service.ts`
+As páginas institucionais **DEVEM** ser geradas a partir dos HTMLs localizados em:
 
-#### Rotas HTTP obrigatórias (App Router)
+05-referencias/
+└── 05a-exemplos-etapa-criacao-estrutura/
+└── referencias-visuais/
 
-```code
-src/app/api/auth/register/route.ts
-src/app/api/auth/login/route.ts
-src/app/api/auth/logout/route.ts
-src/app/api/auth/me/route.ts
-src/app/api/auth/forgot-password/route.ts
-src/app/api/auth/reset-password/route.ts
-```
+### Páginas Institucionais Abrangidas
 
-#### Regras obrigatórias (Backend Auth)
+- login
+- cadastro
+- forgot-password
+- reset-password
+- email-verification
+- first-access
+- access-denied
+- session-expired
+- account-disabled
+- maintenance
+- error
+- not-found
 
-**route.ts apenas:**
+### Regras de Transposição (OBRIGATÓRIAS)
 
-- lê request/params/body
-- valida entrada (ou chama validator)
-- chama controller
-- retorna response
+- Preservar integralmente:
+  - estrutura DOM
+  - hierarquia de elementos
+  - organização visual
+- Adaptar apenas:
+  - título do app (`{APP_NAME}`)
+  - paleta de cores (via tokens ou CSS variables)
+  - links para App Router
+- Converter HTML para JSX **sem reinterpretar layout**
 
-**Regras de negócio e segurança** (hash/sessão) somente em services
+### Proibições Absolutas
 
-**Acesso ao banco** somente via repositories
+❌ Criar placeholders visuais  
+❌ Simplificar layout  
+❌ Criar “versão neutra”  
+❌ Ignorar HTML de referência  
+❌ “Inspirar-se” sem copiar estrutura
 
-### 2.3 Entregas obrigatórias (Frontend Auth/User)
+📌 **Critério de aceite:** a UI resultante deve ser visualmente equivalente ao HTML original.
 
-#### Páginas obrigatórias
+---
 
-```code
-src/app/login/page.tsx
-src/app/cadastro/page.tsx
-src/app/reset-password/page.tsx
-src/app/perfil/page.tsx (placeholder)
-src/app/page.tsx (Home vazia protegida)
-```
+## 7. USO DE SNIPPETS — REGRA SNIPPETS-FIRST
 
-#### Infra obrigatória
+Sempre que existir um snippet correspondente em:
 
-- Provider de sessão em `src/store/Provider.tsx`
-- Service de autenticação em `src/services/` (ex.: `auth.service.ts`)
-- Proteção de rotas: `middleware.ts` ou HOC/guard institucional (um padrão oficial, consistente)
+05-referencias/05a-exemplos-etapa-criacao-estrutura/snippets/
 
-#### Regras obrigatórias (Frontend Auth)
+o AGENTE_CRIADOR **DEVE** utilizá-lo como base.
 
-- UI não chama fetch direto (sempre via services)
-- Sessão e usuário atual vivem no Provider
-- Home deve bloquear acesso sem sessão válida
+### Arquivos Prioritários para Snippets
 
-### 2.4 Critérios de aceite (Etapa 2)
+- middleware.ts
+- src/app/layout.tsx
+- src/app/page.tsx
+- src/app/api/health/route.ts
+- src/services/api.ts
+- Context / Provider
+- Loading / Alert / Modal
 
-- ✔ Cadastro cria usuário no MongoDB via Mongoose
-- ✔ Login cria sessão persistida no MongoDB e seta cookie HTTP-only
-- ✔ `/api/auth/me` retorna usuário autenticado quando cookie válido
-- ✔ Home (/) bloqueia usuário não autenticado (redireciona/login)
-- ✔ Logout invalida sessão (Mongo) e remove/bloqueia cookie
-- ✔ Nenhuma query em `route.ts`
-- ✔ Nenhuma regra de negócio fora de services
+📌 Se não existir snippet:
+
+- criar versão **mínima funcional**
+- sem lógica de produto
+- com TODO explícito
+
+---
+
+## 8. ESTRUTURA OBRIGATÓRIA A SER CRIADA
+
+### Frontend
+
+- `src/app/` com App Router
+- Grupos de rota `(auth)` e `(system)`
+- Todas as páginas institucionais com `page.tsx + main.tsx`
+- `src/features/` **criado e vazio**
+- `src/components/` apenas com UI compartilhada
+- `src/styles/` com tokens e estilos globais
+- `src/store/` com Context + Provider
+- `src/services/` com cascas estruturais
+
+### Backend
+
+- `src/server/` (config, db, utils)
+- `src/app/api/health/route.ts`
+- Endpoints `/api/auth/*` como placeholder permitido
+- `env.ts` como único ponto de leitura de variáveis
+- `db/client.ts` apenas estrutural (sem conexão ativa)
+
+---
+
+## 9. REGRAS SOBRE DADOS E PERSISTÊNCIA
+
+- ❌ Proibido criar ou acessar `/data`
+- ❌ Proibido criar MOCs
+- ❌ Proibido conectar MongoDB
+- MongoDB é **alvo de produção**, não usado nesta etapa
+- Persistência real só ocorre na ETAPA 7
+
+---
+
+## 10. PROIBIÇÕES ABSOLUTAS DO AGENTE CRIADOR
+
+É estritamente proibido:
+
+- planejar produto
+- criar domínio
+- criar feature
+- criar lógica de negócio
+- interpretar referências visuais
+- antecipar decisões do Passaporte
+- registrar decisões em `06-historico/`
+- acessar ou criar dados reais
+
+---
+
+## 11. CRITÉRIOS DE ACEITE (ETAPA 1)
+
+A ETAPA 1 só é considerada concluída se:
+
+- [ ] projeto compila
+- [ ] `npm run dev` executa sem erros
+- [ ] `/api/health` retorna 200
+- [ ] páginas institucionais existem e funcionam
+- [ ] UI institucional replica os HTMLs de referência
+- [ ] `src/features/` existe e está vazio
+- [ ] backend estrutural existe sem banco ativo
+- [ ] nenhuma pasta `/data` existe
+
+---
+
+## 12. REGRA FINAL DE VALIDADE
+
+> Se algo não estiver explicitamente permitido neste playbook,
+> a execução é considerada inválida.
+
+Este documento **não é sugestão**.  
+É procedimento obrigatório.
+Qualquer violação implica **retorno imediato da execução** para correção.

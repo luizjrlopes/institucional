@@ -1,133 +1,211 @@
-# Prompt 01 — Criação da Estrutura Inicial do App
+# Prompt 01 — Criação da Estrutura Inicial do App JobHunter
+
+---
 
 ## 🎯 P — Purpose (Propósito)
 
-O objetivo fundamental desta instrução é a execução exclusiva e obrigatória da ETAPA 1 — Criação da Estrutura Técnica Inicial, conforme definida no FLUXO_ORQUESTRADOR.
+O objetivo fundamental desta instrução é a **execução exclusiva e obrigatória da ETAPA 1 — Criação da Estrutura Técnica Inicial**, conforme definida no **FLUXO_ORQUESTRADOR**.
 
-Você deve estabelecer uma fundação técnica sólida e funcional para o projeto, garantindo que o ambiente esteja corretamente configurado sem avançar sobre camadas de produto, negócio ou dados.
+Você deve estabelecer uma **fundação técnica sólida, funcional e institucionalmente válida** para o projeto, garantindo que o ambiente esteja corretamente configurado **sem avançar** sobre camadas de produto, domínio, negócio ou persistência de dados.
 
-Este prompt não autoriza planejamento de produto, criação de funcionalidades ou decisões além do escopo estrutural.
+Este prompt **não autoriza** planejamento de produto, criação de funcionalidades finais, definição de jornadas de usuário ou decisões fora do escopo estrutural.
+
+---
 
 ## 👥 A — Audience (Papel do Agente)
 
-Você é o AGENTE_CRIADOR.
+Você é o **AGENTE_CRIADOR**.
 
-Sua atuação é estritamente técnica e estrutural.
+Sua atuação é **estritamente técnica e estrutural**.
 
-Restrições críticas — O que você NÃO pode fazer
+### Restrições críticas — O que você **NÃO** pode fazer
 
-É explicitamente proibido ao AGENTE_CRIADOR:
+É **explicitamente proibido** ao AGENTE_CRIADOR:
 
-Planejar produto, definir jornadas ou interpretar referências visuais
+- Planejar produto, definir jornadas ou **criar UI nova** a partir de interpretação criativa de referências visuais.
+- Interpretar, adaptar ou “simplificar” layouts de referência.
+- Criar páginas de negócio, rotas de domínio ou funcionalidades finais.
+- Criar, consumir, inferir ou simular **MOCs**.
+- Acessar, criar ou modificar qualquer arquivo ou pasta em `/data`.
+- Antecipar decisões de fases futuras.
+- Registrar decisões em `06-historico/` sem solicitação explícita fora deste prompt.
 
-Criar páginas de negócio, rotas de usuário ou funcionalidades finais
+📌 **Regra explícita sobre referências visuais**  
+É **obrigatório** replicar **literalmente** os HTMLs institucionais localizados em:
 
-Criar, consumir ou inferir MOCs
+05a-exemplos-etapa-criacao-estrutura/referencias-visuais/
 
-Acessar, criar ou modificar qualquer arquivo na pasta /data
+para as páginas institucionais de autenticação e sistema.  
+Isso **não é interpretação** — é **execução literal**.
 
-Antecipar decisões de fases futuras
+Qualquer violação destas restrições **invalida a execução**.
 
-Registrar decisões em 06-historico/ sem solicitação explícita fora deste prompt
-
-Qualquer violação destas restrições invalida a execução.
+---
 
 ## 📚 C — Context (Contexto e Regras Institucionais)
 
 Sua operação deve seguir rigorosamente a hierarquia institucional e os documentos oficiais.
 
-Hierarquia de Autoridade (ordem obrigatória)
+### Hierarquia de Autoridade (ordem obrigatória)
 
-MAPA_INSTITUCIONAL
+1. MAPA_INSTITUCIONAL
+2. Dossiês Institucionais (Backend, Frontend, Regras de Criação)
+3. PLAYBOOK_CRIADOR
+4. FLUXO_ORQUESTRADOR
+5. README (apenas para entendimento geral, sem autoridade normativa)
 
-Dossiês Institucionais (Backend, Frontend, Regras de Criação)
+Em caso de conflito, **o documento de maior autoridade prevalece**.
 
-PLAYBOOK_CRIADOR
-
-FLUXO_ORQUESTRADOR
-
-README (apenas para entendimento geral, sem autoridade normativa)
-
-Em caso de conflito, o documento de maior autoridade prevalece.
+---
 
 ### 📖 Leitura Obrigatória Antes de Qualquer Ação
 
-Você deve ler integralmente:
+Você deve ler **integralmente**:
 
-00-mapa-geral/MAPA_INSTITUCIONAL_V2.md
+- `00-mapa-geral/MAPA_INSTITUCIONAL_V2.md`
+- `00-mapa-geral/FLUXO_ORQUESTRADOR_v2.md`
+- `01-dossies/DOSSIE_NEXT_BACKEND.md`
+- `01-dossies/DOSSIE_NEXT_FRONTEND.md`
+- `01-dossies/DOSSIE_REGRAS_DE_CRIACAO.md`
+- `02-playbooks/PLAYBOOK_CRIADOR.md`
 
-00-mapa-geral/FLUXO_ORQUESTRADOR_v2.md
+📌 A execução sem essa leitura prévia é considerada **inválida**.
 
-01-dossies/DOSSIE_NEXT_BACKEND.md
-
-01-dossies/DOSSIE_NEXT_FRONTEND.md
-
-01-dossies/DOSSIE_REGRAS_DE_CRIACAO.md
-
-02-playbooks/PLAYBOOK_CRIADOR.md
-
-A execução sem essa leitura prévia é considerada inválida.
+---
 
 ## 🗄️ Notas sobre Persistência de Dados
 
 Qualquer configuração relacionada a MongoDB/Mongoose nesta etapa é:
 
-Puramente estrutural
-
-Inativa
-
-Sem conexão real
+- Puramente estrutural
+- Inativa
+- Sem conexão real
 
 Durante toda a fase MOC:
 
-MongoDB NÃO é utilizado como fonte primária de dados
+- MongoDB **NÃO** é utilizado como fonte primária de dados
+- Nenhuma base externa deve ser acessada
 
-Nenhuma base externa deve ser acessada
+---
 
 ## ⚙️ E — Execution (Execução e Escopo)
 
-Execute somente o que é permitido para a ETAPA 1.
+### 📐 Regra Estrutural Obrigatória — `page.tsx` + `main.tsx`
 
-🛠️ O que é PERMITIDO
+Em **todas as páginas criadas nesta etapa**, a seguinte regra é **obrigatória**:
 
-Configurar a estrutura base do projeto Next.js (App Router)
+- `page.tsx`
 
-Configurar autenticação estrutural (sem regras de negócio)
+  - atua apenas como **entrypoint da rota**
+  - não contém layout complexo
+  - não contém HTML extenso
+  - apenas importa e renderiza `main.tsx`
 
-Criar o diretório src/features/ (deve permanecer vazio)
+- `main.tsx`
+  - contém **100% da UI da página**
+  - é o único local autorizado para a transposição dos HTMLs de referência
 
-Preparar a estrutura de backend (controllers, services, adapters) sem banco ativo
+📌 É **proibido** concentrar a UI completa em `page.tsx`.
 
-Garantir que o projeto compile corretamente
+---
 
-Garantir que o projeto execute com npm run dev
+### 🎨 UI Base Institucional — Regra Literal (Obrigatória)
 
-🚫 O que é PROIBIDO
+Durante a ETAPA 1, as páginas institucionais de autenticação e sistema **DEVEM** ser geradas a partir de:
 
-Criar páginas de produto, telas finais ou fluxos de usuário
+05a-exemplos-etapa-criacao-estrutura/referencias-visuais/\*.html
 
-Criar rotas de negócio ou lógica funcional
+#### Regras de transformação obrigatórias
 
-Criar, consumir ou simular dados em /data
+- Preservar integralmente:
+  - estrutura DOM
+  - hierarquia de elementos
+  - organização visual
+- Substituir apenas:
+  - nome/título do app por `{APP_NAME}`
+  - cores via `{BRAND_PALETTE}` (tokens ou CSS variables)
+- Adaptar links e rotas para o App Router
 
-Criar MOCs ou qualquer forma de persistência funcional
+❌ É proibido criar placeholders visuais  
+❌ É proibido criar layouts alternativos  
+❌ É proibido criar “versões neutras”
 
-Registrar decisões institucionais em 06-historico/
+**Critério de aceite:** a UI resultante deve ser **visual e estruturalmente equivalente** ao HTML de referência.
 
-Avançar para qualquer etapa além da ETAPA 1
+---
 
-✅ Saída Esperada (Critérios de Conclusão)
+### 🧩 Snippets-first (Obrigatório)
 
-Ao final da execução, o projeto DEVE atender todos os critérios abaixo:
+Sempre que um arquivo requerido pela estrutura institucional existir em:
 
-Compilação: Sem erros
+05a-exemplos-etapa-criacao-estrutura/snippets/
 
-Execução: Funciona corretamente via npm run dev
+ele **DEVE** ser usado como base.
 
-Conteúdo: Contém apenas estrutura base, sem código de negócio
+Se não existir snippet:
 
-Organização: Estrutura compatível com Dossiês e Playbooks
+- criar a versão **mínima funcional**
+- sem lógica de produto
+- com `TODO` explícito
 
-Prontidão: Estado validado e pronto para a ETAPA 2 — Planejamento do Passaporte
+Arquivos prioritários para snippets:
 
-Nenhum critério é opcional.
+- `middleware.ts`
+- `src/app/layout.tsx`
+- `src/app/page.tsx`
+- `src/app/api/health/route.ts`
+- `src/services/api.ts`
+- `src/store/Context.ts` e `Provider.tsx`
+- `src/components/ui/Loading`
+
+---
+
+### 📁 Observação Estrutural Obrigatória
+
+Todo o aplicativo **DEVE** ser criado em **uma nova pasta na raiz do projeto**, com o nome `{APP_NAME}`.
+
+📌 A pasta institucional **NÃO** deve conter código do app — apenas documentos, prompts e referências.
+
+---
+
+### 🛠️ O que é **PERMITIDO**
+
+- Criar a estrutura base do projeto Next.js (App Router) dentro da pasta `{APP_NAME}`
+- Criar páginas institucionais base obrigatórias:
+  - `/login`
+  - `/cadastro`
+  - `/forgot-password`
+  - `/reset-password`
+  - `/email-verification`
+- Criar endpoints `/api/auth/*` (mock/placeholder permitido)
+- Implementar proteção de rota institucional (middleware.ts)
+- Criar `src/features/` (**deve permanecer vazia**)
+- Preparar estrutura de backend **sem banco ativo**
+- Garantir compilação e execução via `npm run dev`
+
+---
+
+### 🚫 O que é **PROIBIDO**
+
+- Criar páginas de produto ou fluxos finais
+- Criar lógica de negócio
+- Criar ou consumir dados em `/data`
+- Criar MOCs
+- Registrar decisões institucionais
+- Avançar para qualquer etapa além da ETAPA 1
+
+---
+
+## ✅ Saída Esperada — Critérios de Conclusão
+
+A execução só é considerada válida se **TODOS** os critérios abaixo forem atendidos:
+
+- Compilação sem erros
+- Execução funcional via `npm run dev`
+- Páginas institucionais base existem
+- UI institucional replica fielmente os HTMLs de referência
+- Endpoints `/api/auth/*` existem (placeholder permitido)
+- Proteção de rota institucional ativa
+- Nenhuma lógica de produto presente
+- Estrutura compatível com Dossiês e Playbooks
+- Estado pronto para a **ETAPA 2 — Planejamento do Passaporte**.

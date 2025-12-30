@@ -83,6 +83,10 @@ Para cada feature/página, você deve seguir rigorosamente esta ordem:
 
 #### ⛔ REGRA ABSOLUTA: NENHUMA PÁGINA PODE SER CRIADA SEM ESTAR NO PASSAPORTE\*\*
 
+#### ⛔ REGRA ABSOLUTA: NENHUMA PÁGINA PODE SER CRIADA SEM ESTAR NO PASSAPORTE\*\*
+
+**Exceção: páginas institucionais base definidas nos Dossiês (Auth/Onboarding/Sistema) podem existir antes do Passaporte do Produto e são tratadas como infraestrutura.**
+
 Antes de qualquer ação:
 
 1. **Abrir PASSAPORTE_DA_APLICACAO.md**

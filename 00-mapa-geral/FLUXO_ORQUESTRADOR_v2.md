@@ -107,11 +107,15 @@ Ambiente pronto para execução do scaffold
 Criar projeto Next.js com:
 
 - App Router
-- Auth funcional
+- **Auth Base completa (rotas + páginas mínimas), conforme Dossiê D2:** - /login - /cadastro - /forgot-password - /reset-password - /email-verification - Endpoints /api/auth/\* (mock/placeholder permitido)
 - Context + Provider
 - Estrutura src/features/
 - Backend organizado (src/server/)
 - Home protegida (vazia)
+
+**Obrigatório:** Gerar as páginas institucionais de autenticação e sistema a partir dos HTMLs em `05a-exemplos-etapa-criacao-estrutura/referencias-visuais/*.html`, preservando DOM, hierarquia e classes. Só é permitido alterar nome/título do app ({APP_NAME}) e paleta ({BRAND_PALETTE}) via tokens. Layout e estrutura devem ser equivalentes ao HTML de referência.
+
+**Essas páginas e endpoints são infraestrutura institucional, não produto.**
 
 #### Saída obrigatória
 
@@ -153,8 +157,9 @@ Referências completas do produto
 
 ### ETAPA 2 — GERAÇÃO DO PASSAPORTE (AGENTE GERADOR)
 
-**Agente:** AGENTE_GERADOR_PASSAPORTE  
-**Objetivo:** Planejar o produto de forma normativa
+**Agente:** AGENTE_GERADOR_PASSAPORTE
+
+**Objetivo:** Planejar o produto de forma normativa (não inclui Auth Base, que já é infraestrutura obrigatória)
 
 #### Entradas obrigatórias
 
