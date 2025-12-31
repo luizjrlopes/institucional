@@ -40,6 +40,23 @@ Você deve seguir integralmente:
 
 Regras de Criação > Backend > Frontend
 
+## Regra obrigatória sobre HTMLs de Auth
+
+As páginas de autenticação e sistema (ex.: `/login`, `/register`, `/forgot-password`, `/reset-password`, `/email-verification`) DEVEM ser geradas replicando LITERALMENTE os HTMLs presentes em:
+
+`05-referencias/05a-exemplos-etapa-criacao-estrutura/referencias-visuais/`
+
+Só é permitido alterar:
+
+- o token `{APP_NAME}` substituindo o nome do app
+- a paleta de cores via tokens/variáveis CSS (`{BRAND_PALETTE}`)
+
+É proibido interpretar, simplificar ou reorganizar o DOM/classes dos HTMLs de referência. Essa regra é mandatória e bloqueia a entrega caso não seja seguida.
+
+### Convenção de rota (decisão institucional)
+
+Adotar a rota padrão `/register` para cadastramento de usuários. NÃO usar `/cadastro` neste framework institucional — manter a nomenclatura em inglês consistente com os dossiês e exemplos de referência (`app/register/page.tsx`, HTMLs de referência). Se futuramente for necessário mudar, a renomeação dos arquivos de referência deve ser feita em `05-referencias/05a-exemplos-etapa-criacao-estrutura/referencias-visuais/` e documentada no MAPA.
+
 ## Ordem de Execução (OBRIGATÓRIA)
 
 Você deve executar exatamente nesta ordem:
@@ -102,7 +119,7 @@ Criar:
 - Validators
 - Rotas Auth completas:
   - login
-  - cadastro
+  - register
   - logout
   - me
   - forgot-password
@@ -113,7 +130,7 @@ Criar:
 Criar:
 
 - `/login`
-- `/cadastro`
+- `/register`
 - `/reset-password`
 - `/perfil` (placeholder)
 - `/` (home protegida vazia)

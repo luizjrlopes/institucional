@@ -71,8 +71,9 @@ src/                                   # Código da aplicação
 │   │   ├── page.tsx                  # Server
 │   │   └── Main.tsx                  # Client ("use client")
 │   ├── cadastro/
-│   │   ├── page.tsx                  # Server
-│   │   └── Main.tsx                  # Client
+│   │   ├── register/
+│   │   │   ├── page.tsx                  # Server
+│   │   │   └── Main.tsx                  # Client
 │   ├── perfil/
 │   │   ├── page.tsx                  # Server
 │   │   └── Main.tsx                  # Client
@@ -188,7 +189,7 @@ export default function Main() {
 ### 4.2 Páginas Funcionais (Rotas Estáticas)
 
 - `app/login/page.tsx`
-- `app/cadastro/page.tsx`
+  - `app/register/page.tsx`
 - `app/perfil/page.tsx`
 
 **Responsabilidade:** Compor UI, orquestrar components e hooks e chamar services.

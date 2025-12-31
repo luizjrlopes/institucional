@@ -1,5 +1,3 @@
-...existing code...
-
 ## Prompt 06 — F-Designer (Normalização Visual)
 
 ## 🎯 P — Purpose (Propósito)
@@ -73,7 +71,7 @@ Você deve considerar como já lidos:
 Sempre que existirem referências em:
 
 05-referencias/
-└── 05a-exemplos-etapa-criacao-estrutura/
+└── 05-referencias/05a-exemplos-etapa-criacao-estrutura/
 ├── referencias-visuais/
 └── snippets/
 
@@ -229,10 +227,10 @@ Você foi acionado para atuar sobre:
 
 Se o escopo não estiver claro, **não execute**.
 
-Página(s): **/login, /cadastro, /forgot-password, /reset-password, /email-verification**
+Página(s): **/login, /register, /forgot-password, /reset-password, /email-verification**
 
 - Página(s): **{TARGET_PAGE}**
-- Escopo visual: **/institucional\05-referencias\05a-exemplos-etapa-criacao-estrutura**
+- Escopo visual: **/institucional/05-referencias/05a-exemplos-etapa-criacao-estrutura**
 
 ## ⚙️ E — Execution (Execução)
 

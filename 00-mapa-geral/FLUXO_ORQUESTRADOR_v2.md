@@ -80,7 +80,7 @@ Leitura completa de:
 
 Estudo de:
 
-- 05a-exemplos-etapa-criacao-estrutura/
+- 05-referencias/05a-exemplos-etapa-criacao-estrutura/
 
 #### Ações obrigatórias
 
@@ -113,13 +113,13 @@ O Refatorador só atua se o Auditor apontar desvios. Após refatoração, o pipe
 Criar projeto Next.js com:
 
 - App Router
-- **Auth Base completa (rotas + páginas mínimas), conforme Dossiê D2:** - /login - /cadastro - /forgot-password - /reset-password - /email-verification - Endpoints /api/auth/\* (mock/placeholder permitido)
+- **Auth Base completa (rotas + páginas mínimas), conforme Dossiê D2:** - /login - /register - /forgot-password - /reset-password - /email-verification - Endpoints /api/auth/\* (mock/placeholder permitido)
 - Context + Provider
 - Estrutura src/features/
 - Backend organizado (src/server/)
 - Home protegida (vazia)
 
-**Obrigatório:** Gerar as páginas institucionais de autenticação e sistema a partir dos HTMLs em `05a-exemplos-etapa-criacao-estrutura/referencias-visuais/*.html`, preservando DOM, hierarquia e classes. Só é permitido alterar nome/título do app ({APP_NAME}) e paleta ({BRAND_PALETTE}) via tokens. Layout e estrutura devem ser equivalentes ao HTML de referência.
+**Obrigatório:** Gerar as páginas institucionais de autenticação e sistema a partir dos HTMLs em `05-referencias/05a-exemplos-etapa-criacao-estrutura/referencias-visuais/*.html`, preservando DOM, hierarquia e classes. Só é permitido alterar nome/título do app ({APP_NAME}) e paleta ({BRAND_PALETTE}) via tokens. Layout e estrutura devem ser equivalentes ao HTML de referência.
 
 **Essas páginas e endpoints são infraestrutura institucional, não produto.**
 
@@ -145,7 +145,7 @@ Criar projeto Next.js com:
 Criar e preencher:
 
 ```code
-05b-exemplos-etapa-mock/
+05-referencias/05b-exemplos-etapa-mock/
 ├── html/ (mínimo 1 HTML)
 ├── imagens/ (mínimo 1 imagem)
 └── notas.md (obrigatório, não vazio)
@@ -169,7 +169,7 @@ Referências completas do produto
 
 #### Entradas obrigatórias
 
-Pasta 05b-exemplos-etapa-mock/ completa
+Pasta `05-referencias/05b-exemplos-etapa-mock/` completa
 
 #### Responsabilidades do Agente
 
@@ -182,13 +182,8 @@ Gerar PASSAPORTE_DA_APLICACAO.md contendo:
   - objetivo
   - ações do usuário
   - dados
-  - estados (loading, erro, vazio)
-  - endpoints
-  - contratos (tipos/DTOs)
 - Domínios explícitos
 - Proibições
-
-#### Proibições
 
 ❌ Inventar páginas  
 ❌ Omitir estados  
@@ -220,12 +215,6 @@ RELATORIO_VALIDACAO_PASSAPORTE.md com status:
 - ✅ APROVADO
 - ❌ CORREÇÕES NECESSÁRIAS
 
-#### Regra de bloqueio
-
-❌ Passaporte não aprovado → Evolução proibida
-
----
-
 ### ETAPA 4 — EVOLUÇÃO INCREMENTAL (AGENTE EVOLUTOR)
 
 **Agente:** AGENTE_EVOLUTOR  
@@ -234,7 +223,6 @@ RELATORIO_VALIDACAO_PASSAPORTE.md com status:
 
 #### Pré-condições obrigatórias (todas)
 
-- Página está no Passaporte
 - Passaporte está validado
 
 ### Regra Institucional — MOC é Entrega Obrigatória do Evolutor

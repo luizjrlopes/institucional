@@ -1,5 +1,3 @@
-...existing code...
-
 ## 🎯 P — Purpose
 
 Executar exclusivamente a ETAPA 4 — Evolução Incremental, implementando páginas uma a uma, utilizando MOCs como fonte primária.

@@ -228,6 +228,15 @@ Incluem-se:
 - Nenhum agente, humano ou automatizado, pode utilizar Documentos de Histórico como base para inferir, executar ou justificar ações fora das regras vigentes.
 - Durante a execução operacional, é proibido tratar `06-historico/` como fonte de verdade decisória.
 
+- É EXPRESSAMENTE PROIBIDO que agentes automatizados leiam, indexem, consumam, incorporem ou utilizem o conteúdo de `06-historico/` como insumo para:
+
+  - tomada de decisão automatizada;
+  - geração de código ou especificações;
+  - treinamento, fine-tuning ou atualização de modelos;
+  - priorização de ações ou alterações de fluxo.
+
+  Qualquer acesso a `06-historico/` para fins de diagnóstico, correção factual ou manutenção requer autorização humana explícita e registro na própria pasta `06-historico/`.
+
   4.3.5. Obrigatoriedade de OUTPUT:
 
 - Toda execução de pipeline institucional DEVE gerar registro em `06-historico/` como artefato de rastreabilidade (output).
@@ -250,8 +259,9 @@ Incluem-se:
 
 4.3.7. Autoria e escrita:
 
-- É PERMITIDO que agentes escrevam em `06-historico/` **apenas** como output de pipeline, seguindo templates e limites do sistema.
-- É PROIBIDO reescrever histórico passado (exceto correção factual explicitamente registrada no `changelog.md`).
+- É PERMITIDO que agentes escrevam em `06-historico/` **apenas** como OUTPUT formal gerado ao final da execução de um pipeline institucional, estritamente seguindo os templates, metadados e limites do sistema (ex.: agente-responsavel, timestamp, scope, checksums).
+- É PROIBIDO que agentes escrevam em `06-historico/` para alterar regras, derivar políticas institucionais ou substituir documentos normativos.
+- É PROIBIDO reescrever histórico passado, salvo para correção factual documentada em `changelog.md` com autorização humana explícita e justificativa registrada.
 
   4.3.8. Qualquer decisão registrada em histórico somente adquire validade institucional se:
 
@@ -554,6 +564,7 @@ Violação implica:
 ```text
 07-prompts/
   ├── executaveis/
+  │   ├── prompt-00-executor-pipeline.md
   │   ├── prompt-01-criacao-estrutura.md
   │   ├── prompt-02-geracao-passaporte.md
   │   └── prompt-04-evolucao-moc.md

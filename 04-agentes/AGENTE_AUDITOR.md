@@ -66,6 +66,7 @@ Verifica se as etapas do playbook foram respeitadas.
 ### Auditoria de Conformidade
 
 Verifica violações explícitas às regras institucionais.
+Probido estilos inline, tailwind. Permitido apenas Styled components.
 
 ## Processo Obrigatório de Auditoria
 

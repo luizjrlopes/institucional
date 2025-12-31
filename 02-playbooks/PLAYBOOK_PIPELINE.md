@@ -184,14 +184,6 @@ Resultado final obrigatório:
 
 - Cada pipeline executado gera registro formal em `06-historico/`.
 
-### PASSO 6 — REGISTRO EM 06-historico/ (obrigatório)
-
-**Natureza:** Output obrigatório; Input proibido.
-
-**Regra institucional:**
-
-- Cada pipeline executado gera registro formal em `06-historico/`.
-
 #### Estrutura recomendada (padrão)
 
 ```text

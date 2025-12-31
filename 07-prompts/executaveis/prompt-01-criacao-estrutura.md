@@ -1,7 +1,3 @@
-...existing code...
-
----
-
 ## 🎯 P — Purpose (Propósito)
 
 O objetivo fundamental desta instrução é a **execução exclusiva e obrigatória da ETAPA 1 — Criação da Estrutura Técnica Inicial**, conforme definida no **FLUXO_ORQUESTRADOR**.
@@ -106,20 +102,20 @@ Durante toda a fase MOC:
 
 ## ⚙️ E — Execution (Execução e Escopo)
 
-### 📐 Regra Estrutural Obrigatória — `page.tsx` + `main.tsx`
+### 📐 Regra Estrutural Obrigatória — `page.tsx` + `Main.tsx`
 
 Em **todas as páginas criadas nesta etapa**, a seguinte regra é **obrigatória**:
 
 - `page.tsx`
 
-  - atua apenas como **entrypoint da rota**
-  - não contém layout complexo
-  - não contém HTML extenso
-  - apenas importa e renderiza `main.tsx`
+- atua apenas como **entrypoint da rota**
+- não contém layout complexo
+- não contém HTML extenso
+- apenas importa e renderiza `Main.tsx`
 
-- `main.tsx`
-  - contém **100% da UI da página**
-  - é o único local autorizado para a transposição dos HTMLs de referência
+- `Main.tsx`
+- contém **100% da UI da página**
+- é o único local autorizado para a transposição dos HTMLs de referência
 
 📌 É **proibido** concentrar a UI completa em `page.tsx`.
 
@@ -154,7 +150,7 @@ Durante a ETAPA 1, as páginas institucionais de autenticação e sistema **DEVE
 
 Sempre que um arquivo requerido pela estrutura institucional existir em:
 
-05a-exemplos-etapa-criacao-estrutura/snippets/
+05-referencias/05a-exemplos-etapa-criacao-estrutura/snippets/
 
 ele **DEVE** ser usado como base.
 
@@ -189,7 +185,7 @@ Todo o aplicativo **DEVE** ser criado em **uma nova pasta na raiz do projeto**, 
 - Criar a estrutura base do projeto Next.js (App Router) dentro da pasta `{APP_NAME}`
 - Criar páginas institucionais base obrigatórias:
   - `/login`
-  - `/cadastro`
+  - `/register`
   - `/forgot-password`
   - `/reset-password`
   - `/email-verification`

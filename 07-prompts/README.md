@@ -16,7 +16,9 @@ Cada arquivo segue a estrutura PACE (definição institucional):
 ```
 07-prompts/
 ├── executaveis/
+│   ├── prompt-00-executor-pipeline.md
 │   ├── prompt-01-criacao-estrutura.md
+│   ├── prompt-02-geracao-passaporte.md
 │   └── prompt-04-evolucao-moc.md
 ├── internos/
 │   ├── prompt-02-geracao-passaporte.md

@@ -40,9 +40,10 @@ O AGENTE_CRIADOR deve obedecer **estritamente** à seguinte hierarquia:
 
 1. MAPA_INSTITUCIONAL
 2. Dossiês Institucionais
-3. FLUXO_ORQUESTRADOR
-4. PLAYBOOK_CRIADOR (este documento)
-5. Prompt 01 — Criação da Estrutura Inicial
+3. Playbooks Institucionais (inclui PLAYBOOK_CRIADOR)
+4. FLUXO_ORQUESTRADOR
+5. PLAYBOOK_CRIADOR (este documento)
+6. Prompt 01 — Criação da Estrutura Inicial
 
 📌 Nenhuma decisão pode ser tomada fora dessa hierarquia.
 
@@ -88,7 +89,7 @@ Antes de qualquer ação, o AGENTE_CRIADOR **DEVE LER** integralmente:
 
 ## 5. ESTRUTURA DE PÁGINA — REGRA FORMAL OBRIGATÓRIA
 
-### Regra Institucional: `page.tsx` + `main.tsx`
+### Regra Institucional: `page.tsx` + `Main.tsx`
 
 Em **TODAS** as páginas criadas na ETAPA 1, a seguinte regra é obrigatória:
 
@@ -97,9 +98,9 @@ Em **TODAS** as páginas criadas na ETAPA 1, a seguinte regra é obrigatória:
   - atua apenas como **entrypoint da rota**
   - não contém layout complexo
   - não contém HTML extenso
-  - apenas importa e renderiza `main.tsx`
+  - apenas importa e renderiza `Main.tsx`
 
-- `main.tsx`
+- `Main.tsx`
   - contém **100% da UI da página**
   - é o local autorizado para:
     - transposição dos HTMLs de referência
@@ -116,7 +117,7 @@ Em **TODAS** as páginas criadas na ETAPA 1, a seguinte regra é obrigatória:
 As páginas institucionais **DEVEM** ser geradas a partir dos HTMLs localizados em:
 
 05-referencias/
-└── 05a-exemplos-etapa-criacao-estrutura/
+└── 05-referencias/05a-exemplos-etapa-criacao-estrutura/
 └── referencias-visuais/
 
 ### Páginas Institucionais Abrangidas
@@ -190,7 +191,7 @@ o AGENTE_CRIADOR **DEVE** utilizá-lo como base.
 
 - `src/app/` com App Router
 - Grupos de rota `(auth)` e `(system)`
-- Todas as páginas institucionais com `page.tsx + main.tsx`
+- Todas as páginas institucionais com `page.tsx + Main.tsx`
 - `src/features/` **criado e vazio**
 - `src/components/` apenas com UI compartilhada
 - `src/styles/` com tokens e estilos globais

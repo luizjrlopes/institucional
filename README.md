@@ -49,7 +49,7 @@ A execução institucional ocorre em etapas com bloqueio real:
 4. Agente Gerador de Passaporte
 5. Agente Validador de Passaporte
 6. Agente Evolutor (Página por Página, cria MOCs junto com a página)
-7. Agente Auditor (Opcional / Contínuo)
+7. Agente Auditor (Contínuo — obrigatório no pipeline)
 8. Agente Refatorador (Se necessário)
 9. Transição MOC → Produção (Banco Real) _(gatilho humano explícito)_
 
@@ -152,10 +152,21 @@ institucional/
 │   └── DOSSIE_NEXT_BACKEND.md
 ├── 02-playbooks/
 │   ├── PLAYBOOK_CRIADOR.md
-│   └── PLAYBOOK_EVOLUTOR.md
+│   ├── PLAYBOOK_EVOLUTOR.md
+│   ├── PLAYBOOK_PIPELINE.md
+│   ├── PLAYBOOK_F_DESIGNER.md
+│   └── PLAYBOOK_AUDITOR.md
 ├── 03-passaporte/
 │   ├── PASSAPORTE_DA_APLICACAO.md
 │   └── RELATORIO_VALIDACAO_PASSAPORTE.md
+├── 04-agentes/
+│   ├── AGENTE_CRIADOR.md
+│   ├── AGENTE_GERADOR_PASSAPORTE.md
+│   ├── AGENTE_VALIDADOR_PASSAPORTE.md
+│   ├── AGENTE_EVOLUTOR.md
+│   ├── AGENTE_F_DESIGNER.md
+│   ├── AGENTE_AUDITOR.md
+│   └── AGENTE_REFATORADOR.md
 ├── 05-referencias/
 │   ├── 05a-exemplos-etapa-criacao-estrutura/
 │   └── 05b-exemplos-etapa-mock/
@@ -164,12 +175,18 @@ institucional/
 │   ├── changelog.md
 │   └── RASTREAMENTO_PROJETO.md
 └── 07-prompts/
-    ├── prompt-01-criacao-estrutura.md
-    ├── prompt-02-geracao-passaporte.md
-    ├── prompt-03-validacao-passaporte.md
-    ├── prompt-04-evolucao-moc.md
-    ├── prompt-05-auditoria.md
-    └── prompt-06-refatoracao.md
+   ├── executaveis/
+   │   ├── prompt-00-executor-pipeline.md
+   │   ├── prompt-01-criacao-estrutura.md
+   │   ├── prompt-02-geracao-passaporte.md
+   │   └── prompt-04-evolucao-moc.md
+   └── internos/
+      ├── prompt-03-validacao-passaporte.md
+      ├── prompt-05-auditoria.md
+      ├── prompt-06-f-designer.md
+      └── prompt-07-refatoracao.md
+Observação: o arquivo `02-playbooks/PLAYBOOK_PIPELINE.md` descreve o pipeline obrigatório pós-entrega (Criador → F-Designer → Auditor → Refatorador → F-Designer → Auditor). A execução desse playbook é mandatória antes de considerar uma entrega final.
+
 📌 Regra estrutural: o código do app não fica em institucional/.
 O app deve ser criado em uma pasta na raiz do projeto com o nome do app (ex.: {APP_NAME}/).
 
@@ -198,8 +215,7 @@ Na Fase 1, os HTMLs institucionais de auth/sistema devem ser copiados literalmen
 O que é: tradução visual e conceitual do produto (páginas de produto).
 
 ```txt
-
-05b-exemplos-etapa-mock/
+05-referencias/05b-exemplos-etapa-mock/
 ├── html/
 ├── imagens/
 └── notas.md
@@ -234,7 +250,7 @@ Obrigatório nesta etapa:
 
 Páginas institucionais base (auth/sistema) copiadas dos HTMLs 5a
 
-Regra de página: page.tsx + main.tsx para cada rota criada nesta etapa
+Regra de página: page.tsx + Main.tsx para cada rota criada nesta etapa
 
 Validação: npm run dev sem erros
 
@@ -281,7 +297,7 @@ Estados tratados
 
 MOC criado/atualizado em /data (Fase 3)
 
-ETAPA 5 — Agente Auditor (Opcional)
+ETAPA 5 — Agente Auditor (Contínuo — obrigatório no pipeline)
 Revisa conformidade, não corrige.
 Saída: relatório de desvios ou conformidade.
 
@@ -318,14 +334,14 @@ Criar ou usar /data fora da Fase MOC
 
 Criar “versão neutra” das páginas institucionais em vez de copiar os HTMLs 5a
 
-Quebrar a regra page.tsx + main.tsx
+Quebrar a regra page.tsx + Main.tsx
 
 1. Como Começar um Projeto Novo (Resumo Executivo)
    Copie a pasta institucional/ para o projeto
 
 Leia este README e o FLUXO_ORQUESTRADOR
 
-Preencha 05b-exemplos-etapa-mock/
+Preencha 05-referencias/05b-exemplos-etapa-mock/
 
 Execute o Prompt 01 (Agente Criador)
 

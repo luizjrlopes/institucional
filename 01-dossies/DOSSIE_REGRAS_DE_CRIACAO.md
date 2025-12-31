@@ -89,8 +89,9 @@ Ordem de criação mais importante que velocidade inicial.
 | **Roteamento** | App Router                      |
 | **Backend**    | Opção A (`app/api` + `server/`) |
 | **Banco**      | MongoDB / Mongoose              |
+| **Estilo**     | Styled Components               |
 
-> **Nota institucional obrigatória:** O MongoDB (com Mongoose) é o alvo institucional de persistência em produção. Durante a Fase MOC (fase de construção/integração com MOCs), NENHUMA base de dados externa deve ser utilizada como fonte primária de dados; os MOCs residem exclusivamente em `data/` e são a fonte de verdade até a migração explícita.
+> **Nota institucional obrigatória:** O MongoDB (com Mongoose) é o alvo institucional de persistência em produção. Durante a Fase MOC (fase de construção/integração com MOCs), NENHUMA base de dados externa deve ser utilizada como fonte primária de dados; os MOCs residem exclusivamente em `data/` e são a fonte de verdade até a migração explícita. Sobre a estilização, pode apenas com styled Components, estilo inline é proibido. o uso de tailwind é proibido.
 
 #### UI / Componentização
 
@@ -180,7 +181,7 @@ Validar integração completa front ↔ back, com login funcional até uma home 
 **PÁGINAS:**
 
 - /login
-- /cadastro
+- /register
 - /reset-password
 - /perfil
 - / (home protegida)
@@ -193,10 +194,13 @@ Validar integração completa front ↔ back, com login funcional até uma home 
 
 ### ✅ Validação da Etapa 2
 
+- ✓ Pagina inicial é a pagina de login
+- ✓ Pela pagina login se pode chegar a pagina register e forgot-password
 - ✓ Usuário consegue cadastrar e logar
-- ✓ Usuário acessa home vazia autenticada
+- ✓ Usuário pode acessar com o usuario root - email: <admin@exemplo.com> e senha admin
+- ✓ Usuário acessa home vazia autenticada com um placeholder aguardando a criação dessa pagina.
 - ✓ Logout funcional e sessão persistente
-- ✓ Comunicação front ↔ back validada
+- ✓ Comunicação front ↔ back validada, com todas logica de auth implenetanda no front e no back.
 
 ---
 
