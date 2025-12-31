@@ -1,9 +1,9 @@
 # 📜 MAPA_INSTITUCIONAL
 
-**Estatuto Normativo de Governança Arquitetural e Operacional**  
+**Estatuto Normativo de Governança Arquitetural e Operacional**
 **Aplicações Next.js Fullstack**
 
-- **Versão:** vJ-1.0
+- **Versão:** vJ-1.1
 - **Natureza:** Documento Constitucional Vinculante
 - **Status:** Autoridade Máxima
 - **Aplicabilidade:** Obrigatória a todos os projetos, agentes (humanos ou automatizados) e artefatos derivados
@@ -18,7 +18,7 @@
 - a modificação,
 - a execução,
 - a validação,
-- a auditoria  
+- a auditoria
   de aplicações desenvolvidas sob este framework institucional.
 
   1.2. Este documento tem por finalidade eliminar:
@@ -42,7 +42,7 @@
 
 - restringir,
 - ampliar,
-- reinterpretar  
+- reinterpretar
   as regras aqui definidas.
 
 ---
@@ -66,7 +66,7 @@ A seguinte ordem hierárquica é obrigatória e inquestionável:
 
 - invalidar,
 - contradizer,
-- reinterpretar  
+- reinterpretar
   documento hierarquicamente superior.
 
 ---
@@ -77,7 +77,7 @@ A seguinte ordem hierárquica é obrigatória e inquestionável:
 
 ### 4.2. Documentos não classificados são nulos de pleno direito
 
-#### 4.2.1 Documentos Constitucionais
+#### 4.2.1. Documentos Constitucionais
 
 São documentos de autoridade normativa, não executáveis.
 
@@ -94,21 +94,27 @@ Incluem-se, obrigatoriamente:
 - não são modificáveis por agentes,
 - não admitem interpretação extensiva.
 
-#### 4.2.2 Documentos Operacionais
+#### 4.2.2. Documentos Operacionais
 
 São documentos que ordenam execução.
 
 Incluem-se:
 
+- - PLAYBOOK_PIPELINE.md: Playbook operacional vinculante que define e impõe a execução do pipeline obrigatório pós-entrega (Criador/Evolutor → F-Designer → Auditor → Refatorador se necessário → revalidações → registro em 06-historico/). Nenhuma entrega é válida sem a execução completa deste playbook.
+
 - PLAYBOOK_CRIADOR
+
 - PLAYBOOK_EVOLUTOR
+
 - PLAYBOOK_F_DESIGNER
+
 - FLUXO_ORQUESTRADOR
 
 - O FLUXO_ORQUESTRADOR é o documento operacional normativo responsável por executar, em ordem obrigatória, as diretrizes estabelecidas por este MAPA, pelos Dossiês Institucionais e pelos Playbooks.
+
 - O README não possui autoridade normativa; porém, sua leitura é obrigatória para compreensão do sistema institucional antes do início de qualquer execução do fluxo.
 
-### 4.2.3 Documentos de Planejamento por Projeto
+#### 4.2.3. Documentos de Planejamento por Projeto
 
 São documentos específicos de um produto.
 
@@ -118,12 +124,14 @@ Incluem-se:
 - RELATORIO_VALIDACAO_PASSAPORTE
 
 **Exceção: Páginas Institucionais Base (Bootstrap)**
+
 É PERMITIDA a existência de um conjunto fixo de páginas e endpoints institucionais base (Autenticação/Onboarding/Sistema), definidos pelos Dossiês, antes do Passaporte do Produto.
+
 Essas páginas base não são “produto”; são infraestrutura institucional.
 
 Nenhuma outra página, feature ou endpoint pode existir fora do Passaporte validado.
 
-### 4.2.4 Documentos de Referência
+#### 4.2.4. Documentos de Referência
 
 São documentos não normativos.
 
@@ -139,38 +147,56 @@ Incluem-se:
 - não definem arquitetura,
 - não autorizam execução.
 
-**Exceção normativa — Norma de UI Base:**
-Os arquivos HTML em `05a-exemplos-etapa-criacao-estrutura/referencias-visuais/` (nomes e pastas sempre em kebab-case, idênticos ao descrito) são NORMA OBRIGATÓRIA de UI Base para as páginas institucionais de:
+**Exceção normativa — Norma de UI Base (obrigatória e literal):**
 
-- Autenticação (login, cadastro, email-verification, forgot-password, reset-password)
-- Sistema (access states, system pages)
-- Onboarding inicial (first access)
+Os arquivos HTML em:
+
+`05-referencias/05a-exemplos-etapa-criacao-estrutura/referencias-visuais/`
+
+são NORMA OBRIGATÓRIA de UI Base para as páginas institucionais de:
+
+- Autenticação:
+
+  - `/login`
+  - `/register`
+  - `/email-verification`
+  - `/forgot-password`
+  - `/reset-password`
+
+- Sistema:
+
+  - páginas de estados/acesso e páginas sistêmicas conforme os HTMLs de referência
+
+- Onboarding inicial:
+
+  - first access conforme HTML de referência
 
 **É proibido qualquer improviso visual, layout alternativo ou placeholder nessas páginas.**
 
 **Contrato de transformação obrigatório:**
+
 A estrutura DOM, hierarquia e classes dos HTMLs devem ser preservadas na conversão para páginas Next.js. Só é permitido:
 
-- Substituir nome/título do app por {APP_NAME}
+- Substituir nome/título do app por `{APP_NAME}`
 - Aplicar paleta via tokens/CSS variables (sem alterar layout)
 - Adaptar links/rotas para App Router
 
 Critério de aceite: a UI resultante deve ser visualmente equivalente ao HTML de referência, mudando apenas paleta e nome do app.
 
-### 4.2.5 Documentos de Histórico
+#### 4.2.5. Documentos de Histórico
 
-São documentos de registro factual.
+São documentos de registro factual (rastreabilidade), não executáveis.
 
 Incluem-se:
 
-- auditorias.md
-- changelog.md
-- decisoes.md
-- RASTREAMENTO_PROJETO.md
+- `changelog.md`
+- registros formais de auditoria
+- registros formais de decisões (quando aplicável)
+- registros por pipeline (execução por etapa/agente)
 
-> **Nota:** RASTREAMENTO_PROJETO.md (quando existir) é considerado Documento de Histórico Institucional por projeto.
+**Regra:** Documentos de Histórico nunca têm autoridade normativa.
 
-### 4.2.6 Artefatos de Persistência (Fase MOC)
+#### 4.2.6. Artefatos de Persistência (Fase MOC)
 
 São artefatos institucionais obrigatórios durante a fase MOC.
 
@@ -180,51 +206,57 @@ Incluem-se:
 
 ---
 
-### CLÁUSULA 4.3 — DOS DOCUMENTOS DE HISTÓRICO INSTITUCIONAL
+### CLÁUSULA 4.3 — DO HISTÓRICO INSTITUCIONAL (INPUT PROIBIDO, OUTPUT OBRIGATÓRIO)
 
 4.3.1. Os Documentos de Histórico Institucional constituem a memória formal, rastreável e não executável do sistema institucional.
 
-4.3.2. Enquadram-se como Documentos de Histórico Institucional:
+4.3.2. Os Documentos de Histórico possuem finalidades exclusivas:
 
-- `decisoes.md`
-- `auditorias.md`
-- `changelog.md`
-- demais registros históricos formalmente reconhecidos.
-
-  4.3.3. Os Documentos de Histórico possuem as seguintes finalidades exclusivas:
-
-- registrar decisões estruturais ou normativas tomadas ao longo do tempo;
-- registrar auditorias, desvios e violações institucionais;
+- registrar decisões (quando aplicável e autorizado),
+- registrar auditorias, desvios e violações institucionais,
+- registrar a execução de pipelines (o que foi criado/alterado/verificado),
 - registrar a evolução histórica do framework institucional.
 
-  4.3.4. Os Documentos de Histórico:
+  4.3.3. Os Documentos de Histórico:
 
-- NÃO possuem autoridade normativa própria;
-- NÃO alteram regras vigentes;
+- NÃO possuem autoridade normativa própria,
+- NÃO alteram regras vigentes,
 - NÃO substituem a atualização dos documentos constitucionais ou operacionais.
 
-  4.3.5. Nenhum agente, humano ou automatizado, pode utilizar Documentos de Histórico como base para inferir, executar ou justificar ações fora das regras vigentes.
+  4.3.4. Proibição de INPUT:
 
-  4.3.6. A pasta `06-historico/`:
+- Nenhum agente, humano ou automatizado, pode utilizar Documentos de Histórico como base para inferir, executar ou justificar ações fora das regras vigentes.
+- Durante a execução operacional, é proibido tratar `06-historico/` como fonte de verdade decisória.
 
-- NÃO participa de nenhuma etapa do FLUXO_ORQUESTRADOR;
-- NÃO pode ser consultada durante execução operacional;
-- NÃO pode ser modificada automaticamente por agentes.
+  4.3.5. Obrigatoriedade de OUTPUT:
 
-  4.3.7. Qualquer decisão registrada em Documentos de Histórico somente adquire validade institucional se:
+- Toda execução de pipeline institucional DEVE gerar registro em `06-historico/` como artefato de rastreabilidade (output).
+
+  4.3.6. Estrutura normativa de `06-historico/` (recomendada e padronizável por projeto):
+
+```text
+06-historico/
+  ├── changelog.md
+  ├── decisoes.md (opcional, somente autoridade humana designada)
+  ├── auditorias.md (opcional, consolidado)
+  └── pipelines/
+      └── PIPELINE-000X-nome-do-pipeline/
+          ├── 00-resumo.md
+          ├── 01-criador-ou-evolutor.md
+          ├── 02-f-designer.md
+          ├── 03-auditor.md
+          └── 04-refatorador.md (se acionado)
+```
+
+4.3.7. Autoria e escrita:
+
+- É PERMITIDO que agentes escrevam em `06-historico/` **apenas** como output de pipeline, seguindo templates e limites do sistema.
+- É PROIBIDO reescrever histórico passado (exceto correção factual explicitamente registrada no `changelog.md`).
+
+  4.3.8. Qualquer decisão registrada em histórico somente adquire validade institucional se:
 
 - refletida nos documentos normativos correspondentes; ou
 - expressamente incorporada por atualização formal deste MAPA.
-
-  4.3.8. A alteração, remoção ou reescrita de Documentos de Histórico é vedada, exceto para correção factual explícita, devendo toda modificação ser registrada no `changelog.md`.
-
-  4.3.9. Substituição normativa — Conteúdo e Autores dos Documentos em `06-historico/`
-
-- `auditorias.md` → registro formal de auditorias institucionais. Somente o `AGENTE_AUDITOR` pode adicionar entradas formais neste arquivo.
-- `decisoes.md` → registro de decisões estruturais ou normativas. Apenas humanos responsáveis (Comitê de Governança ou autoridade designada) podem registrar decisões aqui.
-- `changelog.md` → registro automático e manual de alterações de release e histórico técnico. Sistema e equipes de release devem registrar entradas; alterações devem ser rastreáveis.
-
-  4.3.10. Qualquer tentativa de escrita em `06-historico/` por agente não autorizado constitui violação institucional e deve ser reportada ao AGENTE_AUDITOR.
 
 ---
 
@@ -245,7 +277,7 @@ Incluem-se:
 
 6.1. Fica expressamente PROIBIDO o uso do termo, referência ou pasta denominada `mock/data` no âmbito institucional.
 
-6.2. Definição normativa: todo MOC institucional DEVE residir exclusivamente na pasta raiz `data/` do projeto. Referir-se a artefatos de dados simulados como "MOC em /data" é a forma normativa obrigatória.
+6.2. Definição normativa: todo MOC institucional DEVE residir exclusivamente na pasta raiz `data/` do projeto.
 
 6.3. Condições obrigatórias para MOCs:
 
@@ -293,9 +325,9 @@ Incluem-se:
 
 É expressamente proibido:
 
-- criar feature sem Passaporte,
+- criar feature sem Passaporte (exceto páginas institucionais base previstas na Cláusula 4.2.3),
 - executar sem Playbook,
-- inferir regra a partir de referência,
+- inferir regra a partir de referência (exceto a Norma de UI Base prevista na Cláusula 4.2.4),
 - mover lógica para camada indevida,
 - executar ação fora do fluxo oficial.
 
@@ -341,7 +373,7 @@ Violação implica bloqueio imediato da execução.
 
 - criada,
 - funcional,
-- válida  
+- válida
   sem a existência de seu MOC inicial.
 
 ---
@@ -377,9 +409,9 @@ data/
 
 ### CLÁUSULA 10.4 — FASE MOC (FASE DE CONSTRUÇÃO OBRIGATÓRIA)
 
-#### 10.4.1. Durante a fase de construção da aplicação, a persistência de dados DEVE ocorrer exclusivamente via MOCs
+10.4.1. Durante a fase de construção da aplicação, a persistência de dados DEVE ocorrer exclusivamente via MOCs.
 
-#### 10.4.2. Nesta fase
+10.4.2. Nesta fase:
 
 - o banco de dados definitivo NÃO É obrigatório,
 - o Mongo Atlas NÃO DEVE ser utilizado como fonte primária,
@@ -392,7 +424,7 @@ data/
 - NÃO pode acessar `data/` diretamente,
 - DEVE consumir dados exclusivamente via services.
 
-  10.4.5. **A fase MOC é considerada concluída quando todas as páginas do Passaporte estão implementadas e validadas funcionalmente em modo MOC, e o usuário informar que não acrescentará novas páginas.**
+  10.4.5. A fase MOC é considerada concluída quando todas as páginas do Passaporte estão implementadas e validadas funcionalmente em modo MOC, e o usuário informar que não acrescentará novas páginas.
 
 ---
 
@@ -406,7 +438,7 @@ data/
   10.5.2. É EXPRESSAMENTE PROIBIDO:
 
 - alterar contratos ao migrar para o banco definitivo,
-- criar DTOs "temporários" para MOC,
+- criar DTOs “temporários” para MOC,
 - adaptar a UI para distinguir MOC de banco real.
 
   10.5.3. A persistência é uma implementação intercambiável; o contrato é definitivo desde o MOC.
@@ -421,7 +453,7 @@ data/
 
 - flag de configuração,
 - comando manual,
-- decisão registrada no histórico institucional.
+- decisão registrada no histórico institucional (como output formal).
 
   10.6.3. Sem sinalização explícita, a aplicação DEVE permanecer operando em modo MOC, independentemente de estar funcional.
 
@@ -431,12 +463,12 @@ data/
 
 10.7.1. A migração para produção DEVE ocorrer em duas etapas obrigatórias e sequenciais:
 
-#### Etapa 1 — Importação de Dados
+**Etapa 1 — Importação de Dados**
 
 - Transferência integral dos dados existentes nos MOCs para o banco definitivo (Mongo Atlas),
 - Preservando contratos, IDs lógicos e relações.
 
-#### Etapa 2 — Troca de Adapter
+**Etapa 2 — Troca de Adapter**
 
 - Substituição do adapter de repositório:
 
@@ -474,11 +506,11 @@ data/
 
 - iniciar uma página sem MOC,
 - acessar `data/` diretamente na UI,
-- criar lógica condicional baseada em "modo MOC" na UI,
+- criar lógica condicional baseada em “modo MOC” na UI,
 - alterar contratos durante migração,
 - misturar persistência MOC e banco real simultaneamente como fontes primárias.
 
-#### Violação implica
+Violação implica:
 
 - bloqueio imediato da execução,
 - invalidação da etapa,
@@ -488,78 +520,77 @@ data/
 
 ### CLÁUSULA 10.10 — REGRA FINAL DE VALIDADE
 
-10.10.1. Enquanto a aplicação estiver em fase MOC:  
-o MOC é a fonte oficial de verdade.
+10.10.1. Enquanto a aplicação estiver em fase MOC: o MOC é a fonte oficial de verdade.
 
-10.10.2. Após migração validada:  
-o banco definitivo é a fonte oficial de verdade.
+10.10.2. Após migração validada: o banco definitivo é a fonte oficial de verdade.
 
 10.10.3. Não existe fase híbrida.
 
 ---
 
-## 📌 PRINCÍPIO FINAL DE VALIDADE INSTITUCIONAL
+## CLÁUSULA 11 — PAPEL INSTITUCIONAL DA PASTA `07-prompts/`
 
-> Persistência não é um detalhe técnico;  
-> é uma decisão institucional por fase.
->
-> Nada é produzido fora dessas regras.  
-> Nada migra sem sinalização explícita.
+11.1. A pasta `07-prompts/` serve exclusivamente para instanciar agentes em execução, não para definir regras novas.
 
----
+11.2. Funções da pasta `07-prompts/`:
 
-## CLÁUSULA 11 — Papel institucional da pasta 07-prompts/
+- transformar MAPA, FLUXO, Dossiês e Playbooks em ordem de execução;
+- ser ponto de entrada prático do sistema.
 
-A pasta `07-prompts/` serve exclusivamente para instanciar agentes em execução, não para definir regras novas.
+  11.3. Limitações:
 
-**Funções da pasta 07-prompts:**
+- não cria normas;
+- não substitui agentes;
+- não interpreta histórico.
 
-- Transforma MAPA, FLUXO, Dossiês e Playbooks em ordem de execução.
-- É o ponto de entrada prática do sistema.
-
-**Limitações:**
-
-- Não cria normas.
-- Não substitui agentes.
-- Não interpreta histórico.
-
-**Regra-chave:**
+  11.4. Regra-chave:
 
 - Prompts executam o sistema institucional.
 - Agents definem o comportamento.
 - Documentos governam o sistema.
 
-**Organização recomendada da pasta 07-prompts:**
+  11.5. Organização recomendada da pasta `07-prompts/`:
 
-```plaintext
+```text
 07-prompts/
-├── prompt-01-criacao-estrutura.md
-├── prompt-02-geracao-passaporte.md
-├── prompt-03-validacao-passaporte.md
-├── prompt-04-evolucao-moc.md
-├── prompt-05-auditoria.md
-├── prompt-06-refatoracao.md
-├── prompt-aux-f-designer.md
-└── README.md
+  ├── executaveis/
+  │   ├── prompt-01-criacao-estrutura.md
+  │   ├── prompt-02-geracao-passaporte.md
+  │   └── prompt-04-evolucao-moc.md
+  ├── internos/
+  │   ├── prompt-03-validacao-passaporte.md
+  │   ├── prompt-05-auditoria.md
+  │   ├── prompt-06-f-designer.md
+  │   └── prompt-07-refatoracao.md
+  └── README.md
 ```
 
-Cada prompt 01..06 corresponde diretamente a uma ETAPA do FLUXO e instancia um agente específico.
-O prompt-aux-f-designer.md é um prompt auxiliar obrigatório de normalização visual, não corresponde a uma ETAPA, mas sua execução é obrigatória dentro do pipeline institucional.
+11.6. Cada prompt executável corresponde diretamente a uma ETAPA do FLUXO e instancia um agente específico.
 
-## CLÁUSULA 12 — Pipeline obrigatório de entrega institucional
+11.7. Os prompts internos não são ponto de entrada humano: sua execução é obrigatória dentro do pipeline institucional (Cláusula 12).
 
-Toda entrega feita por Criador ou Evolutor só é considerada concluída após passar pelo pipeline:
+---
 
-Criador/Evolutor → F-Designer → Auditor → Refatorador (se necessário) → F-Designer → Auditor
+## CLÁUSULA 12 — PIPELINE OBRIGATÓRIO DE ENTREGA INSTITUCIONAL
 
-O Refatorador só atua se o Auditor apontar desvios.
-Após refatoração, o pipeline reexecuta F-Designer e Auditor antes de concluir.
+12.1. Toda entrega feita por Criador ou Evolutor só é considerada concluída após passar pelo pipeline obrigatório:
 
-## CLÁUSULA 12 — DISPOSIÇÃO FINAL
+**Criador/Evolutor → F-Designer → Auditor → Refatorador (se necessário) → F-Designer → Auditor**
 
-11.1. Este documento entra em vigor imediatamente.
+12.2. O Refatorador só atua se o Auditor apontar desvios.
 
-11.2. Nenhuma etapa começa fora dele.  
-11.3. Nenhuma exceção é válida sem alteração formal deste MAPA.
+12.3. Após refatoração, o pipeline reexecuta F-Designer e Auditor antes de concluir.
 
-Se algo não estiver escrito aqui, não existe institucionalmente.
+12.4. O pipeline DEVE produzir registro em `06-historico/` como output formal (Cláusula 4.3).
+
+---
+
+## CLÁUSULA 13 — DISPOSIÇÃO FINAL
+
+13.1. Este documento entra em vigor imediatamente.
+
+13.2. Nenhuma etapa começa fora dele.
+
+13.3. Nenhuma exceção é válida sem alteração formal deste MAPA.
+
+> Se algo não estiver escrito aqui, não existe institucionalmente.
