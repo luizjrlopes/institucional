@@ -38,6 +38,22 @@ Implementar backend via adapters
 
 Implementar frontend via services
 
+---
+
+## Critério institucional de conclusão
+
+**A execução deste agente nunca encerra a entrega.**
+A entrega só é considerada concluída após execução do pipeline institucional completo:
+
+(Agente Executor)
+→ AGENTE_F_DESIGNER
+→ AGENTE_AUDITOR
+→ AGENTE_REFATORADOR (se apontado)
+→ AGENTE_F_DESIGNER
+→ AGENTE_AUDITOR
+
+O encerramento só ocorre após aprovação final do AGENTE_AUDITOR.
+
 Implementar estados obrigatórios
 
 Validar ponta a ponta

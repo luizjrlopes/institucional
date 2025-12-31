@@ -35,22 +35,17 @@ Sem jamais alterar comportamento funcional.
 
 ## 3. Onde o F-Designer Pode Atuar no Fluxo
 
-O F-Designer **NUNCA inicia execução por conta própria**.  
-Ele só atua quando explicitamente acionado.
-
-### Pontos válidos de acionamento
+O F-Designer **atua obrigatoriamente dentro do pipeline institucional**.  
+Ele só atua quando acionado pelo fluxo:
 
 - Após a implementação de uma página pelo AGENTE_EVOLUTOR
 - Após uma refatoração técnica que afetou layout
-- Para normalização visual de uma página específica
-- Para harmonização visual entre páginas já existentes
 
-### Sequências válidas
+### Pipeline obrigatório
 
-Evolutor → F-Designer → Auditor
+Evolutor → F-Designer → Auditor → Refatorador (se necessário) → F-Designer → Auditor
 
-Copiar código
-Refatorador → F-Designer → Auditor
+O F-Designer é obrigatório em todo ciclo de entrega institucional. Não é opcional.
 
 ---
 
@@ -91,6 +86,7 @@ Refatorador → F-Designer → Auditor
 - Refatorar código estrutural
 
 Se uma mudança alterar comportamento, **a execução é inválida**.
+Se o F-Designer identificar necessidade fora do escopo visual, deve BLOQUEAR e reportar ao Auditor, devolvendo ao Evolutor ou Refatorador conforme o caso.
 
 ---
 

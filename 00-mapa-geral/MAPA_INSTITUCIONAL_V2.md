@@ -57,6 +57,7 @@ A seguinte ordem hierárquica é obrigatória e inquestionável:
 4. Dossiê Institucional — Frontend
 5. Playbook do Criador
 6. Playbook do Evolutor
+   6.1. Playbook do F-Designer
 7. FLUXO_ORQUESTRADOR
 8. Passaporte da Aplicação
 9. Referências do Produto (HTML, imagens, notas)
@@ -93,7 +94,7 @@ Incluem-se, obrigatoriamente:
 - não são modificáveis por agentes,
 - não admitem interpretação extensiva.
 
-### 4.2.2 Documentos Operacionais
+#### 4.2.2 Documentos Operacionais
 
 São documentos que ordenam execução.
 
@@ -101,6 +102,7 @@ Incluem-se:
 
 - PLAYBOOK_CRIADOR
 - PLAYBOOK_EVOLUTOR
+- PLAYBOOK_F_DESIGNER
 - FLUXO_ORQUESTRADOR
 
 - O FLUXO_ORQUESTRADOR é o documento operacional normativo responsável por executar, em ordem obrigatória, as diretrizes estabelecidas por este MAPA, pelos Dossiês Institucionais e pelos Playbooks.
@@ -267,16 +269,17 @@ Incluem-se:
 
 7.1. Cada agente possui escopo estritamente definido.
 
-| Agente                  | Escopo              |
-| ----------------------- | ------------------- |
-| Autoridade              | MAPA_INSTITUCIONAL  |
-| Criador                 | Código base         |
-| Gerador de Passaporte   | Planejamento        |
-| Validador de Passaporte | Conformidade        |
-| Evolutor                | Execução autorizada |
-| Auditor                 | Verificação         |
-| Refatorador             | Correção            |
-| Orquestrador            | Coordenação         |
+| Agente                  | Escopo                   |
+| ----------------------- | ------------------------ |
+| Autoridade              | MAPA_INSTITUCIONAL       |
+| Criador                 | Código base              |
+| Gerador de Passaporte   | Planejamento             |
+| Validador de Passaporte | Conformidade             |
+| Evolutor                | Execução autorizada      |
+| F-Designer              | Normalização visual (UI) |
+| Auditor                 | Verificação              |
+| Refatorador             | Correção                 |
+| Orquestrador            | Coordenação              |
 
 7.2. Nenhum agente pode:
 
@@ -528,8 +531,6 @@ A pasta `07-prompts/` serve exclusivamente para instanciar agentes em execução
 
 **Organização recomendada da pasta 07-prompts:**
 
-Estrutura ideal (simples e suficiente):
-
 ```plaintext
 07-prompts/
 ├── prompt-01-criacao-estrutura.md
@@ -538,14 +539,21 @@ Estrutura ideal (simples e suficiente):
 ├── prompt-04-evolucao-moc.md
 ├── prompt-05-auditoria.md
 ├── prompt-06-refatoracao.md
+├── prompt-aux-f-designer.md
 └── README.md
 ```
 
-Cada prompt:
+Cada prompt 01..06 corresponde diretamente a uma ETAPA do FLUXO e instancia um agente específico.
+O prompt-aux-f-designer.md é um prompt auxiliar obrigatório de normalização visual, não corresponde a uma ETAPA, mas sua execução é obrigatória dentro do pipeline institucional.
 
-- Corresponde diretamente a uma ETAPA do FLUXO.
-- Instancia um agente específico.
-- Não mistura fases.
+## CLÁUSULA 12 — Pipeline obrigatório de entrega institucional
+
+Toda entrega feita por Criador ou Evolutor só é considerada concluída após passar pelo pipeline:
+
+Criador/Evolutor → F-Designer → Auditor → Refatorador (se necessário) → F-Designer → Auditor
+
+O Refatorador só atua se o Auditor apontar desvios.
+Após refatoração, o pipeline reexecuta F-Designer e Auditor antes de concluir.
 
 ## CLÁUSULA 12 — DISPOSIÇÃO FINAL
 

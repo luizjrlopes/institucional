@@ -13,6 +13,13 @@ Ele **não define o que construir** — isso é responsabilidade do
 **Passaporte da Aplicação**.
 
 O Evolutor apenas **executa fielmente** o plano aprovado.
+O Evolutor **NÃO** faz ajustes visuais — isso é do F-Designer.
+
+**A execução deste agente nunca encerra a entrega.**
+
+Cada página/feature só é considerada concluída após execução obrigatória do pipeline institucional:
+
+Evolutor → F-Designer → Auditor → Refatorador (se necessário) → F-Designer → Auditor
 
 ---
 

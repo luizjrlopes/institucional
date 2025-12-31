@@ -96,7 +96,13 @@ Ambiente pronto para execução do scaffold
 
 ---
 
-### ETAPA 1 — CRIAÇÃO DO SCAFFOLD (AGENTE CRIADOR)
+#### Pós-Entrega Obrigatória — Pipeline de Entrega
+
+Ao concluir a ETAPA 1, a entrega só é considerada finalizada após execução obrigatória do pipeline:
+
+Criador → F-Designer → Auditor → Refatorador (se necessário) → F-Designer → Auditor
+
+O Refatorador só atua se o Auditor apontar desvios. Após refatoração, o pipeline reexecuta F-Designer e Auditor antes de concluir.
 
 **Agente:** AGENTE_CRIADOR  
 **Playbook:** PLAYBOOK_CRIADOR  
@@ -261,29 +267,27 @@ desde que represente uma única entidade ou domínio consistente.
 
 #### Ordem obrigatória de execução por página
 
-**⚠️ Regra de Conformidade com Passaporte:**
-
-Os contratos definidos ou confirmados pelo Evolutor
-DEVEM estar em conformidade com o PASSAPORTE_DA_APLICACAO.md.
-
+Os contratos definidos ou confirmados pelo Evolutor DEVEM estar em conformidade com o PASSAPORTE_DA_APLICACAO.md.
 Nenhum ajuste local de contrato é permitido sem atualização do Passaporte.
-
 **O MOC é criado pelo agente Evolutor durante a implementação da página, sendo obrigatório que exista ao final da execução da página, e sempre antes de qualquer integração com banco externo. O Evolutor só pode criar ou alterar MOCs relacionados às páginas que está implementando.**
 
 Para cada página/feature/domínio implementado, o Evolutor DEVE executar:
 
 1. Definir ou confirmar contratos (DTOs, tipos, schemas lógicos) do domínio **conforme especificado no Passaporte**
 2. Criar OU atualizar o MOC correspondente em `data/<dominio>/<entidade>.json`
-3. O MOC inicial PODE ser mínimo, desde que:
-
-   - represente fielmente os contratos definidos
-   - permita o funcionamento real da página
-   - não contenha campos fictícios que não existirão em produção
-
+3. O MOC inicial PODE ser mínimo, desde que: - represente fielmente os contratos definidos - permita o funcionamento real da página - não contenha campos fictícios que não existirão em produção
 4. Implementar backend (services/repositories) consumindo o MOC via adapter
 5. Implementar frontend consumindo apenas via services
 6. Implementar estados obrigatórios (loading/erro/vazio)
 7. Validar funcionamento ponta a ponta
+
+#### Pipeline obrigatório de entrega por página
+
+Para cada página/feature implementada, antes de considerar “concluída”, deve executar o pipeline:
+
+Evolutor → F-Designer → Auditor → Refatorador (se necessário) → F-Designer → Auditor
+
+O Refatorador só atua se o Auditor apontar desvios. Após refatoração, o pipeline reexecuta F-Designer e Auditor antes de concluir.
 
 #### Critério de validade da página
 
@@ -293,6 +297,19 @@ Uma página/feature só é considerada "implementada" se, ao final da execução
 - [ ] o sistema operar usando o adapter `DataRepository`
 - [ ] não houver acesso direto de UI a `data/`
 - [ ] contratos permanecerem consistentes com a futura fase de produção
+
+#### Intervenção Visual — F-Designer (sem alterar comportamento)
+
+Após a implementação funcional de uma página pelo AGENTE_EVOLUTOR, é OBRIGATÓRIA a atuação do AGENTE_F_DESIGNER para normalização visual, desde que:
+
+- não altere rotas, contratos, dados ou lógica
+- não crie componentes novos de domínio
+- não introduza novas decisões de produto
+- realize apenas ajustes visuais objetivos (spacing, alinhamento, hierarquia visual, tokens)
+
+**Regra:** Se qualquer ajuste impactar comportamento, a intervenção é inválida e deve ser revertida.
+
+**Proibição:** Se o F-Designer identificar necessidade de alteração fora do escopo visual, deve BLOQUEAR a entrega e reportar ao Auditor, devolvendo ao Evolutor ou Refatorador conforme o caso.
 
 #### Proibições absolutas
 
@@ -340,6 +357,10 @@ RELATORIO_AUDITORIA.md
 - ❌ Proibido alterar comportamento
 - ❌ Proibido "melhorar por gosto"
 
+#### Normalização Visual Pós-Refatoração (Opcional)
+
+Quando uma refatoração afetar layout, é PERMITIDA uma passagem do AGENTE_F_DESIGNER para reestabilizar a UI, obedecendo as mesmas proibições da intervenção visual na ETAPA 4.
+
 ---
 
 ### ETAPA 7 — TRANSIÇÃO DE PERSISTÊNCIA (MOC → PRODUÇÃO)
@@ -386,7 +407,27 @@ RELATORIO_AUDITORIA.md
 
 ---
 
-## 6. REGRA DE OURO FINAL
+
+## 6. REGRA ABSOLUTA DE ENCERRAMENTO DE ETAPA
+
+### Regra Institucional de Finalização de Entrega
+
+Nenhuma execução realizada por qualquer agente é considerada concluída enquanto o pipeline institucional completo não for executado.
+
+O pipeline institucional obrigatório é:
+
+(Agente Executor)
+→ AGENTE_F_DESIGNER
+→ AGENTE_AUDITOR
+→ AGENTE_REFATORADOR (se apontado)
+→ AGENTE_F_DESIGNER
+→ AGENTE_AUDITOR
+
+O agente executor não decide o encerramento da entrega. O encerramento só ocorre após aprovação final do AGENTE_AUDITOR.
+
+---
+
+## 7. REGRA DE OURO FINAL
 
 > Se algo não estiver explicitamente permitido aqui, a execução está proibida.
 >

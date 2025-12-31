@@ -19,5 +19,9 @@ Cada arquivo segue a estrutura PACE (definição institucional):
 - prompt-04-evolucao-moc.md
 - prompt-05-auditoria.md
 - prompt-06-refatoracao.md
+- prompt-aux-f-designer.md
 
-Cada prompt corresponde a uma etapa do FLUXO_ORQUESTRADOR e instancia um agente específico, sem sobreposição de fases.
+Prompts 01..06 correspondem às ETAPAS do FLUXO_ORQUESTRADOR e instanciam agentes específicos.
+O prompt-aux-f-designer.md é um prompt auxiliar obrigatório de normalização visual, não corresponde a uma ETAPA, mas sua execução é obrigatória dentro do pipeline institucional:
+
+Criador/Evolutor → F-Designer → Auditor → Refatorador (se necessário) → F-Designer → Auditor

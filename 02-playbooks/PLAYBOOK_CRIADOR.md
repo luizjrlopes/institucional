@@ -15,6 +15,7 @@ O **AGENTE_CRIADOR** é responsável exclusivamente pela **construção da funda
 Ele **NÃO** planeja produto.  
 Ele **NÃO** interpreta domínio.  
 Ele **NÃO** cria funcionalidades de negócio.
+Ele **NÃO** faz design fino nem auditoria.
 
 Sua função é **preparar o terreno técnico**, garantindo que a aplicação:
 
@@ -22,6 +23,14 @@ Sua função é **preparar o terreno técnico**, garantindo que a aplicação:
 - execute
 - esteja estruturalmente pronta
 - respeite integralmente os documentos institucionais
+
+**A execução deste agente nunca encerra a entrega.**
+
+A entrega da ETAPA 1 só é considerada concluída após execução obrigatória do pipeline institucional:
+
+Criador → F-Designer → Auditor → Refatorador (se necessário) → F-Designer → Auditor
+
+O Criador não executa design visual detalhado nem auditoria; essas etapas são automáticas e obrigatórias após sua entrega.
 
 ---
 

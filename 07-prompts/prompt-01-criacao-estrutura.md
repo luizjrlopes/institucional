@@ -38,6 +38,22 @@ Sua atuação é **estritamente técnica e estrutural**.
 para as páginas institucionais de autenticação e sistema.  
 Isso **não é interpretação** — é **execução literal**.
 
+---
+
+## Critério institucional de conclusão
+
+**A execução deste agente nunca encerra a entrega.**
+A entrega só é considerada concluída após execução do pipeline institucional completo:
+
+(Agente Executor)
+→ AGENTE_F_DESIGNER
+→ AGENTE_AUDITOR
+→ AGENTE_REFATORADOR (se apontado)
+→ AGENTE_F_DESIGNER
+→ AGENTE_AUDITOR
+
+O encerramento só ocorre após aprovação final do AGENTE_AUDITOR.
+
 Qualquer violação destas restrições **invalida a execução**.
 
 ---
