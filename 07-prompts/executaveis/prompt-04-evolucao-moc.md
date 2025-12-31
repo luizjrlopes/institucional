@@ -1,4 +1,4 @@
-# Prompt 04 — Evolução Incremental com MOC (Fase MOC)
+...existing code...
 
 ## 🎯 P — Purpose
 
@@ -53,6 +53,14 @@ A entrega só é considerada concluída após execução do pipeline institucion
 → AGENTE_AUDITOR
 
 O encerramento só ocorre após aprovação final do AGENTE_AUDITOR.
+
+### 📌 Regra explícita sobre referências visuais
+
+É **obrigatório** replicar **literalmente** os HTMLs institucionais localizados em:
+
+05-referencias/05a-exemplos-etapa-criacao-estrutura/referencias-visuais/
+
+para as páginas institucionais de autenticação e sistema. Isso **não é interpretação** — é **execução literal**.
 
 Implementar estados obrigatórios
 

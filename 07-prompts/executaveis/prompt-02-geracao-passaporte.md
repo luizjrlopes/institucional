@@ -98,7 +98,4 @@ Se a etapa anterior (Prompt 01) não estiver formalmente concluída e registrada
 
 Este prompt só pode ser executado em um dos dois casos:
 
-- No início do projeto, imediatamente após a conclusão da ETAPA 1 (Criação da Estrutura).
-- Quando houver solicitação formal para adicionar uma nova página ou domínio que não esteja contemplado no PASSAPORTE_DA_APLICACAO vigente.
-
 Qualquer execução fora dessas condições é inválida.

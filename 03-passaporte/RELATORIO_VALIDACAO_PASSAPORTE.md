@@ -1,0 +1,4 @@
+# ⚠️ ARTEFATO GERADO AUTOMATICAMENTE
+
+Status: NÃO GERADO / PLACEHOLDER
+Não editar manualmente

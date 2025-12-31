@@ -1,4 +1,4 @@
-# Prompt 01 — Criação da Estrutura Inicial do App JobHunter
+...existing code...
 
 ---
 
@@ -33,7 +33,7 @@ Sua atuação é **estritamente técnica e estrutural**.
 📌 **Regra explícita sobre referências visuais**  
 É **obrigatório** replicar **literalmente** os HTMLs institucionais localizados em:
 
-05a-exemplos-etapa-criacao-estrutura/referencias-visuais/
+05-referencias/05a-exemplos-etapa-criacao-estrutura/referencias-visuais/
 
 para as páginas institucionais de autenticação e sistema.  
 Isso **não é interpretação** — é **execução literal**.
@@ -129,7 +129,7 @@ Em **todas as páginas criadas nesta etapa**, a seguinte regra é **obrigatória
 
 Durante a ETAPA 1, as páginas institucionais de autenticação e sistema **DEVEM** ser geradas a partir de:
 
-05a-exemplos-etapa-criacao-estrutura/referencias-visuais/\*.html
+05-referencias/05a-exemplos-etapa-criacao-estrutura/referencias-visuais/\*.html
 
 #### Regras de transformação obrigatórias
 

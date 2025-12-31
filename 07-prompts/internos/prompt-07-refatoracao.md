@@ -1,4 +1,4 @@
-# Prompt 06 — Refatoração Controlada
+# Prompt 07 — Refatoração Controlada
 
 ## 🎯 P — Purpose
 

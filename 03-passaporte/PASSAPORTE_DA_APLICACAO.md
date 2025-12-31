@@ -1,3 +1,8 @@
+# ⚠️ ARTEFATO GERADO AUTOMATICAMENTE
+
+Status: NÃO GERADO / PLACEHOLDER
+Não editar manualmente
+
 # PASSAPORTE_DA_APLICACAO
 
 ## 0. Declaração Normativa Institucional (Seção Obrigatória)

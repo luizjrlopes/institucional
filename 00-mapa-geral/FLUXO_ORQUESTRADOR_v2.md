@@ -407,14 +407,15 @@ Quando uma refatoração afetar layout, é PERMITIDA uma passagem do AGENTE_F_DE
 
 ---
 
-
-## 6. REGRA ABSOLUTA DE ENCERRAMENTO DE ETAPA
-
 ### Regra Institucional de Finalização de Entrega
 
 Nenhuma execução realizada por qualquer agente é considerada concluída enquanto o pipeline institucional completo não for executado.
 
-O pipeline institucional obrigatório é:
+#### Executor de Pipeline
+
+O **Executor de Pipeline** é o agente responsável por acionar, monitorar e registrar a execução sequencial obrigatória dos agentes institucionais no pipeline:
+
+**Pipeline obrigatório:**
 
 (Agente Executor)
 → AGENTE_F_DESIGNER
@@ -422,6 +423,18 @@ O pipeline institucional obrigatório é:
 → AGENTE_REFATORADOR (se apontado)
 → AGENTE_F_DESIGNER
 → AGENTE_AUDITOR
+
+**Responsabilidades do Executor de Pipeline:**
+
+- Garantir que cada agente execute sua etapa na ordem definida.
+- Bloquear a entrega caso qualquer etapa não seja concluída ou gere bloqueio institucional.
+- Registrar a execução do pipeline em documento próprio na pasta `06-historico/`, seguindo o template obrigatório.
+- Não decidir o encerramento da entrega: o encerramento só ocorre após aprovação final do AGENTE_AUDITOR.
+
+### Regra de rastreabilidade histórica
+
+Cada pipeline executado DEVE gerar um documento próprio na pasta `06-historico/`, seguindo o template obrigatório.
+Esse registro é obrigatório e parte do sistema institucional. Agentes não decidem se escrevem ou não.
 
 O agente executor não decide o encerramento da entrega. O encerramento só ocorre após aprovação final do AGENTE_AUDITOR.
 
