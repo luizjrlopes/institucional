@@ -1,364 +1,373 @@
-# 🧭 Framework Institucional — Orquestração Humano × Agentes (Next.js)
+# MAPA_INSTITUCIONAL_CENTRAL.md
 
-**Versão:** v1.0  
-**Status:** Estável  
-**Escopo:** Produção de aplicações Next.js com agentes especializados, fluxo validado e zero improvisação.
+Governança Central do Sistema Institucional (Multi-Stack)
 
----
-
-## 1. Propósito deste Framework
-
-Este repositório define um framework institucional de produção de software baseado em:
-
-- Orquestração explícita entre humano e agentes
-- Fluxo determinístico, validável e auditável
-- Separação rígida de responsabilidades
-- Evolução incremental, sem atalhos
-
-Ele existe para resolver um problema clássico:
-como construir aplicações complexas sem caos, retrabalho ou decisões invisíveis.
-
-Aqui, nada é criado sem plano, nenhuma página nasce sem contrato, e nenhum agente improvisa.
-
-**Observação institucional:** o `README.md` **não possui autoridade normativa**. No entanto, **a leitura do `README.md` é obrigatória** para compreensão do sistema institucional antes do início de qualquer execução do fluxo.
+**Versão:** v1.0 — Documento Central (Meta)
 
 ---
 
-## 2. Princípios Fundamentais (Leis do Sistema)
+## 1. Objetivo
 
-Estas regras não são sugestões:
+Este mapa central existe para:
 
-- Nenhuma página de produto existe sem estar no Passaporte da Aplicação
-- Nenhum agente pula etapas
-- Toda etapa gera artefatos verificáveis
-- UI nunca acessa dados diretamente
-- Regras de negócio nunca vivem em rotas
-- Auditoria não corrige; refatoração não inventa
+- governar a **ordem de precedência** entre documentos
+- definir **papéis** (o que cada documento faz)
+- definir **como stacks são selecionadas**
+- garantir que agentes executem apenas documentos **compatíveis com a stack selecionada**
 
-Se algo "funcionou mesmo assim", o processo está errado.
+Este documento é sempre a autoridade máxima do sistema.
 
 ---
 
-## 3. Visão Geral do Fluxo Institucional (macro)
+## 2. Regra de Ouro — Seleção de Stack
 
-A execução institucional ocorre em etapas com bloqueio real:
+Toda execução do sistema (criação/evolução) deve declarar explicitamente a stack via:
 
-1. Preparação (Humano)
-2. Agente Criador (Estrutura Técnica Inicial)
-3. Referências do Produto (Humano)
-4. Agente Gerador de Passaporte
-5. Agente Validador de Passaporte
-6. Agente Evolutor (Página por Página, cria MOCs junto com a página)
-7. Agente Auditor (Contínuo — obrigatório no pipeline)
-8. Agente Refatorador (Se necessário)
-9. Transição MOC → Produção (Banco Real) _(gatilho humano explícito)_
+- `BRIEF_PRODUTO.stack_id`
 
-**Notas obrigatórias:**
+**Sem `stack_id`, o sistema entra em estado BLOQUEADO.**
 
-- As referências do produto são preparadas e entregues **após** o scaffold inicial, nunca antes.
-- O MOC nasce junto com a implementação de cada página pelo Evolutor.
-- Cada seta representa bloqueio real: se a etapa anterior não terminou, a próxima não acontece.
+O `stack_id` selecionado define:
+
+- quais dossiês técnicos são válidos
+- quais playbooks técnicos podem ser executados
+- qual mapa de stack deve ser seguido
 
 ---
 
-## 🔷 Visão Geral das Fases do Sistema
+## 3. Catálogo Oficial de Stacks
 
-O desenvolvimento é organizado em **quatro grandes fases institucionais**, governadas por artefatos obrigatórios e pontos formais de bloqueio.
+A lista de stacks reconhecidas institucionalmente é:
 
-Essas fases não são opcionais, não se sobrepõem e não dependem de interpretação.
+- **STACK_001_NEXT_FULLSTACK_MONGO**
 
-┌──────────────────────────────────────────────┐
-│ FASE 1 — Estrutura Técnica Inicial │
-│ (Scaffold / Infra Base) │
-│ │
-│ - Criação do projeto Next.js │
-│ - Providers, Contextos, Auth estrutural │
-│ - Estrutura de pastas (frontend + backend) │
-│ - Páginas institucionais base (auth/sistema) │
-│ copiadas literalmente dos HTMLs 05a │
-│ - Nenhuma página de produto │
-│ - Nenhum domínio funcional │
-└──────────────────────────────────────────────┘
-│
-▼
-┌──────────────────────────────────────────────┐
-│ FASE 2 — Planejamento do Produto │
-│ (Passaporte da Aplicação) │
-│ │
-│ - Definição normativa das páginas de produto │
-│ - Rotas, ações, contratos e domínios │
-│ - Validação institucional do Passaporte │
-│ │
-│ ⚠️ Esta fase pode ser reaberta sempre que │
-│ uma nova página de produto for solicitada │
-│ fora do Passaporte existente │
-└──────────────────────────────────────────────┘
-│
-▼
-┌──────────────────────────────────────────────┐
-│ FASE 3 — Implementação do Produto │
-│ (Fase MOC) │
-│ │
-│ - Criação de páginas conforme Passaporte │
-│ - Criação/atualização de MOCs em /data │
-│ - Backend via DataRepository │
-│ - Frontend consome apenas services │
-│ - Auditoria e refatoração contínuas │
-│ │
-│ 🔒 MOCs são a fonte oficial de verdade │
-│ 🔒 Banco real NÃO é utilizado nesta fase │
-└──────────────────────────────────────────────┘
-│
-▼
-┌──────────────────────────────────────────────┐
-│ FASE 4 — Transição para Produção │
-│ (Banco de Dados Real) │
-│ │
-│ - Importação dos dados de /data │
-│ - Troca DataRepository → MongoRepository │
-│ - Nenhuma alteração em UI, services ou │
-│ contratos │
-│ │
-│ 🚨 Depende de sinalização explícita do humano │
-│ 🚨 Não existe fase híbrida │
-└──────────────────────────────────────────────┘
+  - Mapa: `MAPA_STACK_001_NEXT_FULLSTACK_MONGO.md`
 
-📍 Observações Importantes
+- **STACK_002_NEXT_FRONT_NODE_BACK_MONGO**
 
-- Planejamento (Fase 2) e Implementação (Fase 3) são distintas:
-  - Planejamento define o que será feito; implementação executa como será feito.
-- Existe apenas uma Fase MOC:
-  - toda a implementação do produto ocorre nesta fase.
-- A fonte de verdade muda apenas uma vez:
-  - MOC → Banco Real, de forma explícita e institucional.
-
-🔒 Regra de Leitura
-
-Se houver divergência entre este resumo visual e os documentos normativos
-(**MAPA_INSTITUCIONAL** ou **FLUXO_ORQUESTRADOR**), prevalecem sempre os documentos normativos.
+  - Mapa: `MAPA_STACK_002_NEXT_FRONT_NODE_BACK_MONGO.md`
 
 ---
 
-## 4. Estrutura Oficial de Pastas
-
-````txt
-institucional/
-├── 00-mapa-geral/
-│   ├── MAPA_INSTITUCIONAL_V2.md
-│   └── FLUXO_ORQUESTRADOR_v2.md
-├── 01-dossies/
-│   ├── DOSSIE_REGRAS_DE_CRIACAO.md
-│   ├── DOSSIE_NEXT_FRONTEND.md
-│   └── DOSSIE_NEXT_BACKEND.md
-├── 02-playbooks/
-│   ├── PLAYBOOK_CRIADOR.md
-│   ├── PLAYBOOK_EVOLUTOR.md
-│   ├── PLAYBOOK_PIPELINE.md
-│   ├── PLAYBOOK_F_DESIGNER.md
-│   └── PLAYBOOK_AUDITOR.md
-├── 03-passaporte/
-│   ├── PASSAPORTE_DA_APLICACAO.md
-│   └── RELATORIO_VALIDACAO_PASSAPORTE.md
-├── 04-agentes/
-│   ├── AGENTE_CRIADOR.md
-│   ├── AGENTE_GERADOR_PASSAPORTE.md
-│   ├── AGENTE_VALIDADOR_PASSAPORTE.md
-│   ├── AGENTE_EVOLUTOR.md
-│   ├── AGENTE_F_DESIGNER.md
-│   ├── AGENTE_AUDITOR.md
-│   └── AGENTE_REFATORADOR.md
-├── 05-referencias/
-│   ├── 05a-exemplos-etapa-criacao-estrutura/
-│   └── 05b-exemplos-etapa-mock/
-├── 06-historico/
-│   ├── auditorias.md
-│   ├── changelog.md
-│   └── RASTREAMENTO_PROJETO.md
-└── 07-prompts/
-   ├── executaveis/
-   │   ├── prompt-00-executor-pipeline.md
-   │   ├── prompt-01-criacao-estrutura.md
-   │   ├── prompt-02-geracao-passaporte.md
-   │   └── prompt-04-evolucao-moc.md
-   └── internos/
-      ├── prompt-03-validacao-passaporte.md
-      ├── prompt-05-auditoria.md
-      ├── prompt-06-f-designer.md
-      └── prompt-07-refatoracao.md
-Observação: o arquivo `02-playbooks/PLAYBOOK_PIPELINE.md` descreve o pipeline obrigatório pós-entrega (Criador → F-Designer → Auditor → Refatorador → F-Designer → Auditor). A execução desse playbook é mandatória antes de considerar uma entrega final.
+## 4. Hierarquia Oficial de Documentos (Precedência)
 
-📌 Regra estrutural: o código do app não fica em institucional/.
-O app deve ser criado em uma pasta na raiz do projeto com o nome do app (ex.: {APP_NAME}/).
+Em caso de dúvida, conflito ou ambiguidade, esta ordem deve ser respeitada:
 
-5. Referências: A Divisão Mais Importante do Framework
-5a — Exemplos do Método (institucional)
-O que é: padrões reutilizáveis do framework.
-Caráter: referencial, mas executável literalmente na Fase 1 para páginas institucionais base.
+1. **MAPA_INSTITUCIONAL_CENTRAL.md** → governa todo o sistema
+2. **MAPA*STACK*<stack_id>.md** → governa a execução técnica da stack selecionada
+3. **Dossiês Institucionais (Globais)** → regras imutáveis do sistema (governança, padrões)
+4. **Dossiês Técnicos da Stack** → estrutura e decisões técnicas específicas da stack
+5. **BRIEF_PRODUTO.md** → identidade mínima do produto + seleção de stack
+6. **BIF / Protótipo de Interfaces (HTMLs)** → intenção visual (não normativo)
+7. **Passaporte da Aplicação** → plano executável específico do produto
+8. **Playbooks (Execução)** → criação/evolução e pipeline
+9. **Relatórios (Auditoria/Validação)** → evidências e bloqueios
 
-Contém:
+**Regra explícita:** em caso de divergência entre fluxo e playbooks, **playbooks prevalecem**.
 
-Layouts base
+---
 
-Exemplos de componentes
+## 5. Papéis dos Documentos
 
-Snippets de Context, Providers, Pages
+### 5.1 Constitucionais (não executáveis)
 
-Estruturas que podem ser replicadas
+- MAPA_INSTITUCIONAL_CENTRAL
+- MAPA_STACK
+- Dossiês
 
-Regras:
+Função: limitar e orientar.
 
-Nunca descrevem um produto específico.
+### 5.2 Identidade e Planejamento (não executáveis)
 
-Na Fase 1, os HTMLs institucionais de auth/sistema devem ser copiados literalmente para o app.
+- BRIEF_PRODUTO
+- Passaporte
 
-5b — Referências do Produto (responsabilidade do humano)
-O que é: tradução visual e conceitual do produto (páginas de produto).
+Função: declarar intenção e transformar intenção em plano.
 
-```txt
-05-referencias/05b-exemplos-etapa-mock/
-├── html/
-├── imagens/
-└── notas.md
-````
+### 5.3 Referência executável (não normativo)
 
-Regra de ouro: sem isso, não existe Passaporte; sem Passaporte, não existe evolução do produto.
+- Protótipo HTML (BIF)
 
-1. Etapas do Fluxo (Resumo Operacional)
-   ETAPA 0 — Preparação (Humano)
-   Estudar o framework
+Função: demonstrar intenção visual e relações de UI.
 
-Preparar referências do produto (5b)
+### 5.4 Operacionais (executáveis)
 
-Garantir clareza de objetivo
+- Playbooks
 
-Saída obrigatória: HTML + imagem + notas.md
+Função: executar criação/evolução/pipeline.
 
-ETAPA 1 — Agente Criador (Estrutura Técnica Inicial)
-Cria a base funcional:
+---
 
-Next.js App Router
+## 6. Regra de Escopo Documental por Stack
 
-Auth estrutural + Providers/Context
+Quando uma stack é selecionada (`stack_id`):
 
-Estrutura de pastas (frontend + backend)
+- O sistema **só pode usar**:
 
-src/features/ (vazia)
+  - documentos globais
+  - documentos da stack selecionada
 
-Projeto compilando
+Qualquer tentativa de usar documento técnico de outra stack resulta em **BLOQUEADO**.
 
-Obrigatório nesta etapa:
+---
 
-Páginas institucionais base (auth/sistema) copiadas dos HTMLs 5a
+## 7. Agentes Institucionais (visão central)
 
-Regra de página: page.tsx + Main.tsx para cada rota criada nesta etapa
+- Orquestrador: aplica este mapa, lê `stack_id`, seleciona mapa de stack
+- Criador: executa bootstrap conforme playbooks + dossiês da stack
+- Gerador de Protótipo (opcional): cria HTMLs (BIF)
+- Gerador de Passaporte: transforma BIF/refs em plano
+- Validador de Passaporte: valida consistência institucional
+- Evolutor: implementa páginas por passaporte
+- F-Designer: normaliza UI
+- Auditor: valida tecnicamente
+- Refatorador: corrige violações
 
-Validação: npm run dev sem erros
+---
 
-ETAPA 2 — Agente Gerador de Passaporte
-Transforma referências 5b em plano normativo:
+## 8. Fluxo Central (macro)
 
-Inventário completo de páginas de produto
+1. Ler `BRIEF_PRODUTO.stack_id`
+2. Carregar `MAPA_STACK_<stack_id>`
+3. Executar criação/evolução seguindo playbooks e pipeline
+4. Bloquear se houver divergência, decisão pendente, ou documento fora da stack
 
-Rotas, ações, dados, estados
+---
 
-Contratos técnicos
+## 9. Regra Final
 
-Domínios explícitos
+Nada começa sem `stack_id`.
 
-Saída: PASSAPORTE_DA_APLICACAO.md
+Nada executa fora do mapa de stack selecionado.
 
-ETAPA 3 — Agente Validador de Passaporte
-Verifica conformidade com dossiês:
+---
 
-Frontend
+---
 
-Backend
+---
 
-Regras de criação
+# MAPA_STACK_001_NEXT_FULLSTACK_MONGO.md
 
-Saída: RELATORIO_VALIDACAO_PASSAPORTE.md (APROVADO ou CORREÇÕES)
+Stack 001 — Next.js Fullstack (App Router) + MongoDB (Mongoose)
 
-ETAPA 4 — Agente Evolutor (Incremental)
-Cria uma página por vez, somente se:
+**stack_id:** STACK_001_NEXT_FULLSTACK_MONGO
 
-estiver no Passaporte
+**Versão:** v1.0 — Mapa de Stack
 
-estiver validada
+---
 
-Entrega completa por página:
+## 1. Objetivo
 
-Rota
+Este mapa governa a execução técnica quando a stack selecionada for `STACK_001_NEXT_FULLSTACK_MONGO`.
 
-Feature
+---
 
-Backend (se necessário)
+## 2. Decisões Imutáveis da Stack
 
-Estados tratados
+- Frontend: **Next.js (App Router)**
+- Backend: **Next.js (Route Handlers / Server Actions quando aplicável)**
+- Banco: **MongoDB**
+- ODM: **Mongoose**
+- Integração: camada de **services** e **repositories** (sem fetch direto na UI)
 
-MOC criado/atualizado em /data (Fase 3)
+---
 
-ETAPA 5 — Agente Auditor (Contínuo — obrigatório no pipeline)
-Revisa conformidade, não corrige.
-Saída: relatório de desvios ou conformidade.
+## 3. Estrutura Técnica Oficial (alto nível)
 
-ETAPA 6 — Agente Refatorador (Se acionado)
-Corrige apenas o que foi apontado
+- `src/app/` → rotas e layouts
+- `src/components/` → Shared UI (padrão)
+- `src/features/` → Feature UI (por domínio)
+- `src/lib/` → utilitários, clients, helpers
+- `src/server/` → backend interno (camadas)
 
-Sem melhorias oportunistas
+  - `database/` (conexão)
+  - `models/` (schemas)
+  - `repositories/` (acesso a dados)
+  - `services/` (regras de aplicação)
+  - `controllers/` (orquestração HTTP)
+  - `routes/` (route handlers por domínio)
 
-Sem mudanças de comportamento
+---
 
-ETAPA 7 — Transição MOC → Produção (gatilho humano)
-Importa /data para banco real
+## 4. Dossiês Técnicos Consumidos (Stack)
 
-Troca DataRepository → MongoRepository
+- Dossiê Next Frontend (padrão institucional)
+- Dossiê Next Backend (padrão institucional)
+- Regras de Criação (institucional)
 
-Sem alterar UI/services/contratos
+> Se algum dossiê estiver em múltiplas versões, esta stack deve apontar explicitamente a versão canônica.
 
-Sem fase híbrida
+---
 
-1. Guardrails (Bloqueios Absolutos)
-   Estas situações param o fluxo imediatamente:
+## 5. Playbooks Aplicáveis
 
-Criar página de produto fora do Passaporte
+### 5.1 Playbooks globais (sempre)
 
-Gerar Passaporte sem referências 5b
+- PLAYBOOK_PIPELINE (designer → auditor → refatorador → designer → auditor)
 
-Evoluir sem validação do Passaporte
+### 5.2 Playbooks da Stack (quando existirem)
 
-Fetch direto na UI
+- PLAYBOOK_CRIADOR (Stack 001)
+- PLAYBOOK_AUTH (Stack 001)
+- PLAYBOOK_DB_MONGO (Stack 001)
 
-Regras de negócio em route.ts
+---
 
-Criar ou usar /data fora da Fase MOC
+## 6. Auth (diretriz de stack)
 
-Criar “versão neutra” das páginas institucionais em vez de copiar os HTMLs 5a
+A autenticação deve seguir o padrão institucional definido nos dossiês e no playbook de auth.
 
-Quebrar a regra page.tsx + Main.tsx
+Regras mínimas:
 
-1. Como Começar um Projeto Novo (Resumo Executivo)
-   Copie a pasta institucional/ para o projeto
+- sessão/token conforme decisão do Brief (se existir)
+- persistência de autenticação deve ser compatível com Next
+- rotas protegidas devem usar guard institucional
 
-Leia este README e o FLUXO_ORQUESTRADOR
+---
 
-Preencha 05-referencias/05b-exemplos-etapa-mock/
+## 7. Contrato de Backend (diretriz)
 
-Execute o Prompt 01 (Agente Criador)
+- UI não acessa banco diretamente
+- route handlers chamam controllers
+- controllers chamam services
+- services chamam repositories
+- repositories usam models (mongoose)
 
-Gere e valide o Passaporte
+---
 
-Evolua página por página (Fase MOC)
+## 8. Critérios de Bloqueio
 
-Faça a transição para banco real quando o humano sinalizar
+Bloquear se:
 
-Sem atalhos. Sem pressa. Sem gambiarra.
+- tentar executar backend externo (Express/FastAPI)
+- tentar usar ORM/DB fora do padrão (ex.: Prisma/Postgres)
+- tentar usar documentos da Stack 002
 
-1. Filosofia Final
-   Este framework assume algo simples e impopular:
+---
 
-Software bom é consequência de processo bom.
+## 9. Regra Final
 
-Aqui, o processo não é burocracia — ele é o que permite velocidade sustentável sem perda de qualidade.
+Selecionou `STACK_001` → tudo deve existir e ser executado **dentro do Next**.
 
-Se algo parece lento, revise a etapa anterior.
-O erro quase nunca está onde "quebrou".
+---
+
+---
+
+---
+
+# MAPA_STACK_002_NEXT_FRONT_NODE_BACK_MONGO.md
+
+Stack 002 — Next.js (Frontend) + Node.js (Backend separado) + MongoDB
+
+**stack_id:** STACK_002_NEXT_FRONT_NODE_BACK_MONGO
+
+**Versão:** v1.0 — Mapa de Stack
+
+---
+
+## 1. Objetivo
+
+Este mapa governa a execução técnica quando a stack selecionada for `STACK_002_NEXT_FRONT_NODE_BACK_MONGO`.
+
+---
+
+## 2. Decisões Imutáveis da Stack
+
+- Frontend: **Next.js (App Router)**
+- Backend: **Node.js (API separada)**
+
+  - Padrão recomendado: **Express + TypeScript** (ou Fastify + TS, se institucionalmente definido)
+
+- Banco: **MongoDB**
+- ODM: **Mongoose**
+- Integração: frontend consome backend via **HTTP** (REST)
+
+---
+
+## 3. Estrutura Técnica Oficial (alto nível)
+
+### 3.1 Frontend (Next)
+
+- `src/app/` → rotas e layouts
+- `src/components/` → Shared UI
+- `src/features/` → Feature UI
+- `src/lib/` → clients (ex.: apiClient), helpers
+
+### 3.2 Backend (Node separado)
+
+- `backend/` (ou repositório separado, conforme decisão institucional)
+
+  - `database/` (conexão)
+  - `models/` (schemas)
+  - `repositories/`
+  - `services/`
+  - `controllers/`
+  - `routes/`
+  - `index/` (bootstrap do servidor)
+
+---
+
+## 4. Dossiês Técnicos Consumidos (Stack)
+
+- Dossiê Next Frontend (institucional)
+- Dossiê Node Backend (Stack 002 — quando existir)
+- Regras de Criação (institucional)
+
+> Esta stack exige um dossiê backend próprio para Node. Se não existir, o sistema deve BLOQUEAR ou marcar como draft.
+
+---
+
+## 5. Playbooks Aplicáveis
+
+### 5.1 Playbooks globais
+
+- PLAYBOOK_PIPELINE (visual + auditoria + refatoração)
+
+### 5.2 Playbooks da Stack
+
+- PLAYBOOK_CRIADOR_FRONT (Next)
+- PLAYBOOK_CRIADOR_BACK (Node)
+- PLAYBOOK_AUTH_STACK_002 (integração de auth entre front/back)
+- PLAYBOOK_DB_MONGO (Node)
+
+---
+
+## 6. Auth (diretriz de stack)
+
+Como há backend separado, a autenticação deve explicitar:
+
+- mecanismo de sessão/token
+- como o frontend armazena o estado de auth (sem violar regras institucionais)
+- como o backend valida credenciais
+- estratégia de refresh/expiração
+
+O padrão final deve ser definido por:
+
+- dossiê backend da stack
+- playbook de auth
+- Brief do Produto (se precisar restringir)
+
+---
+
+## 7. Contrato de Integração (Front ↔ Back)
+
+- Frontend **não** acessa banco
+- Frontend consome backend via HTTP
+- A camada `apiClient` deve concentrar chamadas
+- UI não faz fetch direto (usa services/hooks)
+
+---
+
+## 8. Critérios de Bloqueio
+
+Bloquear se:
+
+- tentar implementar backend dentro do Next (isso é Stack 001)
+- tentar consumir DB direto do frontend
+- tentar usar documentos técnicos da Stack 001
+
+---
+
+## 9. Regra Final
+
+Selecionou `STACK_002` → Next é somente frontend. Backend é Node separado.

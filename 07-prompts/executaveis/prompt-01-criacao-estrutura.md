@@ -221,3 +221,22 @@ A execução só é considerada válida se **TODOS** os critérios abaixo forem 
 - Nenhuma lógica de produto presente
 - Estrutura compatível com Dossiês e Playbooks
 - Estado pronto para a **ETAPA 2 — Planejamento do Passaporte**.
+
+## 🔚 Encerramento Institucional (Obrigatório — NÃO finalizar entrega sem isto)
+
+Ao concluir a ETAPA 1, é proibido considerar a entrega como “concluída” sem a execução do pipeline institucional pós-entrega.
+
+### Regra de execução
+
+Imediatamente após terminar a ETAPA 1, você DEVE:
+
+1. Acionar a execução do **prompt-00-executor-pipeline.md** para orquestrar:
+   F-DESIGNER → AUDITOR → (REFATORADOR se necessário) → F-DESIGNER → AUDITOR → Registro em 06-historico/.
+
+### Se você estiver em um ambiente que NÃO permite encadear prompts automaticamente (ex: Copilot por prompt manual)
+
+Seu output final DEVE terminar com este bloco literal:
+
+> **AÇÃO HUMANA OBRIGATÓRIA (NÃO OPCIONAL):**
+> Execute agora o arquivo `07-prompts/prompt-00-executor-pipeline.md` para concluir institucionalmente esta entrega.
+> Sem isso, esta entrega é considerada **INVÁLIDA** e o fluxo permanece **BLOQUEADO**.
