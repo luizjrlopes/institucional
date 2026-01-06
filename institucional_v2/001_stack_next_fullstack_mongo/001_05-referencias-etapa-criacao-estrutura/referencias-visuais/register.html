@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 1. ADAPTE AQUI: Título da Aba -->
+    <title>Criar Conta | Nome do seu Sistema</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      /* 2. ADAPTE AQUI: Cor Principal do Projeto */
+      :root {
+        --primary-color: #2563eb; /* Altere para a cor do seu projeto atual */
+        --primary-hover: #1d4ed8;
+      }
+
+      .bg-brand {
+        background-color: var(--primary-color);
+      }
+      .bg-brand:hover {
+        background-color: var(--primary-hover);
+      }
+      .text-brand {
+        color: var(--primary-color);
+      }
+      .border-brand {
+        border-color: var(--primary-color);
+      }
+      .focus-ring-brand:focus {
+        --tw-ring-color: var(--primary-color);
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+    <div class="min-h-screen flex items-center justify-center p-4">
+      <div
+        class="max-w-md w-full space-y-8 bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700"
+      >
+        <!-- SEÇÃO DE IDENTIDADE DO PROJETO -->
+        <div class="text-center">
+          <!-- 3. ADAPTE AQUI: Seu Logotipo -->
+          <div
+            class="inline-flex items-center justify-center w-16 h-16 bg-brand rounded-xl mb-4 shadow-lg"
+          >
+            <i data-lucide="user-plus" class="text-white w-8 h-8"></i>
+          </div>
+
+          <!-- 4. ADAPTE AQUI: Nome e Descrição -->
+          <h2
+            class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight"
+          >
+            Criar Nova Conta
+          </h2>
+          <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
+            Junte-se ao
+            <span
+              class="font-semibold text-slate-700 dark:text-slate-200 text-brand"
+              >Nome do Projeto</span
+            >
+            hoje mesmo.
+          </p>
+        </div>
+
+        <!-- FORMULÁRIO DE CADASTRO -->
+        <form id="registerForm" class="mt-8 space-y-4">
+          <div class="space-y-4">
+            <!-- Campo Nome Completo -->
+            <div>
+              <label
+                for="name"
+                class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
+                >Nome Completo</label
+              >
+              <div class="relative">
+                <div
+                  class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                >
+                  <i data-lucide="user" class="h-5 w-5 text-slate-400"></i>
+                </div>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus-ring-brand focus:border-transparent transition-all"
+                  placeholder="João Silva"
+                />
+              </div>
+            </div>
+
+            <!-- Campo Email -->
+            <div>
+              <label
+                for="email"
+                class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
+                >E-mail</label
+              >
+              <div class="relative">
+                <div
+                  class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                >
+                  <i data-lucide="mail" class="h-5 w-5 text-slate-400"></i>
+                </div>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus-ring-brand focus:border-transparent transition-all"
+                  placeholder="exemplo@email.com"
+                />
+              </div>
+            </div>
+
+            <!-- Campo Senha -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="password"
+                  class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
+                  >Senha</label
+                >
+                <div class="relative">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                    class="block w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus-ring-brand focus:border-transparent transition-all"
+                    placeholder="••••••••"
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  for="confirm_password"
+                  class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
+                  >Confirmar</label
+                >
+                <div class="relative">
+                  <input
+                    id="confirm_password"
+                    name="confirm_password"
+                    type="password"
+                    required
+                    class="block w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus-ring-brand focus:border-transparent transition-all"
+                    placeholder="••••••••"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Termos e Condições -->
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <input
+                id="terms"
+                name="terms"
+                type="checkbox"
+                required
+                class="h-4 w-4 text-brand focus:ring-brand border-slate-300 rounded cursor-pointer"
+              />
+            </div>
+            <div class="ml-2 text-sm">
+              <label for="terms" class="text-slate-600 dark:text-slate-400">
+                Eu aceito os
+                <a href="#" class="text-brand font-semibold hover:underline"
+                  >Termos de Uso</a
+                >
+                e
+                <a href="#" class="text-brand font-semibold hover:underline"
+                  >Privacidade</a
+                >.
+              </label>
+            </div>
+          </div>
+
+          <!-- Botão de Cadastro -->
+          <button
+            type="submit"
+            class="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-brand shadow-md transition-all active:scale-[0.98]"
+          >
+            Criar minha conta
+          </button>
+        </form>
+
+        <!-- 5. ADAPTE AQUI: Link de Volta para Login -->
+        <div class="pt-4 border-t border-slate-100 dark:border-slate-700">
+          <p class="text-center text-sm text-slate-500 dark:text-slate-400">
+            Já possui uma conta?
+            <a
+              href="login.html"
+              class="font-semibold text-brand hover:underline"
+              >Faça login</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      lucide.createIcons();
+
+      // Validação básica de senhas iguais
+      const form = document.getElementById("registerForm");
+      const password = document.getElementById("password");
+      const confirm = document.getElementById("confirm_password");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (password.value !== confirm.value) {
+          alert("As senhas não coincidem!"); // Substitua por um componente de alerta UI se preferir
+          return;
+        }
+
+        const formData = new FormData(form);
+        console.log("Dados de cadastro:", Object.fromEntries(formData));
+        // Adicione aqui a chamada para sua API
+      });
+    </script>
+  </body>
+</html>

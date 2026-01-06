@@ -1,0 +1,108 @@
+# Dossiê Institucional
+
+## Regras de Criação de Aplicações — Stack: Next.js (front) + Node.js (backend) + MongoDB
+
+> Nota terminológica: As "Fases" descritas neste Dossiê são internas ao próprio Dossiê (Fase D\*) e não substituem, nem conflitam com, as "Etapas" operacionais do `FLUXO_ORQUESTRADOR`.
+
+---
+
+### 📋 Metadados
+
+- **Front-end:** Next.js (App Router)
+- **Back-end:** Node.js (Express/Koa)
+- **Banco:** MongoDB (Mongoose)
+- **Versão:** v1.0
+- **Status:** Padrão Institucional para stack separada
+
+---
+
+## 📑 Sumário
+
+1. [Objetivo](#1-objetivo)
+2. [Escopo](#2-escopo)
+3. [Princípios Institucionais](#3-princípios-institucionais)
+4. Processo Sequencial (Fases Internas do Dossiê)
+5. Regras de Implantação e Dev
+6. Critérios de Aceite
+
+---
+
+## 1. Objetivo
+
+Estabelecer regras obrigatórias para criação de aplicações compostas por um frontend Next.js e um backend Node.js separado, comunicando via API e persistindo em MongoDB.
+
+---
+
+## 2. Escopo
+
+- Geração automática de skeletons
+- Criação de contratos DTO
+- Scripts de dev (docker-compose para orquestrar front+back+mongo)
+
+---
+
+## 3. Princípios Institucionais
+
+- Contracts-first: definir DTOs antes de implementar
+- Testes de contrato entre front e back
+- Deploys independentes e pipelines separados
+- Environment parity: dev ≈ staging ≈ prod (com variáveis seguras)
+
+---
+
+## 4. Processo Sequencial (Fases Internas)
+
+### Fase D0 — Preparação
+
+- Criar repositórios e skeletons para front e back
+- Criar `docker-compose.dev.yml` com frontend, backend e mongo
+- Criar `README` com instruções de setup
+
+### Fase D1 — Estrutura Base
+
+- Frontend: `src/app`, `src/components`, `src/services/api.ts`, `src/styles`
+- Backend: `src/server/routes`, `controllers`, `services`, `repositories`, `models`, `config/env.ts`, `db/client.ts`
+
+### Fase D2 — Autenticação
+
+- Endpoints: `/auth/login`, `/auth/register`, `/auth/me`, `/auth/logout`
+- Front: providers e pages de login/register
+
+### Fase D3 — Páginas de Domínio
+
+- Criar páginas e features por ordem de prioridade
+
+### Fase D4 — Governança
+
+- Testes, CI, análise estática, contratos e deploys
+
+---
+
+## 5. Regras de Implantação e Dev
+
+- Usar `API_BASE_URL` no frontend apontando para backend
+- CORS no backend configurado com política mínima (origem do frontend)
+- Tokens: preferir cookies HTTP-only para segurança; se usar JWT em header, documentar trade-offs
+- Scripts:
+  - `dev:docker` que sobe front+back+mongo
+  - `test:unit` e `test:integration`
+
+---
+
+## 6. Critérios de Aceite
+
+- Projeto compila localmente
+- `docker-compose.dev.yml` inicia serviços
+- Tests unitários e de integração rodando
+- Documentação mínima no README para setup
+- Contratos DTO implementados e testados
+
+---
+
+## Conclusão
+
+Seguir estas regras garante entregas previsíveis e pipelines independentes para frontend e backend.
+
+---
+
+© 2026 - Documentação Institucional - Engenharia de Software

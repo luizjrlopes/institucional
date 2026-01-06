@@ -4,7 +4,7 @@ Stack 003 — Next.js (Frontend) + Python (Backend separado)
 
 **stack_id:** STACK_003_NEXT_FRONT_PYTHON_BACK
 
-**Versão:** v1.0 — Mapa de Stack
+**Versão:** v1.1 — Mapa de Stack
 
 ---
 
@@ -29,9 +29,9 @@ Ele define:
   - Padrão recomendado: **FastAPI**
 
 - Integração: frontend consome backend via **HTTP** (REST)
-- Contrato: backend deve expor APIs estáveis e documentadas (OpenAPI)
+- Contrato: backend deve expor APIs estáveis e documentadas (**OpenAPI**)
 
-> Observação institucional: o framework Python final (FastAPI/Flask/Django) pode ser restringido pelo Brief, mas a stack assume FastAPI como padrão recomendado.
+> Observação institucional: o framework Python final (FastAPI / Flask / Django) pode ser restringido pelo **Brief do Produto**. Na ausência de restrição explícita, **FastAPI é o padrão obrigatório**.
 
 ---
 
@@ -50,17 +50,17 @@ Ele define:
 
   - `app/`
 
-    - `api/` (routers)
-    - `controllers/` (handlers de request, finos)
-    - `services/` (regras de aplicação)
-    - `repositories/` (acesso a dados)
-    - `models/` (modelos de domínio / schemas)
-    - `schemas/` (Pydantic DTOs)
-    - `core/` (config, settings, logging)
-    - `database/` (conexão, sessão, migrations quando aplicável)
+    - `api/` → routers (HTTP)
+    - `controllers/` → handlers de request (finos)
+    - `services/` → regras de aplicação
+    - `repositories/` → acesso a dados
+    - `models/` → modelos de domínio
+    - `schemas/` → DTOs (Pydantic)
+    - `core/` → config, settings, logging
+    - `database/` → conexão, sessão, migrations (quando aplicável)
 
   - `tests/`
-  - `main.py` (bootstrap)
+  - `main.py` → bootstrap da aplicação
 
 ---
 
@@ -68,7 +68,7 @@ Ele define:
 
 Esta stack **não fixa banco por padrão**.
 
-O banco deve ser definido no `BRIEF_PRODUTO` (ou em documento de decisão técnica do produto), por exemplo:
+O banco **deve ser definido obrigatoriamente** no `BRIEF_PRODUTO` (ou em documento formal de decisão técnica do produto), por exemplo:
 
 - Postgres
 - MongoDB
@@ -77,18 +77,18 @@ O banco deve ser definido no `BRIEF_PRODUTO` (ou em documento de decisão técni
 Regras mínimas:
 
 - frontend **nunca** acessa banco
-- backend concentra persistência
-- migrations/controle de schema devem ser explícitos se banco relacional
+- backend concentra toda persistência
+- migrations/controle de schema são **obrigatórios** se banco relacional
 
 ---
 
 ## 5. Dossiês Técnicos Consumidos (Stack)
 
-- Dossiê Next Frontend (institucional)
-- Dossiê Python Backend (Stack 003 — quando existir)
-- Regras de Criação (institucional)
+- Dossiê Institucional — Next Frontend
+- Dossiê Backend Python — Stack 003 (quando existir)
+- Dossiê Institucional — Regras de Criação
 
-> Esta stack exige um dossiê backend próprio para Python. Se não existir, o sistema deve BLOQUEAR ou marcar como draft.
+> Esta stack **exige** um dossiê backend próprio para Python. Se não existir, o processo deve **BLOQUEAR** ou marcar a stack como **draft**.
 
 ---
 
@@ -96,40 +96,40 @@ Regras mínimas:
 
 ### 6.1 Playbooks globais
 
-- PLAYBOOK_PIPELINE (designer → auditor → refatorador → designer → auditor)
+- `PLAYBOOK_PIPELINE` (designer → auditor → refatorador → designer → auditor)
 
-### 6.2 Playbooks da Stack (quando existirem)
+### 6.2 Playbooks específicos da Stack (quando existirem)
 
-- PLAYBOOK_CRIADOR_FRONT (Next)
-- PLAYBOOK_CRIADOR_BACK_PY (Python)
-- PLAYBOOK_AUTH_STACK_003 (integração auth entre front/back)
-- PLAYBOOK_DB_STACK_003 (banco definido no Brief)
+- `PLAYBOOK_CRIADOR_FRONT` (Next)
+- `PLAYBOOK_CRIADOR_BACK_PY` (Python)
+- `PLAYBOOK_AUTH_STACK_003` (auth distribuída)
+- `PLAYBOOK_DB_STACK_003` (persistência conforme Brief)
 
 ---
 
 ## 7. Auth (diretriz de stack)
 
-Como há backend separado, a autenticação deve explicitar:
+Como há backend separado, a autenticação **deve explicitar**:
 
 - mecanismo de sessão/token (ex.: JWT + refresh)
 - estratégia de expiração e renovação
 - como o frontend mantém estado de auth sem violar regras institucionais
 - como o backend valida credenciais
 
-O padrão final deve ser definido por:
+O padrão final de autenticação é definido por:
 
 - dossiê backend Python
-- playbook de auth
+- playbook de auth da stack
 - Brief do Produto (restrições específicas)
 
 ---
 
 ## 8. Contrato de Integração (Front ↔ Back)
 
-- Frontend consome backend via HTTP
-- A camada `apiClient` concentra chamadas
-- UI não faz fetch direto (usa services/hooks)
-- Backend expõe OpenAPI (FastAPI) como documentação
+- Frontend consome backend via **HTTP**
+- A camada `apiClient` centraliza chamadas
+- UI **não** faz fetch direto (usa services/hooks)
+- Backend expõe **OpenAPI** como documentação oficial
 
 ---
 
@@ -137,13 +137,13 @@ O padrão final deve ser definido por:
 
 Bloquear se:
 
-- tentar implementar backend dentro do Next (isso é Stack 001)
-- tentar consumir DB direto do frontend
-- tentar usar documentos técnicos da Stack 001/002
+- tentar implementar backend dentro do Next (isso pertence à Stack 001)
+- tentar consumir banco diretamente do frontend
+- tentar usar documentos técnicos das Stacks 001 ou 002
 - banco não for declarado quando necessário
 
 ---
 
 ## 10. Regra Final
 
-Selecionou `STACK_003` → Next é somente frontend. Backend é Python separado.
+Selecionou `STACK_003` → **Next é exclusivamente frontend**. Backend é **Python separado**, integrado por contrato HTTP documentado.
