@@ -27,6 +27,17 @@ Toda execução do sistema (criação/evolução) deve declarar explicitamente a
 
 **Sem `stack_id`, o sistema entra em estado BLOQUEADO.**
 
+### Resolução de Stack
+
+O sistema resolve `stack_id` → `stack_root_dir` através do [CATALOGO_STACKS.md](mapas_e_fluxos_centrais/CATALOGO_STACKS.md).
+
+**Exemplo:**
+
+- `stack_id`: `001_next_fullstack_mongo` (identificador lógico)
+- `stack_root_dir`: `001_stack_next_fullstack_mongo/` (diretório físico)
+
+**Regra:** Documentos devem usar placeholder `{{STACK_ROOT_DIR}}`, NUNCA `stack_id` como path.
+
 O `stack_id` selecionado define:
 
 - quais dossiês técnicos são válidos
@@ -37,15 +48,21 @@ O `stack_id` selecionado define:
 
 ## 3. Catálogo Oficial de Stacks
 
-A lista de stacks reconhecidas institucionalmente é:
+Ver catálogo completo em [CATALOGO_STACKS.md](mapas_e_fluxos_centrais/CATALOGO_STACKS.md).
 
-- **STACK_001_NEXT_FULLSTACK_MONGO**
+Lista de stacks reconhecidas institucionalmente:
 
-  - Mapa: `MAPA_STACK_001_NEXT_FULLSTACK_MONGO.md`
+| stack_id                           | Status   | Descrição                                    |
+| ---------------------------------- | -------- | -------------------------------------------- |
+| `001_next_fullstack_mongo`         | ✅ ATIVO | Next.js Fullstack + MongoDB                  |
+| `002_next_front_node_back_mongo`   | 🚧 DRAFT | Next.js Frontend + Node.js Backend + MongoDB |
+| `003_next_front_python_back_mongo` | 🚧 DRAFT | Next.js Frontend + Python Backend + MongoDB  |
 
-- **STACK_002_NEXT_FRONT_NODE_BACK_MONGO**
+**Mapas das Stacks:**
 
-  - Mapa: `MAPA_STACK_002_NEXT_FRONT_NODE_BACK_MONGO.md`
+- Stack 001: [001_MAPA_STACK_NEXT_FULLSTACK_MONGO.md](001_stack_next_fullstack_mongo/001_00-mapas_e_fluxos/001_MAPA_STACK_NEXT_FULLSTACK_MONGO.md)
+- Stack 002: Em desenvolvimento (ver [002_stack_next_front_node_back_mongo/README.md](002_stack_next_front_node_back_mongo/README.md))
+- Stack 003: Em desenvolvimento (ver [003_stack_next_front_python_back_mongo/README.md](003_stack_next_front_python_back_mongo/README.md))
 
 ---
 
@@ -205,7 +222,7 @@ Este mapa governa a execução técnica quando a stack selecionada for `STACK_00
 
 - PLAYBOOK_PIPELINE (designer → auditor → refatorador → designer → auditor)
 
-### 5.2 Playbooks da Stack (quando existirem)
+#### 5.2 Playbooks da Stack (quando existirem)
 
 - PLAYBOOK_CRIADOR (Stack 001)
 - PLAYBOOK_AUTH (Stack 001)
@@ -293,7 +310,7 @@ Este mapa governa a execução técnica quando a stack selecionada for `STACK_00
 - `src/features/` → Feature UI
 - `src/lib/` → clients (ex.: apiClient), helpers
 
-### 3.2 Backend (Node separado)
+#### 3.2 Backend (Node separado)
 
 - `backend/` (ou repositório separado, conforme decisão institucional)
 
@@ -323,7 +340,7 @@ Este mapa governa a execução técnica quando a stack selecionada for `STACK_00
 
 - PLAYBOOK_PIPELINE (visual + auditoria + refatoração)
 
-### 5.2 Playbooks da Stack
+#### 5.2 Playbooks da Stack
 
 - PLAYBOOK_CRIADOR_FRONT (Next)
 - PLAYBOOK_CRIADOR_BACK (Node)
