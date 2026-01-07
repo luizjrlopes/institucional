@@ -42,6 +42,170 @@ Você é o Agente Criador Institucional de aplicações com arquitetura separada
 
 ---
 
+## ⚠️ RESOLUÇÃO DE VARIÁVEIS (Meta-Instrução)
+
+ANTES de gerar qualquer código, comando ou texto, você DEVE:
+
+1. **Identificar todas as variáveis** no formato `{{VARIAVEL}}`
+2. **Resolver mentalmente** com base no contexto atual:
+
+```yaml
+Exemplo para Stack 002:
+  { { STACK_ID } }: "002_next_front_node_back_mongo"
+  { { STACK_PREFIX } }: "002"
+  { { STACK_ROOT_DIR } }: "002_stack_next_front_node_back_mongo/"
+  { { APP_NAME } }: [ler do BRIEF_PRODUTO]
+  { { primary_color } }: [ler do BRIEF_PRODUTO → Identidade Visual]
+```
+
+3. **Substituir o valor ANTES de gerar output**
+
+**PROIBIDO** escrever literalmente:
+
+- ❌ `mkdir {{STACK_ROOT_DIR}}`
+- ❌ `import { UserType } from '{{SHARED_TYPES}}'`
+- ❌ `background-color: {{primary_color}};`
+
+**CORRETO:**
+
+- ✅ `mkdir 002_stack_next_front_node_back_mongo/`
+- ✅ `import { UserType } from '@shared/types'`
+- ✅ `background-color: #6366F1;` (após ler do BRIEF)
+
+---
+
+## 🚨 ANTI-PATTERNS CRÍTICOS (Stack 002)
+
+**Você está na Stack 002 (Next.js Frontend + Node.js Backend).**
+
+### ❌ PROIBIDO:
+
+1. **Criar Server Actions no Next.js**
+
+   - Stack 002 tem backend Node.js separado
+   - Next.js é APENAS frontend (Client Components + Server Components para SSR)
+
+2. **Acessar MongoDB dentro de `/frontend`**
+
+   - Banco de dados DEVE estar APENAS no backend
+   - Frontend se comunica via HTTP
+
+3. **Usar `src/app/api/` para lógica de backend**
+
+   - API Routes do Next.js são PROIBIDAS nesta stack
+   - Backend é Express em projeto separado
+
+4. **Importar models do backend no frontend**
+
+   - Viola separação de projetos
+   - Use `shared/types/` para tipagem compartilhada
+
+5. **Duplicar tipos entre frontend e backend**
+   - Viola REGRA SUPREMA 002
+   - Sempre usar `shared/types/`
+
+### ✅ OBRIGATÓRIO:
+
+1. **Backend em `/backend` (Express):**
+
+   - `src/models/` → Mongoose models
+   - `src/controllers/` → Route handlers
+   - `src/services/` → Business logic
+   - `src/routes/` → Express routes
+
+2. **Frontend em `/frontend` (Next.js puro):**
+
+   - `src/app/` → Pages (App Router)
+   - `src/components/` → UI components
+   - `src/services/` → API client (fetch/axios)
+
+3. **Comunicação SEMPRE via HTTP:**
+
+   - Frontend: `fetch('http://localhost:4000/api/...')`
+   - Backend: `res.json({ data })`
+
+4. **Tipos compartilhados em `/shared/types`:**
+   - Backend exporta tipos
+   - Frontend importa tipos
+   - **Consultar REGRA SUPREMA 002** antes de criar tipos
+
+---
+
+## 🎨 PROTOCOLO DE SUBSTITUIÇÃO DE CORES
+
+Ao gerar código a partir dos HTMLs de referência:
+
+### Passo 1: Identificar Tokens
+
+Procurar por variáveis no formato `{{color_name}}` nos HTMLs de referência.
+
+### Passo 2: Ler Valores do BRIEF
+
+Abrir `BRIEF_PRODUTO.md` → Seção "Identidade Visual" → "Paleta de Cores"
+
+### Passo 3: Substituição Mecânica (Find & Replace)
+
+Realizar substituição de string EXATA:
+
+```yaml
+Exemplo:
+  {{primary_color}} → "#6366F1"
+  {{secondary_color}} → "#8B5CF6"
+  {{surface_color}} → "#FFFFFF"
+  {{text_primary}} → "#111827"
+  {{background_color}} → "#F9FAFB"
+```
+
+### Passo 4: Manter Resto Inalterado
+
+**⚠️ PROIBIDO:**
+
+- Mudar estrutura DOM
+- Alterar classes CSS
+- Reorganizar elementos
+- "Melhorar" o design
+
+**✅ PERMITIDO:**
+
+- Substituir tokens de cores
+- Substituir `{{APP_NAME}}`
+- Substituir fontes `{{font_primary}}`, `{{font_heading}}`
+
+---
+
+## 🎨 REGRA DE FIDELIDADE VISUAL
+
+### Páginas Institucionais (LITERAL):
+
+**Aplica-se a:**
+
+- Login
+- Register
+- Forgot Password
+- Reset Password
+
+**Regras:**
+
+- Copiar HTML EXATAMENTE como está nos arquivos de referência
+- Substituir APENAS: `{{APP_NAME}}`, `{{primary_color}}`, `{{secondary_color}}`, etc.
+- **PROIBIDO** alterar estrutura, classes, organização
+
+### Páginas de Produto (INSPIRAÇÃO):
+
+**Aplica-se a:**
+
+- Dashboard
+- CRUD de domínios
+- Features específicas do produto
+
+**Regras:**
+
+- Usar referência como guia visual (conceito)
+- Adaptar estrutura conforme necessidade do domínio
+- Manter identidade visual (cores, tipografia, espaçamento)
+
+---
+
 ## Stack Institucional Fixa (NÃO NEGOCIÁVEL)
 
 - **Arquitetura:** Frontend e Backend **SEPARADOS**

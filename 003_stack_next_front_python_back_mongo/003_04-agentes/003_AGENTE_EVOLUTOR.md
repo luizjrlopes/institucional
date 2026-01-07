@@ -41,6 +41,172 @@ Você é o **Agente Evolutor**, responsável por implementar páginas do produto
 
 ---
 
+## ⚠️ RESOLUÇÃO DE VARIÁVEIS (Meta-Instrução)
+
+ANTES de gerar qualquer código, comando ou texto, você DEVE:
+
+1. **Identificar todas as variáveis** no formato `{{VARIAVEL}}`
+2. **Resolver mentalmente** com base no contexto atual:
+
+```yaml
+Exemplo para Stack 003:
+  { { STACK_ID } }: "003_next_front_python_back_mongo"
+  { { STACK_PREFIX } }: "003"
+  { { BACKEND_DIR } }: "backend/"
+  { { FRONTEND_DIR } }: "frontend/"
+  { { DOMAIN_NAME } }: [ler do contexto - ex: "users", "products"]
+```
+
+3. **Substituir o valor ANTES de gerar output**
+
+**PROIBIDO** escrever literalmente:
+
+- ❌ `cd {{BACKEND_DIR}}`
+- ❌ `class {{DOMAIN_NAME}}Model(CamelCaseModel):`
+
+**CORRETO:**
+
+- ✅ `cd backend/`
+- ✅ `class UserModel(CamelCaseModel):`
+
+---
+
+## 🗑️ CHECKLIST DE LIMPEZA MOC → BANCO REAL
+
+**Quando executar:** Ao migrar da Fase MOC (dados simulados) para Produção (MongoDB real).
+
+### Passo 1: Criar Repositórios Reais (Backend Python)
+
+```yaml
+Localização: backend/app/repositories/
+
+Ações:
+  [ ] Criar MongoRepository para cada domínio
+  [ ] Configurar Motor (async MongoDB driver)
+  [ ] Implementar métodos CRUD async
+  [ ] Testar isoladamente
+```
+
+**Exemplo:**
+
+```python
+# backend/app/repositories/user_repository.py
+from motor.motor_asyncio import AsyncIOMotorDatabase
+from app.models.user import UserModel
+
+class UserRepository:
+    def __init__(self, db: AsyncIOMotorDatabase):
+        self.collection = db.users
+
+    async def create(self, data: dict):
+        result = await self.collection.insert_one(data)
+        return str(result.inserted_id)
+
+    async def find_all(self):
+        cursor = self.collection.find()
+        return await cursor.to_list(length=100)
+```
+
+### Passo 2: LIMPEZA DE ARTEFATOS (CRÍTICO)
+
+**Backend Python:**
+
+```yaml
+1. Listar arquivos de mock:
+   [ ] backend/data/*.json
+   [ ] backend/app/repositories/*_data_repository.py
+   [ ] backend/app/services que usam DataRepository
+
+2. Atualizar Services:
+   [ ] Mudar injeção:
+       ❌ repo = UserDataRepository()
+       ✅ repo = UserRepository(db)
+
+   [ ] Atualizar imports:
+       ❌ from app.repositories.data.user_data_repository import UserDataRepository
+       ✅ from app.repositories.user_repository import UserRepository
+
+3. Deletar arquivos:
+   [ ] rm -rf backend/data/
+   [ ] rm -rf backend/app/repositories/data/ (se existir)
+   [ ] find backend/ -name "*data_repository*" -delete
+```
+
+**Frontend Next.js:**
+
+```yaml
+1. Atualizar Services (se houver mock local):
+   [ ] frontend/src/services/*MockService.ts (deletar)
+   [ ] Garantir que todos os services usam apiClient real
+   [ ] Verificar interceptor de conversão camelCase (se existir)
+```
+
+### Passo 3: Validação Final
+
+```yaml
+Backend Python:
+  [ ] Testar CRUD via Postman:
+      - POST /api/users (criar)
+      - GET /api/users (listar)
+      - GET /api/users/{id} (buscar)
+      - PUT /api/users/{id} (atualizar)
+      - DELETE /api/users/{id} (deletar)
+
+  [ ] Verificar camelCase na resposta:
+      - API retorna {"userId": "123"} (NÃO {"user_id": "123"})
+      - Pydantic com alias_generator funcionando
+
+  [ ] Verificar persistência:
+      - Criar registro
+      - Reiniciar servidor FastAPI
+      - Consultar MongoDB diretamente (mongosh ou Compass)
+
+Frontend Next.js:
+  [ ] Testar UI completa:
+      - Criar via formulário
+      - Listar registros
+      - Editar registro
+      - Deletar registro
+
+  [ ] Verificar que não há mocks:
+      - grep -r "MockService" frontend/src/
+      - grep -r "data/" frontend/src/ | grep import
+
+Integração:
+  [ ] Frontend (TS) se comunica com backend (Python)
+  [ ] CORS funcionando
+  [ ] Conversão snake_case → camelCase automática
+  [ ] Tipos TypeScript consistentes com Pydantic models
+```
+
+### Comando de Auditoria
+
+```bash
+# Backend Python
+cd backend
+grep -r "DataRepository" app/
+grep -r "data_repository" app/
+ls data/ 2>&1 | grep -q "No such" && echo "Backend OK" || echo "ERRO: data/ existe"
+
+# Frontend
+cd frontend
+grep -r "MockService" src/
+grep -r "data/" src/ | grep import
+
+# Testar integração
+curl -X GET http://localhost:8000/api/users
+# Verificar que resposta é camelCase: {"userId": ...}
+```
+
+### 🚨 Se Encontrar Resíduos:
+
+- **BLOQUEAR** migração
+- Documentar arquivos afetados
+- Limpar manualmente
+- Re-executar validação completa
+
+---
+
 ## Pré-condições Obrigatórias
 
 Antes de iniciar qualquer implementação, verifique:

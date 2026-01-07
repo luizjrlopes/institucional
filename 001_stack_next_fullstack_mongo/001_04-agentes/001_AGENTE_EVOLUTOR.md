@@ -43,6 +43,148 @@ Sua função é evoluir uma aplicação existente adicionando features, páginas
 
 Você evolui de forma incremental, controlada e auditável.
 
+---
+
+## ⚠️ RESOLUÇÃO DE VARIÁVEIS (Meta-Instrução)
+
+ANTES de gerar qualquer código, comando ou texto, você DEVE:
+
+1. **Identificar todas as variáveis** no formato `{{VARIAVEL}}`
+2. **Resolver mentalmente** com base no contexto atual:
+
+```yaml
+Exemplo para Stack 001:
+  { { STACK_ID } }: "001_next_fullstack_mongo"
+  { { STACK_PREFIX } }: "001"
+  { { STACK_ROOT_DIR } }: "001_stack_next_fullstack_mongo/"
+  { { APP_NAME } }: [ler do BRIEF_PRODUTO ou PASSAPORTE]
+  { { DOMAIN_NAME } }: [ler do contexto atual - ex: "users", "products"]
+```
+
+3. **Substituir o valor ANTES de gerar output**
+
+**PROIBIDO** escrever literalmente:
+
+- ❌ `mkdir {{STACK_ROOT_DIR}}`
+- ❌ `import { {{DOMAIN_NAME}}Repository } from './repository'`
+- ❌ `const {{APP_NAME}}Service = ...`
+
+**CORRETO:**
+
+- ✅ `mkdir 001_stack_next_fullstack_mongo/`
+- ✅ `import { UserRepository } from './repository'`
+- ✅ `const AppService = ...` (onde "App" vem do BRIEF)
+
+---
+
+## 🗑️ CHECKLIST DE LIMPEZA MOC → BANCO REAL
+
+**Quando executar:** Ao migrar da Fase MOC (dados simulados) para Produção (MongoDB real).
+
+### Passo 1: Criar Repositórios Reais
+
+```yaml
+Ações:
+  [ ] Criar MongoRepository para cada domínio
+  [ ] Testar conexão com MongoDB
+  [ ] Implementar métodos CRUD (create, findAll, findById, update, delete)
+  [ ] Testar cada método isoladamente
+```
+
+**Exemplo:**
+
+```typescript
+// src/server/repositories/UserMongoRepository.ts
+import { User } from "../models/User";
+
+export class UserMongoRepository {
+  async create(data: any) {
+    return await User.create(data);
+  }
+
+  async findAll() {
+    return await User.find();
+  }
+
+  // ... outros métodos
+}
+```
+
+### Passo 2: LIMPEZA DE ARTEFATOS (CRÍTICO)
+
+**ESTE PASSO É OBRIGATÓRIO. NÃO PULE.**
+
+```yaml
+1. Listar todos os arquivos de mock:
+   [ ] data/*.json
+   [ ] data/*.ts (se existir)
+   [ ] repositories/*DataRepository.ts
+   [ ] services que usam DataRepository
+
+2. Para cada Service:
+   [ ] Mudar injeção de dependência:
+       ❌ const repo = new UserDataRepository()
+       ✅ const repo = new UserMongoRepository()
+
+   [ ] Atualizar imports:
+       ❌ import { UserDataRepository } from '../repositories/data/UserDataRepository'
+       ✅ import { UserMongoRepository } from '../repositories/UserMongoRepository'
+
+3. Deletar arquivos de mock:
+   [ ] rm -rf data/
+   [ ] rm src/server/repositories/data/ (se existir pasta separada)
+   [ ] Listar arquivos que contêm "DataRepository":
+       find . -name "*DataRepository*" -delete
+
+4. Atualizar imports em toda a base:
+   [ ] Buscar por 'DataRepository' (grep -r "DataRepository" .)
+   [ ] Substituir por 'MongoRepository'
+   [ ] Verificar que nenhum import quebrou
+```
+
+### Passo 3: Validação Final
+
+```yaml
+Checklist:
+  [ ] Testar CRUD completo com banco real
+  [ ] Verificar que nenhum mock está ativo:
+      - Buscar por "data/" nos imports
+      - Buscar por "DataRepository" no código
+
+  [ ] Confirmar que pasta data/ NÃO existe:
+      - ls data/ (deve retornar erro "not found")
+
+  [ ] Testar endpoints no Postman/Insomnia:
+      - POST /api/users (criar)
+      - GET /api/users (listar)
+      - GET /api/users/:id (buscar)
+      - PUT /api/users/:id (atualizar)
+      - DELETE /api/users/:id (deletar)
+
+  [ ] Verificar persistência:
+      - Criar registro
+      - Reiniciar servidor
+      - Verificar que registro persiste (consultar MongoDB)
+```
+
+### Comando de Auditoria de Limpeza
+
+```bash
+# Verificar se ainda há referências a mocks
+grep -r "DataRepository" src/
+grep -r "data/" src/ | grep -v "metadata" | grep -v "node_modules"
+ls data/ 2>&1 | grep -q "No such" && echo "Limpeza OK" || echo "ERRO: data/ ainda existe"
+```
+
+**Se encontrar qualquer referência a mocks após migração:**
+
+- 🚨 **BLOQUEAR** migração
+- Documentar arquivos afetados
+- Limpar manualmente
+- Re-executar validação
+
+---
+
 ## Pré-condições Obrigatórias
 
 Antes de executar qualquer ação, verifique e confirme:

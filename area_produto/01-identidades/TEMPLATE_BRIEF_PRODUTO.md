@@ -55,20 +55,68 @@ Sem Brief, o projeto é considerado **institucionalmente incompleto**.
 
 ---
 
-### 3.2 Paleta de Cores
+### 3.2 Paleta de Cores (HEX OBRIGATÓRIO)
 
-- **Cor primária:**
-- **Cor secundária:**
-- **Cores neutras:**
-- **Cores de status:** sucesso | erro | alerta | info
+**IMPORTANTE:** Todas as cores DEVEM ser especificadas em formato HEX (#RRGGBB) para garantir substituição mecânica nos HTMLs de referência.
+
+#### Cores Principais
+
+- **primary_color:** `#______` (Botões principais, CTAs, links, destaques)
+- **secondary_color:** `#______` (Botões secundários, badges, elementos de suporte)
+- **accent_color:** `#______` (Alertas positivos, destaques especiais, call-outs)
+
+#### Cores de Superfície
+
+- **background_color:** `#______` (Fundo geral da aplicação)
+- **surface_color:** `#______` (Cards, modals, inputs, áreas de destaque)
+
+#### Cores de Texto
+
+- **text_primary:** `#______` (Textos principais, títulos, conteúdo)
+- **text_secondary:** `#______` (Textos secundários, labels, hints, metadados)
+
+#### Cores Estruturais
+
+- **border_color:** `#______` (Bordas de elementos, dividers, separadores)
+
+#### Cores de Estado
+
+- **error_color:** `#______` (Erros, validações negativas, alertas críticos)
+- **success_color:** `#______` (Sucesso, confirmações, validações positivas)
+- **warning_color:** `#______` (Avisos, ações que requerem atenção)
+- **info_color:** `#______` (Informações neutras, dicas, tooltips)
+
+**Exemplo de preenchimento:**
+
+```markdown
+- **primary_color:** `#6366F1` (Índigo vibrante para CTAs)
+- **secondary_color:** `#8B5CF6` (Roxo para elementos secundários)
+- **surface_color:** `#FFFFFF` (Branco puro para cards)
+- **text_primary:** `#111827` (Cinza muito escuro, quase preto)
+- **background_color:** `#F9FAFB` (Cinza bem claro para fundo)
+```
+
+**Regras de Acessibilidade:**
+
+- Contraste mínimo `text_primary` vs `surface_color`: 4.5:1 (WCAG AA)
+- Contraste mínimo `text_secondary` vs `surface_color`: 4.5:1
+- Contraste botões (`primary_color` com texto): 4.5:1
 
 ---
 
 ### 3.3 Tipografia
 
-- **Fonte principal:**
-- **Fonte secundária (opcional):**
+- **font_primary:** `"_____, sans-serif"` (Fonte para corpo de texto, parágrafos)
+- **font_heading:** `"_____, sans-serif"` (Fonte para títulos, headings)
+- **font_mono:** `"_____, monospace"` (Fonte para código, dados técnicos - opcional)
 - **Fallback padrão:** sistema
+
+**Exemplo:**
+
+```markdown
+- **font_primary:** `"Inter, -apple-system, sans-serif"` (Legibilidade em blocos de texto)
+- **font_heading:** `"Poppins, -apple-system, sans-serif"` (Destaque em títulos)
+```
 
 ---
 

@@ -42,6 +42,180 @@ Você é o Agente Criador Institucional de aplicações com arquitetura separada
 
 ---
 
+## ⚠️ RESOLUÇÃO DE VARIÁVEIS (Meta-Instrução)
+
+ANTES de gerar qualquer código, comando ou texto, você DEVE:
+
+1. **Identificar todas as variáveis** no formato `{{VARIAVEL}}`
+2. **Resolver mentalmente** com base no contexto atual:
+
+```yaml
+Exemplo para Stack 003:
+  { { STACK_ID } }: "003_next_front_python_back_mongo"
+  { { STACK_PREFIX } }: "003"
+  { { STACK_ROOT_DIR } }: "003_stack_next_front_python_back_mongo/"
+  { { APP_NAME } }: [ler do BRIEF_PRODUTO]
+  { { primary_color } }: [ler do BRIEF_PRODUTO → Identidade Visual]
+```
+
+3. **Substituir o valor ANTES de gerar output**
+
+**PROIBIDO** escrever literalmente:
+
+- ❌ `mkdir {{STACK_ROOT_DIR}}`
+- ❌ `class {{STACK_PREFIX}}Model(BaseModel):`
+- ❌ `background-color: {{primary_color}};`
+
+**CORRETO:**
+
+- ✅ `mkdir 003_stack_next_front_python_back_mongo/`
+- ✅ `class UserModel(BaseModel):`
+- ✅ `background-color: #6366F1;` (após ler do BRIEF)
+
+---
+
+## 🚨 ANTI-PATTERNS CRÍTICOS (Stack 003)
+
+**Você está na Stack 003 (Next.js Frontend + Python Backend).**
+
+### ❌ PROIBIDO:
+
+1. **Usar PyMongo (síncrono)**
+
+   - Stack 003 usa FastAPI (async)
+   - DEVE usar Motor (MongoDB async driver)
+
+2. **Pydantic SEM `alias_generator=to_camel`**
+
+   - Viola REGRA SUPREMA 003
+   - API DEVE retornar camelCase para o frontend
+
+3. **Retornar snake_case na API** (ex: `user_id`)
+
+   - Frontend Next.js espera camelCase (`userId`)
+   - SEMPRE usar Pydantic com conversão
+
+4. **Usar Django/Flask em vez de FastAPI**
+
+   - Stack 003 é FastAPI (async, moderno)
+
+5. **Criar Server Actions no Next.js**
+   - Next.js é APENAS frontend
+   - Backend é Python separado
+
+### ✅ OBRIGATÓRIO:
+
+1. **Backend em `/backend` (FastAPI):**
+
+   - `app/models/` → Pydantic schemas com `alias_generator`
+   - `app/routers/` → FastAPI routers
+   - `app/services/` → Business logic
+   - `app/database/` → Motor connection
+
+2. **Frontend em `/frontend` (Next.js):**
+
+   - `src/app/` → Pages (App Router)
+   - `src/components/` → UI components
+   - `src/services/` → API client (fetch/axios)
+   - `src/types/` → TypeScript interfaces (camelCase)
+
+3. **API retorna camelCase:**
+
+   ```python
+   # Backend (Python)
+   class UserModel(CamelCaseModel):
+       user_id: str  # snake_case no Python
+
+   # API retorna:
+   # { "userId": "123" }  ← camelCase para frontend
+   ```
+
+4. **Pydantic com `CamelCaseModel`:**
+
+   - Usar base model com `alias_generator=to_camel`
+   - **Consultar REGRA SUPREMA 003** no DOSSIE_REGRAS_DE_CRIACAO
+
+5. **Interceptor no frontend** (se necessário):
+   - Converter snake_case → camelCase automaticamente
+   - Apenas se backend não puder usar Pydantic com alias
+
+---
+
+## 🎨 PROTOCOLO DE SUBSTITUIÇÃO DE CORES
+
+Ao gerar código a partir dos HTMLs de referência:
+
+### Passo 1: Identificar Tokens
+
+Procurar por variáveis no formato `{{color_name}}` nos HTMLs de referência.
+
+### Passo 2: Ler Valores do BRIEF
+
+Abrir `BRIEF_PRODUTO.md` → Seção "Identidade Visual" → "Paleta de Cores"
+
+### Passo 3: Substituição Mecânica (Find & Replace)
+
+Realizar substituição de string EXATA:
+
+```yaml
+Exemplo:
+  {{primary_color}} → "#6366F1"
+  {{secondary_color}} → "#8B5CF6"
+  {{surface_color}} → "#FFFFFF"
+  {{text_primary}} → "#111827"
+  {{background_color}} → "#F9FAFB"
+```
+
+### Passo 4: Manter Resto Inalterado
+
+**⚠️ PROIBIDO:**
+
+- Mudar estrutura DOM
+- Alterar classes CSS
+- Reorganizar elementos
+- "Melhorar" o design
+
+**✅ PERMITIDO:**
+
+- Substituir tokens de cores
+- Substituir `{{APP_NAME}}`
+- Substituir fontes `{{font_primary}}`, `{{font_heading}}`
+
+---
+
+## 🎨 REGRA DE FIDELIDADE VISUAL
+
+### Páginas Institucionais (LITERAL):
+
+**Aplica-se a:**
+
+- Login
+- Register
+- Forgot Password
+- Reset Password
+
+**Regras:**
+
+- Copiar HTML EXATAMENTE como está nos arquivos de referência
+- Substituir APENAS: `{{APP_NAME}}`, `{{primary_color}}`, `{{secondary_color}}`, etc.
+- **PROIBIDO** alterar estrutura, classes, organização
+
+### Páginas de Produto (INSPIRAÇÃO):
+
+**Aplica-se a:**
+
+- Dashboard
+- CRUD de domínios
+- Features específicas do produto
+
+**Regras:**
+
+- Usar referência como guia visual (conceito)
+- Adaptar estrutura conforme necessidade do domínio
+- Manter identidade visual (cores, tipografia, espaçamento)
+
+---
+
 ## Stack Institucional Fixa (NÃO NEGOCIÁVEL)
 
 - **Arquitetura:** Frontend e Backend **SEPARADOS**

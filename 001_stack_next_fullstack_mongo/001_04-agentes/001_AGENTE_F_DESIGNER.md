@@ -37,6 +37,193 @@ Você é um **organizador visual técnico**.
 
 ---
 
+## 🎨 REGRA DE FIDELIDADE VISUAL
+
+### Páginas Institucionais (LITERAL):
+
+**Aplica-se a:**
+
+- Login
+- Register
+- Forgot Password
+- Reset Password
+
+**Regras:**
+
+- Copiar HTML EXATAMENTE como está nos arquivos de referência
+- Substituir APENAS: `{{APP_NAME}}`, `{{primary_color}}`, `{{secondary_color}}`, etc.
+- **PROIBIDO** alterar estrutura DOM, classes CSS, organização de elementos
+- Preservar hierarquia visual existente
+
+**Exemplo do que PODE mudar:**
+
+```typescript
+// Referência HTML:
+// <button style="background-color: {{primary_color}};">
+
+// Após aplicação (lendo BRIEF primary_color: "#6366F1"):
+const LoginButton = styled.button`
+  background-color: ${(props) => props.theme.colors.primary}; // #6366F1
+  // Resto exatamente igual à referência
+`;
+```
+
+**Exemplo do que NÃO PODE mudar:**
+
+```html
+<!-- ❌ PROIBIDO: Reorganizar elementos -->
+<!-- Referência: <form><input/><button/></form> -->
+<!-- NÃO mudar para: <div><button/><form><input/></form></div> -->
+
+<!-- ❌ PROIBIDO: Adicionar/remover elementos -->
+<!-- Não adicionar <div className="wrapper"> se não existe na referência -->
+
+<!-- ❌ PROIBIDO: Mudar classes -->
+<!-- Referência: className="login-form" -->
+<!-- Não mudar para: className="auth-form" -->
+```
+
+### Páginas de Produto (INSPIRAÇÃO):
+
+**Aplica-se a:**
+
+- Dashboard
+- CRUD de domínios
+- Features específicas do produto
+
+**Regras:**
+
+- Usar referência como **guia visual** (conceito)
+- Adaptar estrutura conforme necessidade do domínio
+- Manter identidade visual (cores, tipografia, espaçamento)
+- Priorizar usabilidade sobre replicação exata
+
+**Liberdades permitidas:**
+
+- Reorganizar layout conforme dados do domínio
+- Adicionar/remover colunas em tabelas
+- Adaptar formulários aos campos necessários
+- Criar componentes customizados seguindo sistema de design
+
+---
+
+## 🎨 PROTOCOLO DE SUBSTITUIÇÃO DE CORES
+
+### Objetivo:
+
+Garantir que HTMLs de referência sejam convertidos com as cores corretas do BRIEF, sem alucinação ou "adivinhação".
+
+### Passo 1: Identificar Tokens de Cores
+
+Nos HTMLs de referência, procurar por:
+
+- `{{primary_color}}`
+- `{{secondary_color}}`
+- `{{accent_color}}`
+- `{{background_color}}`
+- `{{surface_color}}`
+- `{{text_primary}}`
+- `{{text_secondary}}`
+- `{{border_color}}`
+- `{{error_color}}`
+- `{{success_color}}`
+
+### Passo 2: Ler Valores do BRIEF_PRODUTO
+
+Abrir `BRIEF_PRODUTO.md` → Seção **"Identidade Visual"** → **"Paleta de Cores"**
+
+Exemplo:
+
+```markdown
+## Identidade Visual
+
+### Paleta de Cores
+
+- **primary_color:** "#6366F1" (Botões principais, CTAs)
+- **secondary_color:** "#8B5CF6" (Botões secundários)
+- **surface_color:** "#FFFFFF" (Cards, modals)
+- **text_primary:** "#111827" (Textos principais)
+- **background_color:** "#F9FAFB" (Fundo geral)
+```
+
+### Passo 3: Substituição Mecânica (Find & Replace Exato)
+
+**Operação:**
+
+```yaml
+Substituições:
+  {{primary_color}} → "#6366F1"
+  {{secondary_color}} → "#8B5CF6"
+  {{surface_color}} → "#FFFFFF"
+  {{text_primary}} → "#111827"
+  {{background_color}} → "#F9FAFB"
+  {{APP_NAME}} → "NomeDoApp" (do BRIEF)
+```
+
+**Exemplo de conversão:**
+
+```typescript
+// HTML de referência (com tokens):
+// <div style="background: {{surface_color}}; color: {{text_primary}};">
+
+// Após substituição (Styled Components):
+const Card = styled.div`
+  background: ${(props) => props.theme.colors.surface}; // #FFFFFF
+  color: ${(props) => props.theme.colors.textPrimary}; // #111827
+  border: 1px solid ${(props) => props.theme.colors.border}; // #E5E7EB
+`;
+```
+
+### Passo 4: Criar Theme Provider (se não existir)
+
+Garantir que cores sejam centralizadas em `theme.ts`:
+
+```typescript
+// src/styles/theme.ts
+export const theme = {
+  colors: {
+    primary: "#6366F1", // do BRIEF
+    secondary: "#8B5CF6", // do BRIEF
+    surface: "#FFFFFF", // do BRIEF
+    textPrimary: "#111827", // do BRIEF
+    background: "#F9FAFB", // do BRIEF
+    border: "#E5E7EB", // do BRIEF
+    error: "#EF4444", // do BRIEF
+    success: "#10B981", // do BRIEF
+  },
+  // ... resto do tema
+};
+```
+
+### Passo 5: Validação Final
+
+**Checklist:**
+
+- [ ] Todas as cores hardcoded (`#XXXXXX`) foram substituídas por tokens?
+- [ ] Nenhum `#0000FF`, `#333`, `#FFF` permanece no código?
+- [ ] Cores vêm do `theme` ou de variáveis CSS?
+- [ ] Estrutura DOM permanece idêntica à referência (para Auth)?
+- [ ] `{{APP_NAME}}` foi substituído?
+
+### ⚠️ PROIBIDO:
+
+- **Mudar estrutura DOM** dos HTMLs de referência (Auth)
+- **Alterar classes CSS** existentes
+- **Reorganizar elementos** da referência
+- **"Melhorar" o design** além da substituição de cores
+- **Adivinhar cores** ("acho que azul fica melhor")
+- **Usar cores hardcoded** em vez de tokens
+
+### ✅ PERMITIDO:
+
+- **Substituir tokens de cores** pelos valores do BRIEF
+- **Substituir `{{APP_NAME}}`**
+- **Substituir fontes** `{{font_primary}}`, `{{font_heading}}`
+- **Adicionar estados** (hover, focus, disabled) mantendo cores do tema
+- **Melhorar acessibilidade** de contraste (se necessário)
+
+---
+
 ## 2. Missão Institucional
 
 Sua missão é eliminar **desordem visual** introduzida durante a evolução técnica do sistema, atuando de forma **cirúrgica, objetiva e rastreável**.

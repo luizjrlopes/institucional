@@ -1,0 +1,89 @@
+/**
+ * TOKENS DE DESIGN - Sistema de Cores Padronizado
+ * Stack: 001_next_fullstack_mongo
+ * 
+ * Este arquivo define os tokens de cores que serão substituídos
+ * pelos valores reais do BRIEF_PRODUTO.md durante a criação do projeto.
+ * 
+ * IMPORTANTE:
+ * - NÃO editar manualmente os valores HEX aqui
+ * - Os tokens {{variavel}} serão substituídos automaticamente
+ * - Use este arquivo como referência nos HTMLs de auth
+ */
+
+:root {
+  /* Cores Principais */
+  --primary-color: {{primary_color}};
+  --secondary-color: {{secondary_color}};
+  --accent-color: {{accent_color}};
+  
+  /* Cores de Superfície */
+  --background-color: {{background_color}};
+  --surface-color: {{surface_color}};
+  
+  /* Cores de Texto */
+  --text-primary: {{text_primary}};
+  --text-secondary: {{text_secondary}};
+  
+  /* Cores Estruturais */
+  --border-color: {{border_color}};
+  
+  /* Cores de Estado */
+  --error-color: {{error_color}};
+  --success-color: {{success_color}};
+  --warning-color: {{warning_color}};
+  --info-color: {{info_color}};
+  
+  /* Tipografia */
+  --font-primary: {{font_primary}};
+  --font-heading: {{font_heading}};
+}
+
+/**
+ * EXEMPLO DE USO EM HTML:
+ * 
+ * <div style="background-color: var(--surface-color); color: var(--text-primary);">
+ *   Conteúdo
+ * </div>
+ * 
+ * OU use diretamente com tokens (será substituído):
+ * 
+ * <div style="background-color: {{surface_color}}; color: {{text_primary}};">
+ *   Conteúdo
+ * </div>
+ */
+
+/**
+ * EXEMPLO DE USO COM STYLED COMPONENTS:
+ * 
+ * const Card = styled.div`
+ *   background-color: ${props => props.theme.colors.surface};
+ *   color: ${props => props.theme.colors.textPrimary};
+ *   border: 1px solid ${props => props.theme.colors.border};
+ * `;
+ */
+
+/**
+ * MAPEAMENTO PARA THEME.TS:
+ * 
+ * export const theme = {
+ *   colors: {
+ *     primary: '{{primary_color}}',        // será substituído por valor do BRIEF
+ *     secondary: '{{secondary_color}}',
+ *     accent: '{{accent_color}}',
+ *     background: '{{background_color}}',
+ *     surface: '{{surface_color}}',
+ *     textPrimary: '{{text_primary}}',
+ *     textSecondary: '{{text_secondary}}',
+ *     border: '{{border_color}}',
+ *     error: '{{error_color}}',
+ *     success: '{{success_color}}',
+ *     warning: '{{warning_color}}',
+ *     info: '{{info_color}}',
+ *   },
+ *   fonts: {
+ *     primary: '{{font_primary}}',
+ *     heading: '{{font_heading}}',
+ *   }
+ * };
+ */
