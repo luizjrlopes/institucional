@@ -190,6 +190,35 @@ grep -r "{{" frontend/src/ backend/app/
 
 ## ⚖️ CRITÉRIO DE APROVAÇÃO
 
+### 🔄 DISJUNTOR DO AUDITOR (Circuit Breaker)
+
+**REGRA DE 3 TENTATIVAS:**
+
+Se você rejeitar o MESMO arquivo ou componente **3 vezes consecutivas**:
+
+1. **PARE IMEDIATAMENTE** - Não peça mais correção ao Agente Criador
+2. **Gere relatório de erro detalhado** para o Humano (abaixo)
+3. **Peça intervenção manual** - Não continue o loop
+
+**Motivo:**
+
+- Evita loop infinito de alucinação
+- Economiza tokens
+- Previne degradação cognitiva da IA
+
+**Exemplo de Detecção:**
+
+```markdown
+HISTÓRICO DE REJEIÇÕES:
+1ª tentativa: backend/app/schemas/user.py - Erro: Schema sem alias_generator
+2ª tentativa: backend/app/schemas/user.py - Erro: CamelCaseModel não herdado
+3ª tentativa: backend/app/schemas/user.py - Erro: REGRA SUPREMA 003 violada
+
+🛑 DISJUNTOR ATIVADO - Intervenção humana necessária
+```
+
+---
+
 **🚨 BLOQUEADO:**
 
 - Viola REGRA SUPREMA 003 (Pydantic sem alias_generator)
@@ -209,10 +238,42 @@ grep -r "{{" frontend/src/ backend/app/
 - REGRA SUPREMA 003 respeitada
 - API retorna camelCase
 - Builds passam
+- Nenhum loop de rejeição detectado
 
 ---
 
 ## 📊 RELATÓRIO
+
+**Se DISJUNTOR ATIVADO (3 rejeições):**
+
+```markdown
+## 🛑 DISJUNTOR DO AUDITOR ATIVADO
+
+**Data:** [DD/MM/AAAA HH:MM]
+**Stack:** 003 (Next.js + Python FastAPI)
+**Auditor:** AGENTE_AUDITOR
+
+### LOOP DETECTADO - INTERVENÇÃO HUMANA NECESSÁRIA
+
+**Arquivo Problemático:** [caminho/do/arquivo]
+
+**Histórico de Rejeições:**
+1ª tentativa: [Erro detectado]
+2ª tentativa: [Erro persistente]
+3ª tentativa: [Erro ainda presente]
+
+**Diagnóstico:**
+O Agente Criador está em degradação cognitiva e não consegue corrigir o erro sozinho.
+
+**Ações Necessárias:**
+
+1. Revisar manualmente o arquivo acima
+2. Verificar se Pydantic schemas herdam CamelCaseModel corretamente
+3. Verificar geração de contratos TypeScript no Frontend
+4. Considerar se o prompt do Agente Criador precisa de ajuste
+
+**Status:** PAUSADO - Aguardando humano
+```
 
 **Se reprovar:**
 

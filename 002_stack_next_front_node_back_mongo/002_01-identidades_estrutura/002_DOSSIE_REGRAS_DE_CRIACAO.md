@@ -136,6 +136,74 @@ Quando alterar um endpoint no Backend:
 [ ] 6. Atualizar PASSAPORTE_DE_CRIACAO.md com a mudança
 ```
 
+#### 🚨 PROTOCOLO OBRIGATÓRIO DE GERAÇÃO DE CONTRATOS
+
+**CRÍTICO:** Antes de finalizar QUALQUER tarefa de Backend, o agente DEVE:
+
+1. **Gerar arquivo de contratos de tipo**
+
+   - Criar/atualizar `shared/types/api-contracts.ts` com TODAS as interfaces
+   - Incluir tipos de Request e Response de todos os endpoints criados/modificados
+
+2. **Instruir o usuário explicitamente:**
+
+```
+⚠️ SINCRONIZAÇÃO DE TIPOS NECESSÁRIA
+
+Copie o seguinte conteúdo para:
+frontend/src/types/api-contracts.ts
+
+[CÓDIGO GERADO AQUI]
+
+Este passo é OBRIGATÓRIO antes de continuar com o Frontend.
+```
+
+3. **Aguardar confirmação do usuário** antes de prosseguir
+
+**Motivo:** Garante sincronização manual (mais segura que automática via IA)
+
+**Exemplo de Contrato Gerado:**
+
+```typescript
+// shared/types/api-contracts.ts
+
+// ========== USER ENDPOINTS ==========
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  createdAt: string;
+}
+
+export interface CreateUserRequest {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface CreateUserResponse {
+  user: User;
+  token: string;
+}
+
+export interface GetUserResponse {
+  user: User;
+}
+
+// ========== AUTH ENDPOINTS ==========
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  token: string;
+  user: User;
+}
+```
+
 #### Checklist de Validação
 
 Antes de commit/push:
@@ -143,6 +211,8 @@ Antes de commit/push:
 - [ ] Todo endpoint do Backend tem tipo em shared/types/
 - [ ] apiClient usa tipos de shared/types/
 - [ ] Nenhum tipo duplicado entre frontend/backend
+- [ ] Arquivo api-contracts.ts foi gerado e copiado para frontend
+- [ ] Usuário confirmou sincronização de tipos
 - [ ] `tsc --noEmit` passa sem erros
 - [ ] Nenhum `any` em respostas de API
 

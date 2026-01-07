@@ -1,0 +1,36 @@
+{
+  "name": "003-nextjs-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.2.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "axios": "1.7.2",
+    "zod": "3.23.8",
+    "styled-components": "6.1.11"
+  },
+  "devDependencies": {
+    "@types/node": "20.12.12",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "typescript": "5.4.5",
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.2.3"
+  },
+  "_metadata": {
+    "versao_travada_em": "2026-01-07",
+    "motivo": "Garante compatibilidade com snippets testados",
+    "REGRA_CRITICA": "O AGENTE_CRIADOR DEVE usar estas versões EXATAS. Proibido 'latest' ou '^' a menos que autorizado explicitamente pelo usuário.",
+    "stack": "003_next_front_python_back_mongo",
+    "parte": "frontend",
+    "node_version": ">=20.12.0",
+    "next_version_notes": "v14.2.3 - Pages Router estável"
+  }
+}

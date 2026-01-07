@@ -249,7 +249,93 @@ grep -r "APP_NAME" src/ | grep -v "process.env"
 
 ---
 
+### 8. 🔐 Vazamento de Secrets ("use client" vs Server)
+
+**⚠️ CHECK CRÍTICO ESPECÍFICO DA STACK 001**
+
+**Buscar por:**
+
+```bash
+# Verificar se Client Components importam src/server/ ou src/models/
+grep -r "'use client'" src/app src/components src/features | cut -d: -f1 | while read file; do
+  grep -l "from.*src/server" "$file" && echo "❌ ERRO CRÍTICO: $file importa src/server/"
+  grep -l "from.*@/server" "$file" && echo "❌ ERRO CRÍTICO: $file importa @/server/"
+  grep -l "from.*Models" "$file" && echo "❌ ERRO CRÍTICO: $file importa Models"
+done
+
+# Verificar se Client Components acessam DB diretamente
+grep -r "'use client'" -A 50 src/ | grep -i "mongoose.connect\|connectDB"
+```
+
+**Violações críticas:**
+
+- [ ] Nenhum arquivo com `'use client'` importa de `src/server/`?
+- [ ] Nenhum arquivo com `'use client'` importa de `src/models/`?
+- [ ] Nenhum Client Component acessa variáveis de ambiente secretas?
+- [ ] Nenhum Client Component faz conexão com DB?
+
+**Exemplo de violação:**
+
+```typescript
+// ❌ ERRO CRÍTICO
+"use client";
+
+import { UserModel } from "@/server/models/User"; // 🚨 VAZAMENTO!
+import { connectDB } from "@/server/db"; // 🚨 VAZAMENTO!
+
+export function UserProfile() {
+  // Código aqui EXPÕE conexão com DB no bundle do cliente
+}
+```
+
+**Correção esperada:**
+
+```typescript
+// ✅ CORRETO
+"use client";
+
+import { User } from "@/types/user.types"; // Apenas tipos
+// Dados vêm de fetch('/api/users') ou props de Server Component
+
+export function UserProfile({ user }: { user: User }) {
+  // Dados já foram buscados no servidor
+}
+```
+
+**Se encontrar 1 violação:** 🚨 **BLOQUEADO** - VULNERABILIDADE DE SEGURANÇA CRÍTICA
+
+---
+
 ## ⚖️ CRITÉRIO DE APROVAÇÃO RIGOROSO
+
+### 🔄 DISJUNTOR DO AUDITOR (Circuit Breaker)
+
+**REGRA DE 3 TENTATIVAS:**
+
+Se você rejeitar o MESMO arquivo ou componente **3 vezes consecutivas**:
+
+1. **PARE IMEDIATAMENTE** - Não peça mais correção ao Agente Criador
+2. **Gere relatório de erro detalhado** para o Humano (abaixo)
+3. **Peça intervenção manual** - Não continue o loop
+
+**Motivo:**
+
+- Evita loop infinito de alucinação
+- Economiza tokens
+- Previne degradação cognitiva da IA
+
+**Exemplo de Detecção:**
+
+```markdown
+HISTÓRICO DE REJEIÇÕES:
+1ª tentativa: src/app/login/page.tsx - Erro: Tailwind detectado
+2ª tentativa: src/app/login/page.tsx - Erro: Tailwind ainda presente
+3ª tentativa: src/app/login/page.tsx - Erro: Tailwind ainda presente
+
+🛑 DISJUNTOR ATIVADO - Intervenção humana necessária
+```
+
+---
 
 ### Classificação:
 
@@ -262,6 +348,7 @@ grep -r "APP_NAME" src/ | grep -v "process.env"
 - Mocks após migração para produção
 - Variáveis `{{VARIAVEL}}` não substituídas
 - Client Component importa Model/DB/Service
+- Vazamento de secrets (Client Component importa src/server/)
 
 **⚠️ APROVADO COM RESSALVAS** (Se encontrar):
 
@@ -278,10 +365,42 @@ grep -r "APP_NAME" src/ | grep -v "process.env"
 - Estrutura conforme MAPA
 - Build sem erros
 - Todos os comandos de auditoria passaram
+- Nenhum vazamento de secrets detectado
 
 ---
 
 ## 📊 RELATÓRIO OBRIGATÓRIO
+
+**Se DISJUNTOR ATIVADO (3 rejeições):**
+
+```markdown
+## 🛑 DISJUNTOR DO AUDITOR ATIVADO
+
+**Data:** [DD/MM/AAAA HH:MM]
+**Stack:** 001 (Next.js Fullstack)
+**Auditor:** AGENTE_AUDITOR
+
+### LOOP DETECTADO - INTERVENÇÃO HUMANA NECESSÁRIA
+
+**Arquivo Problemático:** [caminho/do/arquivo]
+
+**Histórico de Rejeições:**
+1ª tentativa: [Erro detectado]
+2ª tentativa: [Erro persistente]
+3ª tentativa: [Erro ainda presente]
+
+**Diagnóstico:**
+O Agente Criador está em degradação cognitiva e não consegue corrigir o erro sozinho.
+
+**Ações Necessárias:**
+
+1. Revisar manualmente o arquivo acima
+2. Verificar se os snippets de referência estão corretos
+3. Considerar se o prompt do Agente Criador precisa de ajuste
+4. Corrigir manualmente ou fornecer exemplo mais específico
+
+**Status:** PAUSADO - Aguardando humano
+```
 
 **Se reprovar (BLOQUEADO):**
 

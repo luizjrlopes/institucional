@@ -1,0 +1,38 @@
+# DEPENDÊNCIAS TRAVADAS - Stack 003 Backend Python
+# Versões testadas e compatíveis com os snippets
+
+# Framework Web
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+
+# Banco de Dados
+motor==3.4.0  # MongoDB async driver
+pymongo==4.7.2  # MongoDB sync driver (usado pelo motor)
+
+# Validação e Serialização
+pydantic==2.7.1
+pydantic-settings==2.2.1
+
+# Autenticação e Segurança
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.9
+
+# Utilitários
+python-dotenv==1.0.1
+
+# Desenvolvimento
+pytest==8.2.1
+pytest-asyncio==0.23.6
+httpx==0.27.0  # Para testes de API
+
+# METADATA
+# versao_travada_em: 2026-01-07
+# motivo: Garante compatibilidade com snippets testados
+# REGRA_CRITICA: O AGENTE_CRIADOR DEVE usar estas versões EXATAS.
+#                 Proibido usar pip install <pacote> sem versão fixa.
+# stack: 003_next_front_python_back_mongo
+# parte: backend
+# python_version: >=3.11
+# fastapi_version_notes: v0.111.0 - API estável com Pydantic v2
+# pydantic_version_notes: v2.7.1 - Sintaxe atual (alias_generator, ConfigDict)

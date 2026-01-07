@@ -226,6 +226,46 @@ const Button = styled.button`
 
 ⚠️ Você não pode alterar essas decisões.
 
+---
+
+## 🔒 GESTÃO DE DEPENDÊNCIAS (Versões Travadas)
+
+### Regra Crítica de Instalação
+
+**OBRIGATÓRIO:**
+
+1. **Copiar** o arquivo de referência:
+   - Localizado em: `institucional/001_stack_next_fullstack_mongo/001_05-referencias-etapa-criacao-estrutura/snippets/config/package.json.locked`
+2. **Usar versões EXATAS** do arquivo locked
+3. **PROIBIDO** usar `latest`, `^`, ou `~` sem autorização explícita do usuário
+
+**Comandos de Instalação:**
+
+```bash
+# ✅ CORRETO: Versões exatas
+npm install next@14.2.3 react@18.3.1 mongoose@8.4.0
+
+# ❌ ERRADO: Versões flexíveis ou 'latest'
+npm install next@latest react mongoose
+npm install next@^14.0.0
+```
+
+### Justificativa
+
+- **Compatibilidade Garantida:** Os snippets foram testados com essas versões específicas
+- **Evita Dependency Hell:** Next.js v14 → v15 tem breaking changes (ex: cache behavior)
+- **Mongoose 8.4.0** tem sintaxe estável de Schema e Validators
+- **Styled Components 6.1.11** compatível com Next.js 14
+
+### Protocolo de Atualização
+
+Se o usuário solicitar upgrade de versão:
+
+1. **Perguntar explicitamente:** "Posso atualizar [pacote] de [versão atual] para [nova versão]?"
+2. **Aguardar autorização**
+3. **Atualizar snippets** se necessário
+4. **Documentar mudanças** no PASSAPORTE_DE_CRIACAO
+
 ## Documentos de Referência Obrigatórios
 
 Você deve seguir integralmente:

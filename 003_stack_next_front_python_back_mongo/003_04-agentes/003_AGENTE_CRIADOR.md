@@ -231,6 +231,53 @@ Exemplo:
 
 ---
 
+## 🔒 GESTÃO DE DEPENDÊNCIAS (Versões Travadas)
+
+### Regra Crítica de Instalação
+
+**OBRIGATÓRIO:**
+
+1. **Frontend:** Copiar `institucional/003_stack_next_front_python_back_mongo/003_05-referencias-etapa-criacao-estrutura/snippets-frontend/config/package.json.locked`
+2. **Backend:** Copiar `institucional/003_stack_next_front_python_back_mongo/003_05-referencias-etapa-criacao-estrutura/snippets-backend/config/requirements.txt.locked`
+3. **Usar versões EXATAS** dos arquivos locked
+4. **PROIBIDO** usar versões flexíveis sem autorização explícita
+
+**Comandos Corretos:**
+
+```bash
+# Frontend (Next.js)
+cd frontend
+npm install next@14.2.3 react@18.3.1 axios@1.7.2
+
+# Backend (Python)
+cd backend
+pip install fastapi==0.111.0 uvicorn==0.29.0 motor==3.4.0 pydantic==2.7.1
+
+# OU (preferível)
+pip install -r requirements.txt  # Usando arquivo locked
+
+# ❌ ERRADO
+pip install fastapi uvicorn motor  # Sem versões fixas
+```
+
+### Justificativa
+
+- **FastAPI 0.111.0:** API estável com Pydantic v2
+- **Pydantic 2.7.1:** Sintaxe atual (alias_generator, ConfigDict)
+- **Motor 3.4.0:** Async driver compatível com FastAPI
+- **Uvicorn 0.29.0:** ASGI server testado
+
+### Protocolo de Atualização
+
+Se usuário solicitar upgrade:
+
+1. Perguntar: "Posso atualizar [pacote] de [v1] para [v2]?"
+2. Aguardar autorização
+3. Atualizar requirements.txt.locked se necessário
+4. Documentar no PASSAPORTE_DE_CRIACAO
+
+---
+
 ## Ordem de Execução (OBRIGATÓRIA)
 
 ### ETAPA 0 — Preparação Institucional

@@ -58,7 +58,7 @@ Exemplo para Stack 002:
   { { primary_color } }: [ler do BRIEF_PRODUTO → Identidade Visual]
 ```
 
-3. **Substituir o valor ANTES de gerar output**
+1. **Substituir o valor ANTES de gerar output**
 
 **PROIBIDO** escrever literalmente:
 
@@ -78,7 +78,7 @@ Exemplo para Stack 002:
 
 **Você está na Stack 002 (Next.js Frontend + Node.js Backend).**
 
-### ❌ PROIBIDO:
+### ❌ PROIBIDO
 
 1. **Criar Server Actions no Next.js**
 
@@ -104,7 +104,7 @@ Exemplo para Stack 002:
    - Viola REGRA SUPREMA 002
    - Sempre usar `shared/types/`
 
-### ✅ OBRIGATÓRIO:
+### ✅ OBRIGATÓRIO
 
 1. **Backend em `/backend` (Express):**
 
@@ -175,7 +175,7 @@ Exemplo:
 
 ## 🎨 REGRA DE FIDELIDADE VISUAL
 
-### Páginas Institucionais (LITERAL):
+### Páginas Institucionais (LITERAL)
 
 **Aplica-se a:**
 
@@ -190,7 +190,7 @@ Exemplo:
 - Substituir APENAS: `{{APP_NAME}}`, `{{primary_color}}`, `{{secondary_color}}`, etc.
 - **PROIBIDO** alterar estrutura, classes, organização
 
-### Páginas de Produto (INSPIRAÇÃO):
+### Páginas de Produto (INSPIRAÇÃO)
 
 **Aplica-se a:**
 
@@ -217,6 +217,49 @@ Exemplo:
 - **Estilos:** Styled Components (Tailwind PROIBIDO)
 
 ⚠️ Você não pode alterar essas decisões.
+
+---
+
+## 🔒 GESTÃO DE DEPENDÊNCIAS (Versões Travadas)
+
+### Regra Crítica de Instalação
+
+**OBRIGATÓRIO:**
+
+1. **Frontend:** Copiar `institucional/002_stack_next_front_node_back_mongo/002_05-referencias-etapa-criacao-estrutura/snippets-frontend/config/package.json.locked`
+2. **Backend:** Copiar `institucional/002_stack_next_front_node_back_mongo/002_05-referencias-etapa-criacao-estrutura/snippets-backend/config/package.json.locked`
+3. **Usar versões EXATAS** dos arquivos locked
+4. **PROIBIDO** usar `latest`, `^`, ou `~` sem autorização explícita
+
+**Comandos Corretos:**
+
+```bash
+# Frontend
+cd frontend
+npm install next@14.2.3 react@18.3.1 axios@1.7.2 zod@3.23.8
+
+# Backend
+cd backend
+npm install express@4.19.2 mongoose@8.4.0 jsonwebtoken@9.0.2
+
+# ❌ ERRADO
+npm install next@latest express mongoose
+```
+
+### Justificativa
+
+- **Next.js 14.2.3:** Pages Router estável, compatível com snippets
+- **Express 4.19.2:** API estável
+- **Mongoose 8.4.0:** Sintaxe atual de Schema/Validators
+- **Axios 1.7.2:** Interceptors testados com JWT
+
+### Protocolo de Atualização
+
+Se usuário solicitar upgrade:
+
+1. Perguntar: "Posso atualizar [pacote] de [v1] para [v2]?"
+2. Aguardar autorização
+3. Documentar no PASSAPORTE_DE_CRIACAO
 
 ---
 
@@ -258,7 +301,7 @@ frontend/
 
 **Frontend deve:**
 
-- Configurar `NEXT_PUBLIC_API_URL` (ex: http://localhost:4000)
+- Configurar `NEXT_PUBLIC_API_URL` (ex: <http://localhost:4000>0>)
 - Implementar `apiClient` com interceptors
 - Criar componentes shared: Loading, Modal, Header, Footer
 - Criar Context de autenticação (vazio inicialmente)
@@ -356,7 +399,7 @@ Criar no **BACKEND:**
 
 **Seed:**
 
-- Criar usuário root: admin@exemplo.com / admin
+- Criar usuário root: <admin@exemplo.com>m> / admin
 
 **Nota MOC:** Durante Fase MOC, não conectar MongoDB ativamente. Repositories podem retornar MOCs.
 
@@ -428,7 +471,7 @@ Criar no **FRONTEND:**
 4. Acessar home protegida
 5. Fazer logout
 6. Tentar acessar home (redirecionar para login)
-7. Login com root (admin@exemplo.com / admin)
+7. Login com root (<admin@exemplo.com>m> / admin)
 
 **Builds:**
 

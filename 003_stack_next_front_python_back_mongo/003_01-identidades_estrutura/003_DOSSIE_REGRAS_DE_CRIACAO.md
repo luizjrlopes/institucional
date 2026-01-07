@@ -293,6 +293,77 @@ Quando adicionar novo campo:
 [ ] 6. Atualizar PASSAPORTE_DE_CRIACAO.md
 ```
 
+#### 🚨 PROTOCOLO OBRIGATÓRIO DE GERAÇÃO DE CONTRATOS
+
+**CRÍTICO:** Antes de finalizar QUALQUER tarefa de Backend Python, o agente DEVE:
+
+1. **Gerar arquivo de contratos TypeScript**
+
+   - Criar `shared/types/api-contracts.ts` com interfaces TypeScript correspondentes aos Pydantic schemas
+   - **IMPORTANTE:** Usar camelCase (já que Pydantic usa alias_generator=to_camel)
+
+2. **Instruir o usuário explicitamente:**
+
+```
+⚠️ SINCRONIZAÇÃO DE TIPOS NECESSÁRIA
+
+Copie o seguinte conteúdo para:
+frontend/src/types/api-contracts.ts
+
+[CÓDIGO GERADO AQUI]
+
+Este passo é OBRIGATÓRIO antes de continuar com o Frontend.
+```
+
+3. **Aguardar confirmação do usuário** antes de prosseguir
+
+**Motivo:** Garante sincronização manual (mais segura que automática via IA)
+
+**Exemplo de Contrato Gerado:**
+
+```typescript
+// shared/types/api-contracts.ts
+// Gerado a partir dos schemas Pydantic (app/schemas/)
+
+// ========== USER SCHEMAS ==========
+
+export interface User {
+  userId: string; // Backend: user_id (snake_case)
+  firstName: string; // Backend: first_name
+  lastName: string; // Backend: last_name
+  email: string;
+  createdAt: string; // Backend: created_at
+  isActive: boolean; // Backend: is_active
+}
+
+export interface CreateUserRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+export interface CreateUserResponse {
+  user: User;
+  token: string;
+}
+
+// ========== AUTH SCHEMAS ==========
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  accessToken: string; // Backend: access_token
+  tokenType: string; // Backend: token_type
+  user: User;
+}
+```
+
+**Nota Crítica:** Os tipos TypeScript devem usar camelCase porque o Pydantic já faz a conversão automática com `alias_generator=to_camel`.
+
 #### Auditoria Automática
 
 ```bash

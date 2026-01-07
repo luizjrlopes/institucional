@@ -1,0 +1,42 @@
+{
+  "name": "002-nodejs-backend",
+  "version": "1.0.0",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "lint": "eslint src --ext .ts"
+  },
+  "dependencies": {
+    "express": "4.19.2",
+    "mongoose": "8.4.0",
+    "bcryptjs": "2.4.3",
+    "jsonwebtoken": "9.0.2",
+    "zod": "3.23.8",
+    "cors": "2.8.5",
+    "dotenv": "16.4.5"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.21",
+    "@types/node": "20.12.12",
+    "@types/bcryptjs": "2.4.6",
+    "@types/jsonwebtoken": "9.0.6",
+    "@types/cors": "2.8.17",
+    "typescript": "5.4.5",
+    "tsx": "4.11.0",
+    "eslint": "8.57.0",
+    "@typescript-eslint/parser": "7.10.0",
+    "@typescript-eslint/eslint-plugin": "7.10.0"
+  },
+  "_metadata": {
+    "versao_travada_em": "2026-01-07",
+    "motivo": "Garante compatibilidade com snippets testados",
+    "REGRA_CRITICA": "O AGENTE_CRIADOR DEVE usar estas versões EXATAS. Proibido 'latest' ou '^' a menos que autorizado explicitamente pelo usuário.",
+    "stack": "002_next_front_node_back_mongo",
+    "parte": "backend",
+    "node_version": ">=20.12.0",
+    "express_version_notes": "v4.19.2 - API estável",
+    "mongoose_version_notes": "v8.4.0 - Sintaxe atual de Schema e Validators"
+  }
+}
