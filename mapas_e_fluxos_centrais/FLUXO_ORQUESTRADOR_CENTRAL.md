@@ -2,7 +2,39 @@
 
 Fluxo Central de Orquestração — Sistema Multi-Stack
 
-**Versão:** v2.0 — Fluxo Meta Agnóstico de Stack
+**Versão:** v2.1 — Fluxo Meta Agnóstico de Stack + Protocolo Anti-Alucinação
+
+---
+
+## 0. Integração com ORQUESTRADOR_MESTRE
+
+> **ATENÇÃO:** Este fluxo agora opera em conjunto com o [ORQUESTRADOR_MESTRE.md](../ORQUESTRADOR_MESTRE.md).
+
+### Hierarquia de Documentos
+
+```
+ORQUESTRADOR_MESTRE.md          ← Protocolo operacional (Boot, Check-Wait-Act)
+    ↓
+FLUXO_ORQUESTRADOR_CENTRAL.md   ← Pipeline de fases (D0→D1→D2→D3→D4)
+    ↓
+MAPA_STACK_*.md                 ← Estrutura específica da stack
+    ↓
+DOSSIE_REGRAS_DE_CRIACAO.md     ← Regras técnicas detalhadas
+    ↓
+PLAYBOOK_*.md                   ← Instruções de execução por papel
+```
+
+### Regra de Precedência
+
+```
+ORQUESTRADOR_MESTRE > REGRAS SUPREMAS > FLUXO_ORQUESTRADOR > DOSSIE > PLAYBOOK > PASSAPORTE
+```
+
+### Quando Usar Cada Documento
+
+- **ORQUESTRADOR_MESTRE:** Sempre ler PRIMEIRO. Define boot sequence e protocolo Check-Wait-Act.
+- **FLUXO_ORQUESTRADOR_CENTRAL:** Define a sequência de fases (D0→D1→D2...) e transições entre etapas.
+- **Outros documentos:** Carregados conforme instruções do Orquestrador Mestre.
 
 ---
 
@@ -17,6 +49,7 @@ Ele existe para:
 - selecionar stack baseado no BRIEF_PRODUTO
 - garantir ordem correta de execução das fases
 - carregar dinamicamente os documentos da stack selecionada
+- **garantir contexto cirúrgico sem contaminação entre stacks**
 
 **Princípio de Independência de Stack:**
 
@@ -32,12 +65,12 @@ Em caso de conflito, **os Playbooks da stack sempre prevalecem**.
 
 Antes de qualquer execução:
 
-### Localização do BRIEF_PRODUTO
+### 2.1 Localização do BRIEF_PRODUTO
 
 O arquivo **BRIEF_PRODUTO.md** deve ser criado obrigatoriamente em:
 
 ```text
-/institucional_v2/area_produto/01-identidades/BRIEF_PRODUTO.md
+/./area_produto/01-identidades/BRIEF_PRODUTO.md
 ```
 
 **Estrutura mínima obrigatória:**
@@ -50,11 +83,12 @@ O arquivo **BRIEF_PRODUTO.md** deve ser criado obrigatoriamente em:
 stack_id: 001_next_fullstack_mongo
 ```
 
-### Validações Obrigatórias
+### 2.2 Validações Obrigatórias
 
 - ✅ Deve existir `BRIEF_PRODUTO.md` no caminho especificado
 - ✅ Deve existir campo `stack_id` válido no BRIEF_PRODUTO
-- ✅ O stack_id deve corresponder a uma pasta existente em `/institucional_v2/`
+- ✅ O stack_id deve corresponder a uma pasta existente em `/./`
+- ✅ Nenhum contexto de outra stack deve estar carregado na memória
 
 **Valores válidos para stack_id:**
 
@@ -63,6 +97,25 @@ stack_id: 001_next_fullstack_mongo
 - `003_next_front_python_back_mongo` (Next.js Frontend + Python Backend + MongoDB)
 
 Sem essas validações, o sistema entra em estado **BLOQUEADO**.
+
+### 2.3 Protocolo de Contexto Cirúrgico
+
+**ANTES de carregar qualquer documento da stack selecionada:**
+
+1. **DESCARTAR** todo contexto de stacks anteriores
+2. **VALIDAR** que não há referências cruzadas na memória
+3. **LIMPAR** variáveis de configuração de stack anterior
+4. **CARREGAR** EXCLUSIVAMENTE documentos da nova stack
+
+**Checklist de Limpeza:**
+
+```markdown
+[ ] Contexto de stack anterior descartado
+[ ] Nenhuma variável de outra stack em memória
+[ ] Nenhum import de dossiê/playbook de outra stack
+[ ] PASSAPORTE anterior salvo e fechado (se existir)
+[ ] Pronto para carregar nova stack
+```
 
 ---
 
@@ -80,22 +133,77 @@ Sem essas validações, o sistema entra em estado **BLOQUEADO**.
 
 ### FASE 0 — Inicialização e Seleção de Stack
 
-**Objetivo:** Carregar contexto da stack selecionada
+**Objetivo:** Carregar contexto da stack selecionada de forma cirúrgica
 
 **Entradas:**
 
 - `BRIEF_PRODUTO.md` com `stack_id` definido
+- **ORQUESTRADOR_MESTRE.md** (já deve estar carregado)
 
-**Processo:**
+**Processo (Seguindo Protocolo do ORQUESTRADOR_MESTRE):**
 
-1. Ler `BRIEF_PRODUTO.stack_id` (ex: `001_next_fullstack_mongo`)
-2. **Resolver stack_root_dir:** Consultar [CATALOGO_STACKS.md](CATALOGO_STACKS.md) para obter diretório físico
-   - Exemplo: `001_next_fullstack_mongo` → `001_stack_next_fullstack_mongo/`
-3. Carregar documentos da stack usando `{{STACK_ROOT_DIR}}`:
-   - `{{STACK_ROOT_DIR}}/{{STACK_PREFIX}}_00-mapas_e_fluxos/{{STACK_PREFIX}}_MAPA_STACK_*.md`
-   - `{{STACK_ROOT_DIR}}/{{STACK_PREFIX}}_01-identidades_estrutura/{{STACK_PREFIX}}_DOSSIE_*.md`
-   - `{{STACK_ROOT_DIR}}/{{STACK_PREFIX}}_02-playbooks/{{STACK_PREFIX}}_PLAYBOOK_*.md`
-   - `{{STACK_ROOT_DIR}}/{{STACK_PREFIX}}_04-agentes/{{STACK_PREFIX}}_AGENTE_*.md`
+#### Step 1: Boot Sequence
+
+```markdown
+1. VALIDAR que ORQUESTRADOR_MESTRE.md está carregado
+2. PERGUNTAR ao usuário: "Qual Stack ID você deseja utilizar?"
+3. VALIDAR que o Stack ID é válido (existe no CATALOGO_STACKS)
+4. EXECUTAR Protocolo de Limpeza de Contexto (seção 2.3)
+```
+
+#### Step 2: Context Loading (Contexto Cirúrgico)
+
+```markdown
+1. Ler BRIEF_PRODUTO.stack_id (ex: 001_next_fullstack_mongo)
+2. Resolver stack_root_dir via CATALOGO_STACKS.md
+   - Exemplo: 001_next_fullstack_mongo → 001_stack_next_fullstack_mongo/
+3. Carregar EXCLUSIVAMENTE os seguintes documentos:
+
+   Fase 1 - Documentos Estruturais (Ordem obrigatória):
+   a) CATALOGO_STACKS.md
+   b) MAPA_INSTITUCIONAL_CENTRAL.md
+   c) FLUXO_ORQUESTRADOR_CENTRAL.md (este documento)
+
+   Fase 2 - Documentos da Stack (Ordem obrigatória):
+   a) {{STACK_ROOT_DIR}}/{{STACK_PREFIX}}_00-mapas_e_fluxos/{{STACK_PREFIX}}\_MAPA_STACK__.md
+   b) {{STACK_ROOT_DIR}}/{{STACK_PREFIX}}*01-identidades_estrutura/{{STACK_PREFIX}}\_DOSSIE_REGRAS_DE_CRIACAO.md
+   c) {{STACK_ROOT_DIR}}/{{STACK_PREFIX}}\_01-identidades_estrutura/{{STACK_PREFIX}}\_DOSSIE*__FRONTEND.md
+   d) {{STACK_ROOT_DIR}}/{{STACK_PREFIX}}\_01-identidades_estrutura/{{STACK_PREFIX}}\_DOSSIE_\*\_BACKEND.md
+
+   Fase 3 - Playbook Apropriado (Apenas 1):
+
+   - Para criação: {{STACK_ROOT_DIR}}/{{STACK_PREFIX}}\_02-playbooks/{{STACK_PREFIX}}\_PLAYBOOK_CRIADOR.md
+
+   Fase 4 - Passaporte:
+
+   - Criar ou carregar: {{STACK_ROOT_DIR}}/{{STACK_PREFIX}}\_03-passaporte_de_criacao/PASSAPORTE_DE_CRIACAO.md
+   - Se não existir, usar template da pasta 03-passaporte/
+
+4. PROIBIDO carregar:
+   ❌ Documentos de outras stacks
+   ❌ Múltiplos playbooks simultaneamente
+   ❌ Arquivos de referência antes da necessidade
+```
+
+#### Step 3: Validation
+
+```markdown
+EXECUTAR Stack Context Validator (conforme ORQUESTRADOR_MESTRE):
+
+[ ] current_stack_id == BRIEF_PRODUTO.stack_id?
+[ ] Todos arquivos carregados pertencem à mesma stack?
+[ ] DOSSIE_REGRAS_DE_CRIACAO carregado?
+[ ] REGRA SUPREMA da stack identificada?
+[ ] PASSAPORTE criado ou carregado?
+[ ] Sem referências a outras stacks?
+
+SE QUALQUER VERIFICAÇÃO FALHAR:
+ABORTAR e reportar erro específico
+```
+
+- `{{STACK_ROOT_DIR}}/{{STACK_PREFIX}}_02-playbooks/{{STACK_PREFIX}}_PLAYBOOK_*.md`
+- `{{STACK_ROOT_DIR}}/{{STACK_PREFIX}}_04-agentes/{{STACK_PREFIX}}_AGENTE_*.md`
+
 4. Restringir escopo documental exclusivamente à stack selecionada
 
 **Bloqueio:** Qualquer referência a documentos de outra stack resulta em falha imediata
@@ -555,7 +663,7 @@ O FLUXO_ORQUESTRADOR_CENTRAL é **agnóstico de tecnologia**. Ele:
 Quando `BRIEF_PRODUTO.stack_id = "001_next_fullstack_mongo"`:
 
 ```plaintext
-institucional_v2/
+./
    mapas_e_fluxos_centrais/
       ✅ FLUXO_ORQUESTRADOR_CENTRAL.md (este arquivo - sempre carregado)
       ✅ MAPA_INSTITUCIONAL_CENTRAL.md (sempre carregado)

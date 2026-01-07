@@ -325,6 +325,7 @@ Agrupar funcionalidades por contexto de negócio:
    ```
 
 4. **TaskResponse** (retornar task)
+
    ```python
    class TaskResponse(TaskBase):
        id: str = Field(alias="_id")
@@ -942,7 +943,7 @@ async def delete_task(
 **Localização:**
 
 ```
-institucional_v2/area_produto/passaporte_do_produto/PASSAPORTE_DO_PRODUTO.md
+./area_produto/passaporte_do_produto/PASSAPORTE_DO_PRODUTO.md
 ```
 
 ---

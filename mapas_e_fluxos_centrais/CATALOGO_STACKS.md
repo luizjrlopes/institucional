@@ -74,7 +74,7 @@ Todas as stacks seguem a mesma estrutura interna padronizada:
 │   ├── {{STACK_PREFIX}}_PLAYBOOK_PIPELINE.md
 │   └── {{STACK_PREFIX}}_PLAYBOOK_F_DESIGNER.md
 ├── {{STACK_PREFIX}}_03-passaporte_de_criacao/
-│   ├── {{STACK_PREFIX}}_TEMPLATE_PASSAPORTE_CRIACAO.md
+│   ├── {{STACK_PREFIX}}_TEMPLATE_PASSAPORTE_DE_CRIACAO.md
 │   ├── {{STACK_PREFIX}}_PASSAPORTE_DE_CRIACAO.md (gerado)
 │   └── README.md
 ├── {{STACK_PREFIX}}_04-agentes/

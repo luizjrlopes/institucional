@@ -193,7 +193,7 @@ Em toda execução, você deve:
 - 🚫 Não alterar decisões institucionais
 - 🚫 Não "aproveitar o embalo"
 
-⚠️ **Nota operacional:** Refatorações NÃO devem ocorrer durante a Fase 2 — Planejamento do Passaporte. Qualquer pedido de refatoração que coincida com uma alteração ativa do [PASSAPORTE_CRIACAO.md](../001_03-passaporte_de_criacao/001_PASSAPORTE_CRIACAO.md) ou durante a janela de preparação/validação do Passaporte deve ser adiado até a conclusão da fase de Planejamento e a confirmação de que não há mudança de escopo.
+⚠️ **Nota operacional:** Refatorações NÃO devem ocorrer durante a Fase 2 — Planejamento do Passaporte. Qualquer pedido de refatoração que coincida com uma alteração ativa do [PASSAPORTE_DE_CRIACAO.md](../001_03-passaporte_de_criacao/001_PASSAPORTE_DE_CRIACAO.md) ou durante a janela de preparação/validação do Passaporte deve ser adiado até a conclusão da fase de Planejamento e a confirmação de que não há mudança de escopo.
 
 ## Objetivo Final do Agente Refatorador
 

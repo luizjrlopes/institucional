@@ -20,7 +20,7 @@
 
 ### Passaporte de Criação
 
-- [PASSAPORTE_CRIACAO](../001_03-passaporte_de_criacao/001_PASSAPORTE_CRIACAO.md) — Planejamento do produto (insumo normativo único)
+- [PASSAPORTE_DE_CRIACAO](../001_03-passaporte_de_criacao/001_PASSAPORTE_DE_CRIACAO.md) — Planejamento do produto (insumo normativo único)
 
 ### Dossiês de Implementação
 
@@ -67,7 +67,7 @@ Toda evolução implementada pelo AGENTE_EVOLUTOR ocorre exclusivamente dentro d
 
 ## Referências e Responsabilidade do Evolutor
 
-- As referências visuais (HTML, imagens, notas) são analisadas e consolidadas pelo **Agente Gerador de Passaporte**. O **Agente Evolutor** recebe o [PASSAPORTE_CRIACAO.md](../001_03-passaporte_de_criacao/001_PASSAPORTE_CRIACAO.md) como insumo normativo único.
+- As referências visuais (HTML, imagens, notas) são analisadas e consolidadas pelo **Agente Gerador de Passaporte**. O **Agente Evolutor** recebe o [PASSAPORTE_DE_CRIACAO.md](../001_03-passaporte_de_criacao/001_PASSAPORTE_DE_CRIACAO.md) como insumo normativo único.
 
 - O AGENTE_EVOLUTOR NÃO interpreta, redefine ou reavalia referências visuais. Qualquer necessidade de esclarecer ou ampliar o Passaporte deve ser encaminhada ao Agente Gerador de Passaporte ou ao humano responsável pelo produto.
 
@@ -75,7 +75,7 @@ Toda evolução implementada pelo AGENTE_EVOLUTOR ocorre exclusivamente dentro d
 
 1. O MOC é criado OU atualizado pelo AGENTE_EVOLUTOR como parte integrante da implementação de cada página — o humano NÃO fornece o MOC.
 
-2. Se o [PASSAPORTE_CRIACAO.md](../001_03-passaporte_de_criacao/001_PASSAPORTE_CRIACAO.md) for alterado ou atualizado enquanto o AGENTE_EVOLUTOR estiver executando tarefas, o Evolutor **deve pausar imediatamente** toda execução em curso e aguardar revalidação do Passaporte antes de retomar.
+2. Se o [PASSAPORTE_DE_CRIACAO.md](../001_03-passaporte_de_criacao/001_PASSAPORTE_DE_CRIACAO.md) for alterado ou atualizado enquanto o AGENTE_EVOLUTOR estiver executando tarefas, o Evolutor **deve pausar imediatamente** toda execução em curso e aguardar revalidação do Passaporte antes de retomar.
 
 3. Toda ação do Evolutor deve obedecer às ordens e bloqueios explícitos definidos no [FLUXO_ORQUESTRADOR](../../mapas_e_fluxos_centrais/FLUXO_ORQUESTRADOR_CENTRAL.md). Qualquer conflito entre instruções locais e o FLUXO deve ser resolvido em favor do `FLUXO_ORQUESTRADOR`.
 
@@ -112,7 +112,7 @@ Para cada feature/página, você deve seguir rigorosamente esta ordem:
 
 Antes de qualquer ação:
 
-1. **Abrir [PASSAPORTE_CRIACAO.md](../001_03-passaporte_de_criacao/001_PASSAPORTE_CRIACAO.md)**
+1. **Abrir [PASSAPORTE_DE_CRIACAO.md](../001_03-passaporte_de_criacao/001_PASSAPORTE_DE_CRIACAO.md)**
 2. **Buscar a página solicitada** pelo usuário
 3. **Verificar se existe entrada completa** com:
    - Nome da página

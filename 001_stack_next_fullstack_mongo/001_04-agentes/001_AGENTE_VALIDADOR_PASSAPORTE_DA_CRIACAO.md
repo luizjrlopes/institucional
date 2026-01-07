@@ -20,8 +20,8 @@ Validação do Passaporte do Produto
 
 ### Passaporte e Template
 
-- [PASSAPORTE_CRIACAO](../001_03-passaporte_de_criacao/001_PASSAPORTE_CRIACAO.md) — Passaporte a ser validado
-- [TEMPLATE_PASSAPORTE_CRIACAO](../001_03-passaporte_de_criacao/001_TEMPLATE_PASSAPORTE_CRIACAO.md) — Estrutura esperada
+- [PASSAPORTE_DE_CRIACAO](../001_03-passaporte_de_criacao/001_PASSAPORTE_DE_CRIACAO.md) — Passaporte a ser validado
+- [TEMPLATE_PASSAPORTE_DE_CRIACAO](../001_03-passaporte_de_criacao/001_TEMPLATE_PASSAPORTE_DE_CRIACAO.md) — Estrutura esperada
 
 ### Dossiês de Implementação
 
@@ -33,7 +33,7 @@ Validação do Passaporte do Produto
 
 ## Papel
 
-Validar se o [Passaporte de Criação](../001_03-passaporte_de_criacao/001_PASSAPORTE_CRIACAO.md) está:
+Validar se o [Passaporte de Criação](../001_03-passaporte_de_criacao/001_PASSAPORTE_DE_CRIACAO.md) está:
 
 - completo
 - coerente
@@ -44,7 +44,7 @@ Validar se o [Passaporte de Criação](../001_03-passaporte_de_criacao/001_PASSA
 
 ## Entradas
 
-- [PASSAPORTE_CRIACAO.md](../001_03-passaporte_de_criacao/001_PASSAPORTE_CRIACAO.md)
+- [PASSAPORTE_DE_CRIACAO.md](../001_03-passaporte_de_criacao/001_PASSAPORTE_DE_CRIACAO.md)
 - Dossiês institucionais
 - Playbooks
 

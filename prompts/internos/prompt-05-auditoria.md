@@ -31,7 +31,7 @@ uso correto de /data
 ausência de Mongo antes da Etapa 7
 
 Saída obrigatória
-06-historico/auditorias.md
+historico/auditorias.md
 
 ✅ Saída Esperada
 

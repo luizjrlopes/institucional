@@ -20,7 +20,7 @@ Geração do Passaporte do Produto (Planejamento Guiado por Referências)
 
 ### Template de Passaporte
 
-- [TEMPLATE_PASSAPORTE_CRIACAO](../001_03-passaporte_de_criacao/001_TEMPLATE_PASSAPORTE_CRIACAO.md) — Estrutura do passaporte
+- [TEMPLATE_PASSAPORTE_DE_CRIACAO](../001_03-passaporte_de_criacao/001_TEMPLATE_PASSAPORTE_DE_CRIACAO.md) — Estrutura do passaporte
 
 ### Dossiês de Implementação
 
@@ -278,7 +278,7 @@ Você deve:
 
 - Confirmar leitura completa das referências
 - Informar páginas identificadas
-- Gerar o [PASSAPORTE DE CRIAÇÃO](../001_03-passaporte_de_criacao/001_PASSAPORTE_CRIACAO.md) completo
+- Gerar o [PASSAPORTE DE CRIAÇÃO](../001_03-passaporte_de_criacao/001_PASSAPORTE_DE_CRIACAO.md) completo
 - Não antecipar implementação
 - Não delegar execução
 

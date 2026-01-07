@@ -83,7 +83,7 @@ Para cada página:
 Salvar em:
 
 ```
-institucional_v2/area_produto/passaporte_do_produto/PASSAPORTE_DO_PRODUTO.md
+./area_produto/passaporte_do_produto/PASSAPORTE_DO_PRODUTO.md
 ```
 
 ---

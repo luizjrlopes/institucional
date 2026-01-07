@@ -149,7 +149,7 @@ Stack: 002_next_front_node_back_mongo
 Salvar em:
 
 ```
-institucional_v2/002_stack_next_front_node_back_mongo/002_03-passaporte_de_criacao/PASSAPORTE_DA_CRIACAO.md
+./002_stack_next_front_node_back_mongo/002_03-passaporte_de_criacao/PASSAPORTE_DA_CRIACAO.md
 ```
 
 ---

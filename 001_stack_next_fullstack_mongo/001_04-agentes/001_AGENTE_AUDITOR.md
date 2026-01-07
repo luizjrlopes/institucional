@@ -20,7 +20,7 @@
 
 ### Passaporte de Criação
 
-- [PASSAPORTE_CRIACAO](../001_03-passaporte_de_criacao/001_PASSAPORTE_CRIACAO.md) — Planejamento do produto
+- [PASSAPORTE_DE_CRIACAO](../001_03-passaporte_de_criacao/001_PASSAPORTE_DE_CRIACAO.md) — Planejamento do produto
 
 ### Dossiês de Implementação
 

@@ -85,7 +85,7 @@ Para cada auditoria realizada:
 
 #### Objetivo
 
-Validar integridade estrutural após migração de institucional/ para institucional_v2/, incluindo verificação de referências quebradas e inconsistências de nomenclatura.
+Validar integridade estrutural após migração de ./ para ./, incluindo verificação de referências quebradas e inconsistências de nomenclatura.
 
 #### Critérios Avaliados
 

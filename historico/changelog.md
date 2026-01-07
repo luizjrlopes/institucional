@@ -79,7 +79,7 @@ Para cada mudança significativa:
 
 ### Added
 
-- Estrutura inicial do institucional_v2
+- Estrutura inicial do institucional
 - Stack 001 completa (mapa, dossiês, playbooks, agentes)
 - Agentes de criação e evolução
 - Sistema de passaportes de criação

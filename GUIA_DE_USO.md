@@ -1,4 +1,4 @@
-# 🚀 Guia de Uso do Sistema Institucional v2
+# 🚀 Guia de Uso do Sistema Institucional
 
 ## 📖 Visão Geral
 
@@ -17,7 +17,7 @@ Este sistema governança a criação completa de aplicações web através de **
 **1. Crie o arquivo obrigatório:**
 
 ```text
-institucional_v2/area_produto/01-identidades/BRIEF_PRODUTO.md
+./area_produto/01-identidades/BRIEF_PRODUTO.md
 ```
 
 **2. Estrutura mínima:**
@@ -345,7 +345,7 @@ Substituir MOCs por banco de dados real (MongoDB).
 ## 📁 Estrutura de Arquivos Importante
 
 ```text
-institucional_v2/
+./
 ├── area_produto/                           # ÁREA DO PRODUTO
 │   ├── 01-identidades/
 │   │   ├── BRIEF_PRODUTO.md               # ⭐ VOCÊ CRIA AQUI

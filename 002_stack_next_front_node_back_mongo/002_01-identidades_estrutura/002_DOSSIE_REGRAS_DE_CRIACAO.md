@@ -19,7 +19,172 @@
 
 ---
 
-## 📑 Sumário
+## �️ REGRA SUPREMA 002 - SINCRONIZAÇÃO DE TIPOS
+
+### ⚠️ REGRA CRÍTICA ANTI-ALUCINAÇÃO
+
+**VIOLAÇÃO DESTA REGRA = ERRO DE TIPAGEM EM PRODUÇÃO**
+
+#### Declaração da Regra
+
+```
+Qualquer alteração no Backend que mude um JSON de resposta
+OBRIGA a atualização IMEDIATA da interface TypeScript correspondente.
+
+Hierarquia de Tipos:
+1. Backend define os tipos (source of truth)
+2. shared/types/ contém a definição compartilhada
+3. Frontend importa APENAS de shared/types/
+
+O apiClient é a ÚNICA fonte de verdade para comunicação HTTP.
+```
+
+#### Fluxo Obrigatório de Sincronização
+
+```typescript
+// 1. BACKEND: Definir Controller/Service
+// backend/src/controllers/UserController.ts
+export const getUser = async (req, res) => {
+  const user = {
+    id: "123",
+    name: "John",
+    email: "john@example.com",
+    createdAt: new Date(),
+  };
+  res.json(user);
+};
+
+// 2. SHARED: Criar interface correspondente
+// shared/types/user.types.ts
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  createdAt: string;
+}
+
+export interface GetUserResponse {
+  user: User;
+}
+
+// 3. FRONTEND: Importar de shared e usar no apiClient
+// frontend/src/services/apiClient.ts
+import { User, GetUserResponse } from "@shared/types/user.types";
+
+export const userApi = {
+  getUser: async (id: string): Promise<User> => {
+    const response = await fetch(`${API_URL}/users/${id}`);
+    const data: GetUserResponse = await response.json();
+    return data.user;
+  },
+};
+
+// 4. FRONTEND: Usar tipos do apiClient
+// frontend/src/features/user/UserProfile.tsx
+import { userApi } from "@/services/apiClient";
+
+export function UserProfile() {
+  const [user, setUser] = useState<User | null>(null);
+  // ...
+}
+```
+
+#### Exemplos Proibidos ❌
+
+```typescript
+// ❌ ERRADO - Frontend define seus próprios tipos
+// frontend/src/types/user.ts (duplicação!)
+interface User {
+  // Duplicado!
+  id: string;
+  name: string;
+}
+
+// ❌ ERRADO - Fetch sem tipagem
+const response = await fetch("/api/users");
+const data = await response.json(); // any! 😱
+
+// ❌ ERRADO - Tipos inline
+const [user, setUser] = useState<{ id: string; name: string }>(null);
+```
+
+#### Exemplos Corretos ✅
+
+```typescript
+// ✅ CORRETO - Importar de shared
+import { User } from "@shared/types/user.types";
+
+// ✅ CORRETO - apiClient tipado
+export const userApi = {
+  getUser: (id: string): Promise<User> => apiClient.get<User>(`/users/${id}`),
+};
+
+// ✅ CORRETO - Usar tipo do shared
+const [user, setUser] = useState<User | null>(null);
+```
+
+#### Protocolo de Atualização
+
+Quando alterar um endpoint no Backend:
+
+```markdown
+[ ] 1. Alterar Controller/Service no backend
+[ ] 2. Atualizar/Criar tipo correspondente em shared/types/
+[ ] 3. Atualizar método no apiClient (frontend/src/services/apiClient.ts)
+[ ] 4. Verificar se algum componente precisa ser atualizado
+[ ] 5. Executar TypeScript check: tsc --noEmit
+[ ] 6. Atualizar PASSAPORTE_DE_CRIACAO.md com a mudança
+```
+
+#### Checklist de Validação
+
+Antes de commit/push:
+
+- [ ] Todo endpoint do Backend tem tipo em shared/types/
+- [ ] apiClient usa tipos de shared/types/
+- [ ] Nenhum tipo duplicado entre frontend/backend
+- [ ] `tsc --noEmit` passa sem erros
+- [ ] Nenhum `any` em respostas de API
+
+#### Auditoria Automática
+
+```bash
+# Verificar tipos duplicados
+# Se encontrar User tanto em frontend/ quanto shared/ → ERRO
+
+# Verificar uso de any
+grep -r ": any" frontend/src/services/
+grep -r "as any" frontend/src/services/
+
+# Se retornar resultados → ERRO CRÍTICO
+```
+
+#### Estrutura Obrigatória de Tipos
+
+```
+projeto/
+├── backend/
+│   └── src/
+│       ├── controllers/  (usa tipos de shared/)
+│       └── services/     (usa tipos de shared/)
+├── shared/
+│   └── types/
+│       ├── index.ts      (exporta tudo)
+│       ├── api.types.ts  (tipos genéricos de API)
+│       ├── user.types.ts
+│       ├── auth.types.ts
+│       └── [dominio].types.ts
+└── frontend/
+    └── src/
+        ├── services/
+        │   └── apiClient.ts  (importa de shared/)
+        └── features/
+            └── [feature]/    (importa de shared/)
+```
+
+---
+
+## �📑 Sumário
 
 1. [Objetivo](#1-objetivo)
 2. [Escopo](#2-escopo)

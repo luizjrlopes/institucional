@@ -18,7 +18,103 @@
 
 ---
 
-## 📑 Sumário
+## �️ REGRA SUPREMA 001 - ISOLAMENTO SERVER/CLIENT
+
+### ⚠️ REGRA CRÍTICA ANTI-ALUCINAÇÃO
+
+**VIOLAÇÃO DESTA REGRA = ERRO CRÍTICO NO SISTEMA**
+
+#### Declaração da Regra
+
+```
+Arquivos em src/app ou src/components NUNCA importam diretamente
+de src/models, src/lib/db, src/server ou qualquer módulo de backend.
+
+A comunicação DEVE ser SEMPRE através de:
+1. fetch para /api/* (API Routes)
+2. Server Actions (funções marcadas com 'use server')
+3. Server Components (componentes SEM a diretiva 'use client')
+```
+
+#### Exemplos Proibidos ❌
+
+```typescript
+// ❌ ERRADO - Component Client importando Model
+"use client";
+import { User } from "@/server/models/User"; // PROIBIDO!
+
+// ❌ ERRADO - Component Client importando DB
+("use client");
+import dbConnect from "@/server/db/client"; // PROIBIDO!
+
+// ❌ ERRADO - Component Client importando Service
+("use client");
+import { AuthService } from "@/server/services/AuthService"; // PROIBIDO!
+```
+
+#### Exemplos Corretos ✅
+
+```typescript
+// ✅ CORRETO - Usar fetch para API Route
+"use client";
+export function LoginForm() {
+  const handleLogin = async (data) => {
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+    // ...
+  };
+}
+
+// ✅ CORRETO - Usar Server Action
+("use client");
+import { loginAction } from "@/server/actions/auth";
+
+export function LoginForm() {
+  return <form action={loginAction}>...</form>;
+}
+
+// ✅ CORRETO - Server Component (pode importar backend)
+// Sem 'use client'
+import { getUserData } from "@/server/services/UserService";
+
+export default async function ProfilePage() {
+  const user = await getUserData();
+  return <div>{user.name}</div>;
+}
+```
+
+#### Checklist de Validação
+
+Antes de criar/modificar qualquer arquivo, verificar:
+
+- [ ] Arquivo tem 'use client'?
+  - Se SIM → NÃO pode importar de src/server, src/models, src/lib/db
+  - Se NÃO (Server Component) → Pode importar backend
+- [ ] Comunicação com DB/Models?
+  - Client Components → fetch('/api/...') ou Server Action
+  - Server Components → import direto OK
+- [ ] Lógica de autenticação?
+  - Client: usar hooks + fetch
+  - Server: import direto de services
+
+#### Auditoria Automática
+
+Ao finalizar qualquer arquivo em src/app ou src/components, executar:
+
+```bash
+# Verificar imports proibidos
+grep -r "from '@/server" src/app/**/*.tsx
+grep -r "from '@/models" src/components/**/*.tsx
+grep -r "from '@/lib/db" src/app/**/*.tsx
+
+# Se retornar resultados → ERRO CRÍTICO
+```
+
+---
+
+## �📑 Sumário
 
 1. [Objetivo](#1-objetivo)
 2. [Escopo](#2-escopo)
@@ -141,7 +237,7 @@ server/utils/response.ts
 server/utils/logger.ts
 ```
 
-- Repositórios e services devem ser definidos por interface para permitir adapter DataRepository durante a Fase MOC (ver Cláusula 10 do MAPA_INSTITUCIONAL_V2) antes da conexão real ao Mongo Atlas.
+- Repositórios e services devem ser definidos por interface para permitir adapter DataRepository durante a Fase MOC (ver Cláusula 10 do MAPA_institucional) antes da conexão real ao Mongo Atlas.
 
 **Nota operacional sobre `src/server/db/client.ts` e Mongoose:**
 

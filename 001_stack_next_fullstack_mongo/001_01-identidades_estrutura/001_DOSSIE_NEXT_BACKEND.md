@@ -205,7 +205,7 @@ Evita falhas silenciosas em produção e garante previsibilidade de ambiente.
 ### Nota sobre adapters (Fase MOC → Mongo)
 
 - Definir interfaces de repositório e usar uma factory para injetar implementações.
-- Durante a Fase MOC (ver Cláusula 10 do MAPA_INSTITUCIONAL_V2), usar adapter DataRepository que consome MOCs persistidos em `data/` (arquivos ou memória). É proibido utilizar ou referir `mock/data`.
+- Durante a Fase MOC (ver Cláusula 10 do MAPA_institucional), usar adapter DataRepository que consome MOCs persistidos em `data/` (arquivos ou memória). É proibido utilizar ou referir `mock/data`.
 - Na migração para Mongo Atlas (após ETAPA 7 do FLUXO_ORQUESTRADOR), trocar apenas o adapter pela implementação Mongoose, mantendo contratos e DTOs.
 
 ### ⚠️ Salvaguardas para evitar problemas nas rotas da API

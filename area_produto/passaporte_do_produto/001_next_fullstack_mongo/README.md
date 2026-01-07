@@ -28,7 +28,7 @@ Antes da geração, certifique-se de que:
 O agente responsável:
 
 ```text
-/institucional_v2/001_stack_next_fullstack_mongo/001_04-agentes/001_AGENTE_GERADOR_PASSAPORTE_DO_PRODUTO.md
+/./001_stack_next_fullstack_mongo/001_04-agentes/001_AGENTE_GERADOR_PASSAPORTE_DO_PRODUTO.md
 ```
 
 **Analisa:**
@@ -46,7 +46,7 @@ O agente responsável:
 O agente responsável:
 
 ```text
-/institucional_v2/001_stack_next_fullstack_mongo/001_04-agentes/001_AGENTE_VALIDADOR_PASSAPORTE_DO_PRODUTO.md
+/./001_stack_next_fullstack_mongo/001_04-agentes/001_AGENTE_VALIDADOR_PASSAPORTE_DO_PRODUTO.md
 ```
 
 **Valida:**

@@ -19,7 +19,313 @@
 
 ---
 
-## 📑 Sumário
+## �️ REGRA SUPREMA 003 - CONVERSÃO SNAKE_CASE ↔ CAMELCASE
+
+### ⚠️ REGRA CRÍTICA ANTI-ALUCINAÇÃO
+
+**VIOLAÇÃO DESTA REGRA = QUEBRA DE CONTRATO DE API**
+
+#### Declaração da Regra
+
+```
+O Backend Python DEVE usar Pydantic com alias_generator=to_camel
+OU o Frontend deve ter um interceptor que converte os dados.
+
+Padrão Institucional:
+- Backend Python: snake_case (código interno)
+- API JSON: camelCase (comunicação externa)
+- Frontend JavaScript: camelCase (código interno)
+
+A conversão deve ser:
+1. Transparente para os desenvolvedores
+2. Bidirecional (request e response)
+3. Validada em testes
+```
+
+#### Configuração Obrigatória - Backend
+
+```python
+# backend/app/schemas/base.py
+from pydantic import BaseModel, ConfigDict
+from typing import Any
+
+def to_camel(string: str) -> str:
+    """Converte snake_case para camelCase"""
+    components = string.split('_')
+    return components[0] + ''.join(x.title() for x in components[1:])
+
+class CamelCaseModel(BaseModel):
+    """Base model que converte automaticamente para camelCase"""
+    model_config = ConfigDict(
+        alias_generator=to_camel,
+        populate_by_name=True,  # Aceita tanto camelCase quanto snake_case
+        from_attributes=True
+    )
+
+# Uso em todos os schemas:
+# backend/app/schemas/user.py
+from .base import CamelCaseModel
+from datetime import datetime
+
+class UserResponse(CamelCaseModel):
+    user_id: str          # Código Python: snake_case
+    first_name: str       # API retorna: firstName
+    last_name: str        # API retorna: lastName
+    email: str
+    created_at: datetime  # API retorna: createdAt
+    is_active: bool       # API retorna: isActive
+```
+
+#### Configuração Obrigatória - Frontend
+
+```typescript
+// frontend/src/types/user.types.ts
+export interface User {
+  userId: string; // camelCase
+  firstName: string;
+  lastName: string;
+  email: string;
+  createdAt: string;
+  isActive: boolean;
+}
+
+// frontend/src/services/apiClient.ts
+import axios from "axios";
+
+const apiClient = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+});
+
+// Opcional: Interceptor para garantir conversão
+// (só necessário se backend não usar Pydantic corretamente)
+apiClient.interceptors.response.use((response) => {
+  // Validar que está em camelCase
+  return response;
+});
+
+export default apiClient;
+```
+
+#### Exemplos de Fluxo Completo
+
+**Backend → Frontend (Response)**
+
+```python
+# backend/app/routers/users.py
+from fastapi import APIRouter
+from app.schemas.user import UserResponse
+
+router = APIRouter()
+
+@router.get("/users/{user_id}", response_model=UserResponse)
+async def get_user(user_id: str):
+    # Código interno usa snake_case
+    user_data = {
+        "user_id": "123",
+        "first_name": "John",
+        "last_name": "Doe",
+        "email": "john@example.com",
+        "created_at": datetime.now(),
+        "is_active": True
+    }
+    return UserResponse(**user_data)
+
+# API retorna automaticamente em camelCase:
+# {
+#   "userId": "123",
+#   "firstName": "John",
+#   "lastName": "Doe",
+#   "email": "john@example.com",
+#   "createdAt": "2026-01-07T10:00:00",
+#   "isActive": true
+# }
+```
+
+```typescript
+// frontend/src/features/user/UserProfile.tsx
+import { User } from "@/types/user.types";
+import apiClient from "@/services/apiClient";
+
+export function UserProfile({ userId }: { userId: string }) {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    apiClient.get<User>(`/users/${userId}`).then((response) => {
+      // response.data já está em camelCase
+      setUser(response.data);
+    });
+  }, [userId]);
+
+  return (
+    <div>
+      {user?.firstName} {user?.lastName}
+    </div>
+  );
+}
+```
+
+**Frontend → Backend (Request)**
+
+```typescript
+// frontend/src/features/auth/RegisterForm.tsx
+const handleRegister = async (data: RegisterFormData) => {
+  // Frontend envia em camelCase
+  const response = await apiClient.post("/auth/register", {
+    firstName: data.firstName,
+    lastName: data.lastName,
+    email: data.email,
+    password: data.password,
+  });
+};
+```
+
+```python
+# backend/app/routers/auth.py
+from app.schemas.auth import RegisterRequest
+
+@router.post("/auth/register")
+async def register(data: RegisterRequest):
+    # Pydantic converte automaticamente para snake_case
+    # data.first_name (não data.firstName)
+    user = await create_user(
+        first_name=data.first_name,
+        last_name=data.last_name,
+        email=data.email,
+        password=data.password
+    )
+    return UserResponse.model_validate(user)
+```
+
+#### Exemplos Proibidos ❌
+
+```python
+# ❌ ERRADO - Pydantic sem alias_generator
+class UserResponse(BaseModel):
+    user_id: str  # API retorna "user_id" em vez de "userId"
+    first_name: str  # Quebra o contrato!
+
+# ❌ ERRADO - Retornar dict sem Pydantic
+@router.get("/users/{user_id}")
+async def get_user(user_id: str):
+    return {"user_id": "123", "first_name": "John"}  # snake_case na API!
+```
+
+```typescript
+// ❌ ERRADO - Types em snake_case
+interface User {
+  user_id: string; // Deve ser camelCase!
+  first_name: string;
+}
+
+// ❌ ERRADO - Acessar campos em snake_case
+const userName = user.first_name; // TypeScript error se types corretos
+```
+
+#### Checklist de Validação
+
+Antes de criar/modificar qualquer schema ou tipo:
+
+**Backend (Python):**
+
+- [ ] Todo schema herda de CamelCaseModel (ou tem alias_generator)
+- [ ] model_config tem populate_by_name=True
+- [ ] Código interno usa snake_case
+- [ ] Endpoints retornam response_model do Pydantic
+- [ ] FastAPI docs (/docs) mostram camelCase
+
+**Frontend (TypeScript):**
+
+- [ ] Todos os types/interfaces usam camelCase
+- [ ] apiClient configurado corretamente
+- [ ] Nenhum campo em snake_case no código
+- [ ] Requisições enviam camelCase
+- [ ] Respostas são tratadas como camelCase
+
+#### Testes de Conformidade
+
+```python
+# backend/tests/test_case_conversion.py
+import pytest
+from app.schemas.user import UserResponse
+
+def test_user_response_converts_to_camel_case():
+    user = UserResponse(
+        user_id="123",
+        first_name="John",
+        last_name="Doe",
+        email="john@example.com",
+        created_at=datetime.now(),
+        is_active=True
+    )
+
+    # Validar que JSON está em camelCase
+    json_data = user.model_dump(by_alias=True)
+    assert "userId" in json_data
+    assert "firstName" in json_data
+    assert "user_id" not in json_data
+    assert "first_name" not in json_data
+```
+
+```typescript
+// frontend/tests/api/user.test.ts
+describe("User API", () => {
+  it("should receive data in camelCase", async () => {
+    const response = await apiClient.get<User>("/users/123");
+
+    expect(response.data).toHaveProperty("userId");
+    expect(response.data).toHaveProperty("firstName");
+    expect(response.data).not.toHaveProperty("user_id");
+    expect(response.data).not.toHaveProperty("first_name");
+  });
+});
+```
+
+#### Protocolo de Atualização
+
+Quando adicionar novo campo:
+
+```markdown
+[ ] 1. Backend: Adicionar campo em snake_case no schema
+[ ] 2. Backend: Verificar que herda de CamelCaseModel
+[ ] 3. Frontend: Adicionar campo em camelCase no type
+[ ] 4. Testar conversão end-to-end
+[ ] 5. Atualizar documentação FastAPI
+[ ] 6. Atualizar PASSAPORTE_DE_CRIACAO.md
+```
+
+#### Auditoria Automática
+
+```bash
+# Backend: Verificar se todos os schemas usam CamelCaseModel
+grep -r "class.*BaseModel" backend/app/schemas/ | grep -v "CamelCaseModel"
+# Se retornar resultados → Schemas sem conversão!
+
+# Frontend: Verificar snake_case no código
+grep -r "_" frontend/src/types/*.ts | grep -v "NEXT_PUBLIC"
+# Se retornar resultados → Types com snake_case!
+```
+
+#### Documentação FastAPI
+
+A documentação automática em `/docs` deve refletir camelCase:
+
+```python
+# Verificar que FastAPI docs mostram:
+# {
+#   "userId": "string",
+#   "firstName": "string"  ← camelCase
+# }
+#
+# E NÃO:
+# {
+#   "user_id": "string",
+#   "first_name": "string"  ← snake_case (ERRADO!)
+# }
+```
+
+---
+
+## �📑 Sumário
 
 1. [Objetivo](#1-objetivo)
 2. [Escopo](#2-escopo)

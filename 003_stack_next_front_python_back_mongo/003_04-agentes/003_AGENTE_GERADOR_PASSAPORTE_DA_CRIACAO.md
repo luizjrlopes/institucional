@@ -786,7 +786,7 @@ Stack 003: Next.js + Python/FastAPI + MongoDB
 
 ```
 
-institucional_v2/003_stack_next_front_python_back_mongo/003_03-passaporte_de_criacao/PASSAPORTE_DA_CRIACAO.md
+./003_stack_next_front_python_back_mongo/003_03-passaporte_de_criacao/PASSAPORTE_DA_CRIACAO.md
 
 ````
 

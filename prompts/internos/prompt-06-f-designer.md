@@ -58,7 +58,7 @@ Em caso de conflito, **o documento de maior autoridade prevalece**.
 
 Você deve considerar como já lidos:
 
-- `00-mapa-geral/MAPA_INSTITUCIONAL_V2.md`
+- `00-mapa-geral/MAPA_institucional.md`
 - `00-mapa-geral/FLUXO_ORQUESTRADOR_v2.md`
 - `01-dossies/DOSSIE_NEXT_FRONTEND.md`
 - `02-playbooks/PLAYBOOK_CRIADOR.md`

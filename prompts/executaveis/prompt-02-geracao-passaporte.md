@@ -40,7 +40,7 @@ README
 
 📖 Leitura Obrigatória
 
-00-mapa-geral/MAPA_INSTITUCIONAL_V2.md
+00-mapa-geral/MAPA_institucional.md
 
 00-mapa-geral/FLUXO_ORQUESTRADOR_v2.md
 
