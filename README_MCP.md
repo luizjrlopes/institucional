@@ -92,7 +92,7 @@ Depois de configurado, você pode perguntar no Copilot Chat:
 
 ## 📂 Estrutura
 
-```
+```text
 institucional/
 ├── src/
 │   └── index.ts          # Servidor MCP
